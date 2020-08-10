@@ -1,0 +1,260 @@
+<style>
+    :root {
+        --rad-0: blue;
+        --rad-50: 50%;
+        --rad-100: 100%;
+    }
+
+    @-ms-viewport {
+        width: device-width;
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    .cn {
+        display: table-cell;
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+        text-align: center;
+        background-color: transparent;
+    }
+
+    .cm {
+        display: table-cell;
+        width: 5px;
+        height: 5px;
+        vertical-align: middle;
+        text-align: center;
+        background-color: transparent;
+    }
+
+    .inner {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+    }
+
+    input {
+        margin: 0;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        box-shadow: none;
+        border-style: hidden;
+        border-width: 0;
+        outline: 0;
+        overflow: visible;
+        width: 95%;
+        margin-left: .25em;
+        background-color: transparent;
+        text-indent: 1.5px;
+        color: inherit;
+    }
+
+    input::-ms-clear {
+        display: none;
+        height: 0;
+        width: 0;
+    }
+
+    input:active {
+        outline: 0;
+    }
+
+    span {
+        background-color: currentColor;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        border: 0px;
+        color: inherit;
+        -webkit-text-fill-color: inherit !important;
+        box-shadow: none;
+        -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+        transition: color 5000s, background-color 5000s ease-in-out 0s;
+    }
+
+    .moz-cover-clear {
+        position: relative;
+        z-index: 0;
+        display: inline-block;
+        left: -20px;
+        top: 6px;
+        width: 18px;
+        height: 18px;
+        background-color: white;
+        color: red;
+    }
+
+    input[value="Cancel"] {
+        display: none !important;
+    }
+
+    input[value="Reset"] {
+        display: none !important;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+        box-sizing: border-box;
+        padding: 0;
+    }
+
+    input[type="date"],
+    input[type="tel"],
+    input[type="time"],
+    input[type="datetime-local"],
+    input[type="datetime"],
+    input[type="month"] {
+        -webkit-appearance: listbox;
+    }
+
+    [type="number"]::-webkit-inner-spin-button,
+    [type="number"]::-webkit-outer-spin-button {
+        height: auto;
+    }
+
+    [type="search"] {
+        -webkit-appearance: none;
+    }
+
+    [type="search"]::-webkit-search-cancel-button,
+    [type="search"]::-webkit-search-decoration {
+        -webkit-appearance: none;
+    }
+
+    output {
+        display: inline-block;
+    }
+
+    @media screen and (prefers-reduced-motion: reduce) {
+        .form-control {
+            transition: none;
+        }
+    }
+
+    @media only screen and (min-device-width: 300px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+        .module {
+            width: 100%;
+        }
+    }
+
+    @media (min-width: 200px) {
+        .input {
+            max-width: 540px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    @media (min-width: 200px) {
+        .span {
+            min-width: 100px;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .input {
+            flex-grow: 1;
+            max-width: 450px;
+        }
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        outline: darkmagenta;
+        position: relative;
+        background-repeat: no-repeat;
+        padding-right: 1px;
+        padding-left: 1px;
+        padding-top: .05px;
+        margin: 0px;
+        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-2 -1 72 72"><path d="m 16.203125,0 c -1.541337,0 -2.791016,0.9339375 -2.791016,2.0859375 l 0.01367,1.1660156 -0.02539,9.7988279 h 0.01172 c -0.0013,1.193333 1.24773,2.126953 2.789063,2.126953 1.541333,0 2.792969,-0.933318 2.792969,-2.083984 l -0.07617,-9.5253906 0.07617,-1.4824219 C 18.994141,0.9339375 17.744458,0 16.203125,0 Z m 26,0 c -1.541333,0 -2.791016,0.9339375 -2.791016,2.0859375 l 0.01367,1.1660156 -0.02539,9.7988279 h 0.01172 c -0.0013,1.193333 1.24773,2.126953 2.789063,2.126953 1.541333,0 2.792969,-0.933318 2.792969,-2.083984 l -0.07617,-9.5253906 0.07617,-1.4824219 C 44.994141,0.9339375 43.744458,0 42.203125,0 Z M 2.4179688,6.3378906 C 1.35797,6.3378906 0.5,7.1978138 0.5,8.2578125 V 60.169922 c 0,1.059999 0.8599194,1.919922 1.9199219,1.919922 H 55.580078 c 1.060003,0 1.919922,-0.859923 1.919922,-1.919922 V 8.2578125 C 57.5,7.1978138 56.640081,6.3378906 55.580078,6.3378906 H 47.939453 L 48,14.654297 c 0,2.151999 -3.133626,3.896484 -5.765625,3.896484 -2.630668,0 -5.765002,-1.745277 -5.763672,-3.974609 h -0.0293 l 0.01953,-8.2382814 H 21.939453 l 0.05859,8.3164064 c 0,2.150664 -3.133004,3.896484 -5.763672,3.896484 -2.631999,0 -5.765006,-1.743324 -5.763672,-3.972656 l -0.0293,-0.002 0.01953,-8.2382814 z M 31.333984,25.380859 h 6 v 6 h -6 z m 9,0 h 7 v 6 h -7 z m -28.5,0.666016 h 6 v 6 h -6 z m 10.5,8.333984 h 6 v 6 h -6 z m 9,0 h 6 v 6 h -6 z m 9,0 h 7 v 6 h -7 z m -28.5,8.664063 h 6 v 6 h -6Z" style="fill:rgb(144, 164, 174);"></path></svg>');
+    }
+</style>
+<span style="background-color:transparent;outline:0!important;border:none;color:inherit!important;"
+    [ngStyle]="{'border-radius': '_radius', 'width': _w }">
+    <div id="container"
+        style="background-color:transparent;display:inline-block;vertical-align:top;padding:0;margin:0;color:inherit!important;"
+        [ngStyle]="{'width' : _w, 'border-radius': _radius }">
+        <div style="color:inherit!important;margin-bottom:12px;" [ngStyle]="{'border-radius' : _radius}">
+            <span style="background-color:transparent;display:inline-block;">
+                <b *ngIf=req style="color:red;font-size: medium;padding-right:.2rem;">*</b>
+                <label for={{_id}} style="margin:0em .025em 0em 0em;"
+                    [ngStyle]="{'display' : _lbl, 'color' : 'inherit', 'text-align': 'left' }">
+                    {{label}}
+                </label>
+            </span>
+            <span name=name #in [id]=[_cid]
+                style="color:inherit!important;margin:0em .0em 0em .0em;box-sizing: border-box;display: flex;flex-wrap: nowrap;vertical-align:middle;overflow:hidden;color:inherit;"
+                [ngStyle]="{
+                    'background-color': _c,
+                    'border' : _b,
+                    'border-radius' : _radius,
+                    'font-size' : 'inherit',
+                    'padding' : padding,
+                    'width' : width }">
+                    <span [id]="lg" style="color:inherit;background-color:transparent;padding:0px;margin:0;z-index: 2;" role="button">
+                        <ng-content select="[content1]"></ng-content>
+                    
+                  </span>
+
+                <input *ngIf=txt [maxLength]="_l" (keydown)="onKeydown($event)" (keyup)="onKeyUp($event)"
+                    (focusout)="onOut()" (focus)="onIn()" style="background-color:transparent!important;"
+                    (mousedown)="onMouseDown($event)" [id]=[_id] name={{name}} autocomplete=[autocomplete] type=_t
+                    placeholder={{placeholder}} [value]=[_value]
+                    [style.color]="style1 ? plC : (style2 ? 'inherit' : null)"
+                    [ngStyle]="{'maxlength': _l, 'width': _w, 'color': plC }">
+
+                <input *ngIf=dt2 [maxLength]=10 (keydown)="onKeydown($event)" (keyup)="onKeyUp($event)"
+                    (focusout)="onOut()" (focus)="onIn()"
+                    style="padding:0px;margin:0px;background-color:transparent!important;color:inherit!important;"
+                    (mousedown)="onMouseDown($event)" [id]=[_id] [name]=name type="date"
+                    [value]="dte | date:'yyyy-MM-dd'" [style.color]="style1 ? plC : (style2 ? 'inherit' : null)">
+
+                <input *ngIf=dt3 maxLength=10 type="date" [value]=_value [id]=[_id] style="width:90%;" required>
+
+                <div class="cn" style="width:.5px;">
+                </div>
+                <div class="cm">
+                    <div class="inner">
+                    </div>
+                </div>
+                <ng-content select="[content2]"></ng-content>
+                <div class="cn">
+
+                    <div class="inner" *ngIf="clr" [id]="rg" (click)="reset()" [ngStyle]="{'padding-top': top}"
+                        style="position: relative;">
+                        <svg width="24px" height="24px"
+                            style="padding: 1px 1px;background-color:transparent;overflow: hidden;vertical-align: middle;">
+                            <g transform="translate(0,0) scale(.055)">
+                                <path [attr.stroke]="'#C6C9E8'" [attr.fill]="'#C6C9E8'"
+                                    d="M 25.912109 11.03125 L 12.568359 24.455078 L 110.39844 122.96289 L 12.582031 221.45703 L 25.912109 234.89258 L 123.73242 136.38867 L 221.54688 234.88086 L 234.89062 221.45703 L 137.07031 122.95898 L 234.89062 24.455078 L 221.55859 11.03125 L 123.73633 109.5332 L 25.912109 11.03125 z "
+                                    style="fill-opacity:1;fill-rule:nonzero;stroke-width:24" />
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </span>
+            <p [id]="err"
+                style="margin-top:0px;margin-bottom:3px;background-color: transparent;font-size:12pt;font-weight: normal;"
+                [ngStyle]="{
+                'color' : style.error,
+                'padding' : padding,
+                'width' : width,
+                'display' : _e}">
+            </p>
+        </div>
+    </div>
+</span>
+
