@@ -1,0 +1,17 @@
+<span>
+    <button [id]=_id type='button' (mouseover)="showDivWithHoverStyles(id)" (mouseout)="showAllDivsWithDefaultStyles()"
+      (mousedown)="keyPress()" (mouseup)="keyUp()" (focusout)="keyUp()" (focus)="keyPress()" [ngStyle]="{
+    'background-color': style.primary,
+    'color': color,
+    'border' : style.border,
+    'padding' : padding,
+    'border-radius': style.borderRadius,
+    'font-family' : style.fontFamily,
+    'font-size' : style.fontSize,
+    'font-weight' : style.fontWeight,
+     'width' : style.width, 
+    'outline' : '0'
+    }" class="button">
+      <ng-content></ng-content>
+    </button>
+  </span>
