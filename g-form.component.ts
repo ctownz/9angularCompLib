@@ -45,7 +45,6 @@ export class GFormComponent implements OnInit {
       if(elements[i].className != "button"){
         let ut = <HTMLInputElement>elements[i];
         let y = this.values[i].id;
-        alert(y);
         if(ut.value != undefined){
           xy = ut.value;
         }
@@ -57,7 +56,7 @@ export class GFormComponent implements OnInit {
         arr_Out.push(ct);
       }
     }
-    alert(arr_Out[1].id);
+
     this.results.emit(arr_Out); 
   }
  
