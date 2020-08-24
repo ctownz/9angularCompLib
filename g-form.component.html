@@ -1,0 +1,16 @@
+<form [id]=[_id] class="container" style="z-index:-1;background-color: transparent;color:inherit;"
+  [ngStyle]="{ 'width': width }">
+  <p *ngIf="ttl" style="font-weight:bold;margin-bottom:.5rem;">{{ title }}</p>
+  <div *ngFor="let item of values" style="margin:0;">
+    <g-input [attr.id]=item.id [label]=item.name [value]=item.value [type]=item.type
+      [bg]=style.backgroundColor
+      [border]=style.border
+      [radius]=style.borderRadius
+      [size]=style.size
+      [onErr]=onErr
+      [req]=req
+      placeholder={{item.placeholder}} ></g-input>  
+  </div>
+  <p><g-button class="button" [width]="'100%'" (click)="save()">Submit</g-button></p>
+</form>
+
