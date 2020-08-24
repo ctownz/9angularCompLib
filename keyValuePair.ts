@@ -10,4 +10,6 @@ export class KeyValuePair {
     label?: string;
     on?: boolean;
     target?: string;
+    valid?: boolean = true;  
 }
+
