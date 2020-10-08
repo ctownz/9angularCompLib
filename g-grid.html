@@ -1,0 +1,933 @@
+<style>
+    .panel-heading {
+        background-color: #E5E7E8;
+/*         border-color: #006699;
+        border-width: 2px;
+        border-style: solid; */
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        height: auto;
+        width: inherit;
+    }
+
+    .well-sm {
+        padding: 0px;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        border-style: solid;
+        /*border-width: 1px;*/
+        border-color: #1976d2;
+        border-left-width: 1px;
+        border-right-width: 1px;
+        border-bottom-width: 1px;
+        border-top-width: 1px;
+        margin-top: 0px;
+    }
+
+    .grid-containers {
+        /*background-color: #0d47a1;*/
+        border-color: #006699;
+        border-radius: 6px;
+        border-style: solid;
+        border-width: 2px;
+    }
+
+    /* BUTTONS */
+    .btn-primary {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-width: 0px;
+        margin-right: 15px;
+        margin-left: 15px;
+        border-bottom: 0px;
+    }
+
+
+
+    .btn-primary,
+    .btn-primary:visited {
+        background-color: #006699;
+        font-weight: bold;
+    }
+
+    .btn-primary:hover {
+        /*background-color: #e8e8e8;*/
+        /*border: solid 0px #eceff1;*/
+        color: #e8e8e8;
+    }
+
+    .btn-primary:focus {
+        border-bottom: 0px;
+        /*background-color: #ffffff;*/
+        border-style: solid;
+        border-bottom-color: yellow;
+        color: #e8e8e8;
+    }
+
+
+    .btn-group {
+        width: 100%;
+        background-color: #006699;
+        border-style: solid;
+        border-color: #006699;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        border-left-width: 2px;
+        border-right-width: 2px;
+        border-bottom-width: 0px;
+        border-top-width: 8px;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .btn-group>btn-primary {
+        background-color: red;
+    }
+
+    /*PAGINATION*/
+    .disabled-button {
+        color: #212121;
+        background-color: transparent;
+        box-shadow: none;
+        border-style: hidden;
+        border-width: 0px;
+        outline: none;
+        padding: 8px;
+    }
+
+    .no-button {
+        color: #212121;
+        background-color: transparent;
+        box-shadow: none;
+        border-style: hidden;
+        border-width: 0px;
+        outline: none;
+        padding: 8px;
+    }
+
+    .no-button:hover {
+        background-color: #f5f5f5;
+        color: #000000;
+        font-weight: bolder;
+    }
+
+    .no-button:active {
+        background-color: #c5cae9 !important;
+        color: #000000;
+        font-weight: bolder;
+    }
+
+    .no-button:focus {
+        font-size: larger;
+        font-weight: bolder;
+    }
+button:active, :focus{
+    border-color: whitesmoke;
+    outline: none;
+}
+    .isSelected {
+        background-color: #006699;
+        color: #ffffff;
+        font-size: larger;
+        font-weight: bolder;
+    }
+
+    .notSelected {
+        font-weight: normal;
+    }
+
+
+    /* TABLE */
+
+    .tdNbrStyle {
+        padding: .1em .1em .1em .1em;
+        text-align: right;
+    }
+    .tdNV {
+        visibility: hidden;
+    }
+    .tdDateStyle {
+        padding: .1em .1em .1em .1em;
+        text-align: right;
+    }
+
+    .tdStrStyle {
+        padding: .1em .1em .1em .1em;
+        text-align: left;
+
+    }
+
+
+    th {
+        background-color: #E5E7E8;
+        padding: .3em .6em;
+    }
+
+    th:first-of-type {
+        border-top-left-radius: 4px;
+    }
+
+    th:last-of-type {
+        border-top-right-radius: 4px;
+        background-color: orchid;
+    }
+
+    tr:last-of-type td:last-of-type {
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+      
+    }
+    th:first-child {
+    border-left: 1px #E5E7E8 solid;
+    border-top: 1px #E5E7E8 solid;
+    border-bottom: 1.5px #E5E7E8 solid;
+    border-top-left-radius: 4px; 
+    border-bottom-left-radius: 0px;
+    margin-right: 0%;
+    background-color: #E5E7E8;
+}
+th {
+   margin-left: 0%;
+    border-top: 1px #E5E7E8 solid;
+    border-bottom: 1px #E5E7E8 solid;
+    background-color: #E5E7E8;
+
+}
+thead{
+    background-color: orchid;
+}
+
+
+    .arrow {
+        padding: 2px;
+        width: 18px;
+        height: 20px;
+    }
+
+    .arrow:hover {
+        background-color: #ffffff;
+    }
+
+    .foo-class {
+        float: left;
+        padding: 3px;
+        width: 310px;
+        min-width: 310px;
+    }
+
+    .nesting span.pencil {
+        float: right;
+        background-color: red;
+    }
+
+    .nesting span.triangle-top {
+        float: right;
+        color: #ccc;
+        background-color: green;
+        display: inline-block;
+        font-size: 1.2em;
+    }
+
+    .nesting span.triangle-top:hover {
+        float: right;
+        display: inline-block;
+        background-color: #ccc;
+        color: red;
+        font-size: 1.2em;
+    }
+
+    .nesting span.triangle-bottom {
+        float: right;
+        color: #ccc;
+        background-color: green;
+        display: inline-block;
+        font-size: 1.2em;
+        -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
+        /* Safari */
+        transition: width 2s, height 2s, transform 2s;
+    }
+
+    .nesting span.triangle-bottom:hover {
+        float: right;
+        display: inline-block;
+        background-color: #ccc;
+        color: red;
+        font-size: 1.2em;
+        -webkit-transform: rotate(180deg);
+        /* Safari */
+        transform: rotate(180deg);
+    }
+
+
+    .nestchild a {
+        clear: both;
+        display: block;
+    }
+
+    .nesting {
+        background-color: #e8e8e8;
+        /*table headings*/
+        border-top-color: #e8e8e8;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+
+
+
+    .nesting a {
+        width: 285px;
+    }
+
+    .nesting a .pencil {
+
+        display: inline-block;
+    }
+
+    .nesting a .triangle-top {
+        display: none;
+
+    }
+
+
+    .nestchild {
+        margin-left: 15px;
+    }
+
+    /***********************************************************************/
+    .show {
+        margin-top: 0px;
+        color: purple;
+        opacity: 1;
+        /*transition: opacity 1s;*/
+    }
+
+    .show:hover {
+        margin-top: 0px;
+        color: blue;
+        opacity: 1;
+        /*transition: opacity 1s;*/
+    }
+
+    .hide {
+        margin-top: 0px;
+        color: white;
+        opacity: 0;
+        /*transition: opacity 1s;*/
+    }
+
+    .hide:hover {
+        margin-top: 0px;
+        color: blue;
+        opacity: 0;
+        /*transition: opacity 1s;*/
+    }
+
+    .test {
+        color: #363636;
+        white-space: nowrap;
+    }
+
+    .test:hover {
+        color: #878787;
+        /*min-width: 125px;*/
+    }
+
+    .test:active {
+        color: #006699;
+    }
+
+    .glyphicon {
+
+        color: #c5cae9;
+    }
+
+    .glyphicon:hover {
+        color: #3f51b5;
+    }
+
+
+    .showme {
+        visibility: hidden;
+    }
+
+    .showme:hover {
+        visibility: hidden;
+        color: #878787;
+
+    }
+
+    .showme:active {
+        /*visibility: hidden;*/
+        color: #E5E7E8;
+        color: red;
+    }
+
+    .showhim:hover .showme {
+        visibility: visible;
+        white-space: nowrap;
+        color: #878787;
+    }
+
+    .filters {
+        max-width: 50px;
+        visibility: visible;
+    }
+
+    .noFilters {
+        color: #ccc;
+        visibility: collapse;
+        max-width: 50px;
+    }
+
+    /*sorting*/
+    /*.notSorted*/
+
+    label {
+        color: #363636;
+    }
+
+    label:hover {
+        color: #808080;
+    }
+
+    label:active {
+        color: red;
+    }
+
+    /*     span:hover {
+        color: red;
+    } */
+    .span:hover:arrow {
+        color: green;
+    }
+
+    .span-hover:hover .glyphicon {
+        color: #e8e8e8;
+    }
+
+    .Sam {
+        cursor: pointer;
+        pointer-events: auto;
+    }
+
+    .Sam:hover {
+        background-color: "red" !important;
+
+    }
+
+    /* .Sam:active {
+        color: red;
+        visibility: collapse; 
+    } */
+    .Biff {
+        background-color: #ccc;
+    }
+
+    .Happ {
+        background-color: #ccc;
+    }
+
+    .btn-xs {
+        color: #fff;
+        background-color: rgb(204, 204, 204);
+        /* gray*/
+        box-shadow: none;
+
+        font-size: 1.2em;
+        text-align: center;
+        width: 45px;
+        height: 15px;
+        padding-right: 0px;
+        padding-left: 5px;
+        margin-bottom: 8px;
+        vertical-align: middle;
+    }
+
+    .btn-xs:hover,
+    .btn-xs:active,
+    .btn-xs:visited,
+    .btn-xs:focus {
+        color: #fff;
+        background-color: rgb(204, 204, 204);
+        border-color: #ccc !important;
+        box-shadow: none;
+        width: 45px;
+        height: 15px;
+        outline: none;
+        display: inline-block;
+        visibility: visible;
+    }
+
+    .span:hover {
+        color: #e8e8e8;
+    }
+
+
+    /* DROPDOWNS */
+    .dropdown {
+        vertical-align: middle;
+        position: relative;
+        display: inline-block;
+        background-color: transparent !important;
+        margin-left: 0px;
+        margin-right: 50px;
+        padding-left: 1px;
+
+    }
+
+    .dropdown-menu {
+        /*position: relative;
+    display: inline-block;*/
+        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+        border-style: none;
+        background-color: pink !important;
+        margin-right: 8px;
+        /*width: 12px !important;*/
+    }
+
+    .selectdiv {
+        position: relative;
+        /*Don't really need this just for demo styling*/
+        float: left;
+        /*min-width: 200px;*/
+        margin: 50px 33%;
+        background-color: green;
+    }
+
+    /*To remove button from IE11, thank you Matt */
+    select::-ms-expand {
+        display: none;
+    }
+
+    .selectdiv:after {
+        content: '<>';
+        font: 17px "Consolas", monospace;
+        color: #ffffff;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        right: 11px;
+        /*Adjust for position however you want*/
+        top: 18px;
+        padding: 0 0 2px;
+        border-bottom: 1px solid #999;
+        /*left line */
+        position: absolute;
+        pointer-events: none;
+        background-color: #f9f9f9;
+    }
+
+    .selectdiv select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        /*appearance: none;*/
+        /* Add some styling */
+        display: block;
+        width: 100%;
+        max-width: 320px;
+        height: 50px;
+        float: right;
+        margin: 5px 0px;
+        padding: 0px 24px;
+        font-size: 16px;
+        line-height: 1.75;
+        color: #333;
+        /*background-color: #ffffff;*/
+        background-color: red;
+        background-image: none;
+        border: 1px solid #cccccc;
+        -ms-word-break: normal;
+        word-break: normal;
+    }
+
+    /* HeroesComponent's private CSS styles */
+    .heroes {
+        margin: 0 0 2em 0;
+        list-style-type: none;
+        padding: 0;
+        width: 15em;
+    }
+
+    .heroes li {
+        cursor: pointer;
+        position: relative;
+        left: 0;
+        background-color: #EEE;
+        margin: .5em;
+        padding: .3em 0;
+        height: 1.6em;
+        border-radius: 4px;
+    }
+
+    .heroes li:hover {
+        color: #607D8B;
+        background-color: #DDD;
+        left: .1em;
+    }
+
+    .heroes li.selected {
+        background-color: #CFD8DC;
+        color: white;
+    }
+
+    .heroes li.selected:hover {
+        background-color: #BBD8DC;
+        color: white;
+    }
+
+    .heroes .badge {
+        display: inline-block;
+        font-size: small;
+        color: white;
+        padding: 0.8em 0.7em 0 0.7em;
+        background-color: #405061;
+        line-height: 1em;
+        position: relative;
+        left: -1px;
+        top: -4px;
+        height: 1.8em;
+        margin-right: .8em;
+        border-radius: 4px 0 0 4px;
+    }
+
+    /*  **********from bootstrap************* */
+    @media (max-width: 575.98px) {
+        .table-responsive-sm {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+        }
+
+        .table-responsive-sm>.table-bordered {
+            border: 0;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .table-responsive-md {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+        }
+
+        .table-responsive-md>.table-bordered {
+            border: 0;
+        }
+    }
+
+    @media (max-width: 991.98px) {
+        .table-responsive-lg {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+        }
+
+        .table-responsive-lg>.table-bordered {
+            border: 0;
+        }
+    }
+
+    @media (max-width: 1199.98px) {
+        .table-responsive-xl {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+        }
+
+        .table-responsive-xl>.table-bordered {
+            border: 0;
+        }
+    }
+
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+
+    .table-responsive>.table-bordered {
+        border: 0;
+    }
+
+    svg {
+        overflow: hidden;
+        vertical-align: middle;
+    }
+
+    .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        height: 10px;
+        /* Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .heading {
+        font-size: 20px;
+    }
+
+    .heading:hover {
+        color: red;
+    }
+.item1 { grid-area: header; }
+.item2 { grid-area: menu; }
+.item3 { grid-area: main; }
+.item4 { grid-area: right; }
+.item5 { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right'
+    'footer footer footer footer footer footer';
+  grid-gap: 1px;
+  background-color: transparent;
+  padding: 10px;
+  margin-bottom: 1px;
+  width: 100%;
+}
+
+.grid-container > div {
+  background-color: transparent;
+  text-align: center;
+  padding: 2px 0;
+  font-size: inherit;
+  margin-bottom: 1px;
+}
+</style>
+
+<p>W2 is the grid component?</p>
+<h2>gridItems, grid version 9</h2>
+<p>&#171;</p>
+<p>&#187;</p>
+<p>&#x25B2;</p> <p>&#x25BC;</p>
+= &#9668;
+► = &#9658;
+▼ = &#9660;
+▲ = &#9650;
+<p
+    style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: 32px;font-weight: bold;">
+    Clear filters <span style="background-color: tomato;color:white;border-radius: 50px;">&#8681; &#10506;</span></p>
+
+
+<svg (click)="clearFilters()" width="16px" height="16px"
+    style="padding: 1px 1px;background-color:transparent;overflow: hidden;vertical-align: middle;">
+    <g transform="translate(0,0) scale(.05)">
+        <path
+            d="M 25.912109 11.03125 L 12.568359 24.455078 L 110.39844 122.96289 L 12.582031 221.45703 L 25.912109 234.89258 L 123.73242 136.38867 L 221.54688 234.88086 L 234.89062 221.45703 L 137.07031 122.95898 L 234.89062 24.455078 L 221.55859 11.03125 L 123.73633 109.5332 L 25.912109 11.03125 z "
+            style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:15" />
+    </g>
+</svg>
+/*******************Header**********************/
+<label class="label-control">Rows on page</label>
+
+nbrItems {{ nbrItems }} pageSize {{ pageSize }} curPage {{ curPage }} nbrItems{{ nbrItems }}
+/*************************************************/
+
+    <div class="grid-container" style="background-color: thistle;padding: 0px;margin:0px;width:100%;">
+        <div class="item1">Header</div>
+        <div class="item2" style="text-align: left;vertical-align:bottom;padding-left:20px;">
+            <span>
+                <button type="button" style="min-width:84px;" (click)="filtersPnl()">Add Filters</button>
+                <button type="button" style="min-width:84px;" (click)="clearFilters()" >Clear Filters</button>
+                <button type="button" style="min-width:84px;" (click)="showSort()" >Sort</button>
+                <button type="button" style="min-width:84px;" (click)="reset()" >Reset</button>
+            </span>
+        </div>
+        <div class="item3" style="text-align: right;"></div>  
+        <div class="item4" style="text-align: right;padding-right:12px;">
+            <span style="padding-right:10px;">
+                <label style="padding-right:8px;">items per page</label>
+                <select name="perPg" id={{ddlId}} (change)="itemsPerPage(10)">
+                <option>10 items per page</option>
+                <option>20 items per page</option>
+                <option>30 items per page</option>
+                <option>40 items per page</option>
+                <option>50 items per page</option>
+                <option>All</option>
+ 
+            </select>
+        </span>
+        </div>
+        <div class="item5" style="padding:0px;background-color:green;"></div>
+    </div>
+        <div class="panel panel-primary"
+            style="padding:0px;border:4px solid; border-color:transparent;border-radius:8px;margin-top: 0%;">
+           
+            <div class="grid-container" style="background-color: thistle;padding: 0px;margin:0px;width:100%;">
+                <div class="item1">Header</div>
+                <div class="item2" style="text-align: left;vertical-align:bottom;padding-left:20px;">
+                    <span>
+                        <button type="button" style="min-width:84px;" (click)="filtersPnl()">Add Filters</button>
+                        <button type="button" style="min-width:84px;" (click)="clearFilters()" >Clear Filters</button>
+                        <button type="button" style="min-width:84px;" (click)="showSort()" >Sort</button>
+                        <button type="button" style="min-width:84px;" (click)="reset()" >Reset</button>
+                    </span>
+                </div>
+                <div class="item3" style="text-align: right;"></div>  
+                <div class="item4" style="text-align: right;padding-right:12px;">
+                    <span style="padding-right:10px;">
+                        <label style="padding-right:8px;">items per page</label>
+                        <select name="perPg" id={{ddlId}} (change)="itemsPerPage(10)">
+                        <option>10 items per page</option>
+                        <option>20 items per page</option>
+                        <option>30 items per page</option>
+                        <option>40 items per page</option>
+                        <option>50 items per page</option>
+                        <option>All</option>
+         
+                    </select>
+                </span>
+                </div>
+                <div class="item5" style="padding:0px;background-color:green;"></div>
+            </div>
+            <div style="width:inherit; margin-left:0px;padding-left: 0px;float:right;"
+            [ngStyle]="{
+                'background-color' : color,
+                'color': 'white'
+            }">
+            </div>
+
+<!--             <div class="panel-body" style="color:#546E7A;background-color: transparent;padding:0px;">
+ -->
+                <!-- <div class="table-responsive"
+                    style="background-color:transparent; border:1px #E5E7E8 solid;border-radius: 6px;color:inherit">
+                     -->
+                     <table>
+                        <!-- <thead style="background-color: orchid;"> -->
+                            <tr class="row" style="background-color: transparent;">
+                                <th *ngFor="let tableHeading of tableHeadings" style="background-color: #E5E7E8;">
+                                    <div class="container" *ngIf="tableHeading.tableHeadingKey != key && tableHeading.tableHeadingKey != keyDefault"
+                                        style="text-align:center;display: inline;vertical-align: middle;background-color:transparent;margin: 0px;">
+                                        <span style="white-space: nowrap; text-align:left; margin-left:auto;margin-right:auto;vertical-align:middle;">
+                                            <span style="text-align:left;vertical-align: middle;">
+                                                {{ tableHeading.tableHeadingVal }}
+                                            </span>
+                                            <span id={{tableHeading.idx}} class="container" style="margin:0px 0px 0px 0px;margin:0;">
+                                                <span style="padding:0px;margin:0px;" [ngStyle]="{'display': sortVis}">
+                                                    <span class="Sam" (click)="sortByColumn(tableHeading.idx, 0, $event)"
+                                                        style="padding:0;margin:0px 0px 0px 8px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: 22px;font-weight: bold;vertical-align: middle;"
+                                                        [ngStyle]="{
+                                                                                            'color' : clrA                                                                               
+                                                                                        }">
+                                                        &#x25BC;
+                                    
+                                                    </span>
+                                                    <span class="Sam" (click)="sortByColumn(tableHeading.idx, 1, $event)" id={{tableHeading.idx}}
+                                                        style="padding:0px 0px 10px 0px;margin:0px 0px 10px 0px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size:22px;font-weight: bold;vertical-align: middle;"
+                                                        [ngStyle]="{
+                                                                                            'color' : clrA
+                                                                                        }">
+                                                        &#x25B2;
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr class="row" [ngClass]="filters" style="padding:0;">
+                                <th *ngFor="let tableHeading of tableHeadings" style="padding:0;">
+                                    <div *ngIf="tableHeading.tableHeadingKey != key && tableHeading.tableHeadingKey != keyDefault"
+                                        style="text-align:center;display: inline;vertical-align: middle;padding:0px;">
+                                        <input type="search" style="border:1.5px #d3d3d3 solid;width:100px;" #box (keyup)="onKey(box.value, tableHeading.idx)">
+                                    </div>
+                                </th>
+                            </tr>
+                       <!--  </thead> -->
+                         <tr class="row" *ngFor="let gi of g | slice: (curPage * nbrItems) - pageSize :curPage * nbrItems" style="padding: 2px;">
+                            <td  *ngFor="let p of gi.props"  class="{{ p.style }}" style="border:1px solid #D3D3D3;background-color: #fff;padding:.4em .5em;width:auto;white-space: nowrap;">
+                              <span *ngIf="p.key != key">
+                                {{p.value}}
+                              </span>
+                            </td>
+                        </tr> 
+                    </table>
+                    <div style="align-content:center;display: inline-block;margin-left:8px; margin-right: auto;color:inherit;">
+                        <div>
+                            <span style="color:inherit">Page <span class="disabled-button" style="color:inherit">{{curPage}}</span><span style="color:inherit">of</span><button class="disabled-button" style="color:inherit">{{totalNumberPages}}</button>
+                        </span>
+
+                            <button class="disabled-button" style="background-color: transparent;font-size: large;color:gray;" disabled *ngIf="curPage == 1">
+                                &#171;
+                            </button>
+                            <button class="no-button" style="font-weight:bold;font-size:large;" *ngIf="curPage > 1" (click)="startOver()"
+                                [ngStyle]="{
+                                    'color': style.primary
+                                }">
+                                &#171;
+                            </button>
+
+
+                            <button disabled *ngIf="curPage == 1" style="color:#C0C0C0; background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;margin-bottom:3px;">Previous</button>
+                            <button *ngIf="curPage > 1" style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;" (click)="prev()">Previous</button>
+                            <!--...-->
+                            <button class="no-button" *ngIf="lastDisplayed > numberToDisplay && curPage != 1" (click)="previousTen()">...</button>
+
+                            <!--<button class="no-button" *ngIf="lastDisplayed > numberToDisplay" (click)="previousTen()">{{ curPage }}...</button>-->
+                            <!--page number-->
+                            <!--<button class="no-button" *ngFor="let nbr of pageNumbers" (click)="curPage = nbr">{{ nbr }}</button>-->
+                            <span style="color:inherit;">
+                            <button class="button" [ngStyle]="(nbr == curPage) ? {'background-color': style.primary, 'color': 'white', 'box-shadow': 'none', 'border-color': style.primary, 'border-style': 'dotted'} : {'color': 'inherit'}"
+                                *ngFor="let nbr of pageNumbers" (click)="curPage = nbr">
+                                    {{ nbr }}
+                            </button>
+                            </span>
+                   <!--          <button class="no-button" [ngClass]="{'isSelected': nbr === curPage, 'notSelected': nbr !== curPage}" 
+                                *ngFor="let nbr of pageNumbers" (click)="curPage = nbr">
+                                    {{ nbr }}
+                            </button> -->
+                            <!--...-->
+                            <button class="no-button" *ngIf="numberToDisplay < totalNumberPages && lastDisplayed < totalNumberPages" (click)="nextTen()">...</button>
+
+                            <button style="color:gray;background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;color:#C0C0C0;" disabled *ngIf="curPage >= totalNumberPages" (click)="curPage = curPage + 1">
+                                Next
+                            </button>
+                            <button style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;" *ngIf="curPage < totalNumberPages" (click)="moveUp()">
+                                <!--ok? not really.  this does not update the page number array -->
+                                Next
+                            </button>
+                            <button class="disabled-button" style="background-color: transparent;font-size: large;color:gray;" disabled *ngIf="curPage == lastPage || lastDisplayed == totalNumberPages">
+                                &#187;
+                            </button>
+                            <button class="no-button" style="font-weight:bold;font-size: large;" *ngIf="curPage < lastPage  && lastDisplayed < totalNumberPages" (click)="endUp()"
+                            [ngStyle]="{
+                                'color': style.primary
+                            }">
+                                &#187;
+                              
+                            </button>
+                            <br />
+
+                        </div>
+                    </div>
+
+         <!--        </div> -->
+       <!--      </div> -->
+
