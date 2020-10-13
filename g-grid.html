@@ -1,7 +1,7 @@
 <style>
     .panel-heading {
         background-color: #E5E7E8;
-/*         border-color: #006699;
+        /*         border-color: #006699;
         border-width: 2px;
         border-style: solid; */
         border-top-left-radius: 6px;
@@ -126,10 +126,13 @@
         font-size: larger;
         font-weight: bolder;
     }
-button:active, :focus{
-    border-color: whitesmoke;
-    outline: none;
-}
+
+    button:active,
+    :focus {
+        border-color: whitesmoke;
+        outline: none;
+    }
+
     .isSelected {
         background-color: #006699;
         color: #ffffff;
@@ -148,9 +151,11 @@ button:active, :focus{
         padding: .1em .1em .1em .1em;
         text-align: right;
     }
+
     .tdNV {
         visibility: hidden;
     }
+
     .tdDateStyle {
         padding: .1em .1em .1em .1em;
         text-align: right;
@@ -180,27 +185,30 @@ button:active, :focus{
     tr:last-of-type td:last-of-type {
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
-      
-    }
-    th:first-child {
-    border-left: 1px #E5E7E8 solid;
-    border-top: 1px #E5E7E8 solid;
-    border-bottom: 1.5px #E5E7E8 solid;
-    border-top-left-radius: 4px; 
-    border-bottom-left-radius: 0px;
-    margin-right: 0%;
-    background-color: #E5E7E8;
-}
-th {
-   margin-left: 0%;
-    border-top: 1px #E5E7E8 solid;
-    border-bottom: 1px #E5E7E8 solid;
-    background-color: #E5E7E8;
 
-}
-thead{
-    background-color: orchid;
-}
+    }
+
+    th:first-child {
+        border-left: 1px #E5E7E8 solid;
+        border-top: 1px #E5E7E8 solid;
+        border-bottom: 1.5px #E5E7E8 solid;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 0px;
+        margin-right: 0%;
+        background-color: #E5E7E8;
+    }
+
+    th {
+        margin-left: 0%;
+        border-top: 1px #E5E7E8 solid;
+        border-bottom: 1px #E5E7E8 solid;
+        background-color: #E5E7E8;
+
+    }
+
+    thead {
+        background-color: orchid;
+    }
 
 
     .arrow {
@@ -694,240 +702,240 @@ thead{
     .heading:hover {
         color: red;
     }
-.item1 { grid-area: header; }
-.item2 { grid-area: menu; }
-.item3 { grid-area: main; }
-.item4 { grid-area: right; }
-.item5 { grid-area: footer; }
 
-.grid-container {
-  display: grid;
-  grid-template-areas:
-    'header header header header header header'
-    'menu main main main right right'
-    'footer footer footer footer footer footer';
-  grid-gap: 1px;
-  background-color: transparent;
-  padding: 10px;
-  margin-bottom: 1px;
-  width: 100%;
-}
+    .item1 {
+        grid-area: header;
+    }
 
-.grid-container > div {
-  background-color: transparent;
-  text-align: center;
-  padding: 2px 0;
-  font-size: inherit;
-  margin-bottom: 1px;
-}
+    .item2 {
+        grid-area: menu;
+    }
+
+    .item3 {
+        grid-area: main;
+    }
+
+    .item4 {
+        grid-area: right;
+    }
+
+    .item5 {
+        grid-area: footer;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+            'header header header header header header'
+            'menu main main main main right'
+            'footer footer footer footer footer footer';
+        grid-gap: 1px;
+        background-color: transparent;
+        padding: 10px;
+        margin-bottom: 1px;
+        width: 100%;
+    }
+
+    .grid-container>div {
+        background-color: transparent;
+        text-align: center;
+        padding: 2px 0;
+        font-size: inherit;
+        margin-bottom: 1px;
+    }
+
+    .g-btn {
+        background-color: transparent;
+        border: 1.5px solid #C6C9E8;
+        border-radius: 1.5px;
+        font-size: 'inherit';
+        padding: .5em 2em;
+    }
+    .p-btn {
+        background-color: transparent;
+        border: 1.5px solid #C6C9E8;
+        border-radius: 1.5px;
+        font-size: 'inherit';
+    }
+    select {
+       width: 7rem;
+        -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="60%" height="20%" viewBox="0 0 100 100"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:rgb(144, 164, 174);"></path></svg>');
+    background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 5px;
+  border: none;
+
+  margin-right: 2rem;
+  margin-left: 2rem;
+  padding: .25rem;
+  padding-right: .25rem;  
+    }
+    select:hover{
+        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="60%" height="20%" viewBox="0 0 100 100"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:gray;stroke:gray;stroke-width:6"></path></svg>');
+    background-repeat: no-repeat;
+    }
 </style>
 
-<p>W2 is the grid component?</p>
-<h2>gridItems, grid version 9</h2>
-<p>&#171;</p>
-<p>&#187;</p>
-<p>&#x25B2;</p> <p>&#x25BC;</p>
-= &#9668;
-► = &#9658;
-▼ = &#9660;
-▲ = &#9650;
-<p
-    style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: 32px;font-weight: bold;">
-    Clear filters <span style="background-color: tomato;color:white;border-radius: 50px;">&#8681; &#10506;</span></p>
+<div class="panel panel-primary"
+    style="padding:0px;border:4px solid; border-color:transparent;border-radius:8px;margin-top: 0%;">
 
-
-<svg (click)="clearFilters()" width="16px" height="16px"
-    style="padding: 1px 1px;background-color:transparent;overflow: hidden;vertical-align: middle;">
-    <g transform="translate(0,0) scale(.05)">
-        <path
-            d="M 25.912109 11.03125 L 12.568359 24.455078 L 110.39844 122.96289 L 12.582031 221.45703 L 25.912109 234.89258 L 123.73242 136.38867 L 221.54688 234.88086 L 234.89062 221.45703 L 137.07031 122.95898 L 234.89062 24.455078 L 221.55859 11.03125 L 123.73633 109.5332 L 25.912109 11.03125 z "
-            style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:15" />
-    </g>
-</svg>
-/*******************Header**********************/
-<label class="label-control">Rows on page</label>
-
-nbrItems {{ nbrItems }} pageSize {{ pageSize }} curPage {{ curPage }} nbrItems{{ nbrItems }}
-/*************************************************/
-
-    <div class="grid-container" style="background-color: thistle;padding: 0px;margin:0px;width:100%;">
+    <div class="grid-container" style="background-color:transparent;padding: 0px;margin:0px;width:100%;">
         <div class="item1">Header</div>
-        <div class="item2" style="text-align: left;vertical-align:bottom;padding-left:20px;">
+        <div class="item2" style="text-align: left;vertical-align:bottom;">
             <span>
-                <button type="button" style="min-width:84px;" (click)="filtersPnl()">Add Filters</button>
-                <button type="button" style="min-width:84px;" (click)="clearFilters()" >Clear Filters</button>
-                <button type="button" style="min-width:84px;" (click)="showSort()" >Sort</button>
-                <button type="button" style="min-width:84px;" (click)="reset()" >Reset</button>
+                <button class="g-btn" type="button" style="min-width:130px;" (click)="filtersPnl()">Add Filters</button>
+                <button class="g-btn" type="button" style="min-width:130px;" (click)="clearFilters()">Clear
+                    Filters</button>
+                <button class="g-btn" type="button" style="min-width:130px;" (click)="showSort()">Sort</button>
+                <button class="g-btn" type="button" style="min-width:130px;" (click)="reset()">Reset</button>
+               
+                <select name="perPg" id={{ddlId}} (change)="itemsPerPage(10)">
+                    <option value="0">Items per Page </option>
+                    <option>10 items per page</option>
+                    <option>20 items per page</option>
+                    <option>30 items per page</option>
+                    <option>40 items per page</option>
+                    <option>50 items per page</option>
+                    <option>All</option>
+
+                </select>
             </span>
         </div>
-        <div class="item3" style="text-align: right;"></div>  
+        <div class="item3" style="text-align: right;"></div>
         <div class="item4" style="text-align: right;padding-right:12px;">
-            <span style="padding-right:10px;">
-                <label style="padding-right:8px;">items per page</label>
-                <select name="perPg" id={{ddlId}} (change)="itemsPerPage(10)">
-                <option>10 items per page</option>
-                <option>20 items per page</option>
-                <option>30 items per page</option>
-                <option>40 items per page</option>
-                <option>50 items per page</option>
-                <option>All</option>
- 
-            </select>
-        </span>
+   
         </div>
-        <div class="item5" style="padding:0px;background-color:green;"></div>
+        <div class="item5" style="padding:0px;background-color:transparent;"></div>
     </div>
-        <div class="panel panel-primary"
-            style="padding:0px;border:4px solid; border-color:transparent;border-radius:8px;margin-top: 0%;">
-           
-            <div class="grid-container" style="background-color: thistle;padding: 0px;margin:0px;width:100%;">
-                <div class="item1">Header</div>
-                <div class="item2" style="text-align: left;vertical-align:bottom;padding-left:20px;">
-                    <span>
-                        <button type="button" style="min-width:84px;" (click)="filtersPnl()">Add Filters</button>
-                        <button type="button" style="min-width:84px;" (click)="clearFilters()" >Clear Filters</button>
-                        <button type="button" style="min-width:84px;" (click)="showSort()" >Sort</button>
-                        <button type="button" style="min-width:84px;" (click)="reset()" >Reset</button>
-                    </span>
-                </div>
-                <div class="item3" style="text-align: right;"></div>  
-                <div class="item4" style="text-align: right;padding-right:12px;">
-                    <span style="padding-right:10px;">
-                        <label style="padding-right:8px;">items per page</label>
-                        <select name="perPg" id={{ddlId}} (change)="itemsPerPage(10)">
-                        <option>10 items per page</option>
-                        <option>20 items per page</option>
-                        <option>30 items per page</option>
-                        <option>40 items per page</option>
-                        <option>50 items per page</option>
-                        <option>All</option>
-         
-                    </select>
-                </span>
-                </div>
-                <div class="item5" style="padding:0px;background-color:green;"></div>
-            </div>
-            <div style="width:inherit; margin-left:0px;padding-left: 0px;float:right;"
-            [ngStyle]="{
+    <div style="width:inherit; margin-left:0px;padding-left: 0px;float:right;" 
+    [ngStyle]="{
                 'background-color' : color,
                 'color': 'white'
             }">
-            </div>
+    </div>
 
-<!--             <div class="panel-body" style="color:#546E7A;background-color: transparent;padding:0px;">
- -->
-                <!-- <div class="table-responsive"
-                    style="background-color:transparent; border:1px #E5E7E8 solid;border-radius: 6px;color:inherit">
-                     -->
-                     <table>
-                        <!-- <thead style="background-color: orchid;"> -->
-                            <tr class="row" style="background-color: transparent;">
-                                <th *ngFor="let tableHeading of tableHeadings" style="background-color: #E5E7E8;">
-                                    <div class="container" *ngIf="tableHeading.tableHeadingKey != key && tableHeading.tableHeadingKey != keyDefault"
-                                        style="text-align:center;display: inline;vertical-align: middle;background-color:transparent;margin: 0px;">
-                                        <span style="white-space: nowrap; text-align:left; margin-left:auto;margin-right:auto;vertical-align:middle;">
-                                            <span style="text-align:left;vertical-align: middle;">
-                                                {{ tableHeading.tableHeadingVal }}
-                                            </span>
-                                            <span id={{tableHeading.idx}} class="container" style="margin:0px 0px 0px 0px;margin:0;">
-                                                <span style="padding:0px;margin:0px;" [ngStyle]="{'display': sortVis}">
-                                                    <span class="Sam" (click)="sortByColumn(tableHeading.idx, 0, $event)"
-                                                        style="padding:0;margin:0px 0px 0px 8px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: 22px;font-weight: bold;vertical-align: middle;"
-                                                        [ngStyle]="{
+
+    <table>
+        <tr class="row" style="background-color: transparent;">
+            <th *ngFor="let tableHeading of tableHeadings" style="background-color: #E5E7E8;">
+                <div class="container"
+                    *ngIf="tableHeading.tableHeadingKey != key && tableHeading.tableHeadingKey != keyDefault"
+                    style="text-align:center;display: inline;vertical-align: middle;background-color:transparent;margin: 0px;">
+                    <span
+                        style="white-space: nowrap; text-align:left; margin-left:auto;margin-right:auto;vertical-align:middle;">
+                        <span style="text-align:left;vertical-align: middle;">
+                            {{ tableHeading.tableHeadingVal }}
+                        </span>
+                        <span id={{tableHeading.idx}} class="container" style="margin:0px 0px 0px 0px;margin:0;">
+                            <span style="padding:0px;margin:0px;" [ngStyle]="{'display': sortVis}">
+                                <span class="Sam" (click)="sortByColumn(tableHeading.idx, 0, $event)"
+                                    style="padding:0;margin:0px 0px 0px 8px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: 22px;font-weight: bold;vertical-align: middle;"
+                                    [ngStyle]="{
                                                                                             'color' : clrA                                                                               
                                                                                         }">
-                                                        &#x25BC;
-                                    
-                                                    </span>
-                                                    <span class="Sam" (click)="sortByColumn(tableHeading.idx, 1, $event)" id={{tableHeading.idx}}
-                                                        style="padding:0px 0px 10px 0px;margin:0px 0px 10px 0px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size:22px;font-weight: bold;vertical-align: middle;"
-                                                        [ngStyle]="{
+                                    &#x25BC;
+
+                                </span>
+                                <span class="Sam" (click)="sortByColumn(tableHeading.idx, 1, $event)"
+                                    id={{tableHeading.idx}}
+                                    style="padding:0px 0px 10px 0px;margin:0px 0px 10px 0px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size:22px;font-weight: bold;vertical-align: middle;"
+                                    [ngStyle]="{
                                                                                             'color' : clrA
                                                                                         }">
-                                                        &#x25B2;
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr class="row" [ngClass]="filters" style="padding:0;">
-                                <th *ngFor="let tableHeading of tableHeadings" style="padding:0;">
-                                    <div *ngIf="tableHeading.tableHeadingKey != key && tableHeading.tableHeadingKey != keyDefault"
-                                        style="text-align:center;display: inline;vertical-align: middle;padding:0px;">
-                                        <input type="search" style="border:1.5px #d3d3d3 solid;width:100px;" #box (keyup)="onKey(box.value, tableHeading.idx)">
-                                    </div>
-                                </th>
-                            </tr>
-                       <!--  </thead> -->
-                         <tr class="row" *ngFor="let gi of g | slice: (curPage * nbrItems) - pageSize :curPage * nbrItems" style="padding: 2px;">
-                            <td  *ngFor="let p of gi.props"  class="{{ p.style }}" style="border:1px solid #D3D3D3;background-color: #fff;padding:.4em .5em;width:auto;white-space: nowrap;">
-                              <span *ngIf="p.key != key">
-                                {{p.value}}
-                              </span>
-                            </td>
-                        </tr> 
-                    </table>
-                    <div style="align-content:center;display: inline-block;margin-left:8px; margin-right: auto;color:inherit;">
-                        <div>
-                            <span style="color:inherit">Page <span class="disabled-button" style="color:inherit">{{curPage}}</span><span style="color:inherit">of</span><button class="disabled-button" style="color:inherit">{{totalNumberPages}}</button>
+                                    &#x25B2;
+                                </span>
+                            </span>
                         </span>
+                    </span>
+                </div>
+            </th>
+        </tr>
+        <tr class="row" [ngClass]="filters" style="padding:0;">
+            <th *ngFor="let tableHeading of tableHeadings" style="padding:0;">
+                <div *ngIf="tableHeading.tableHeadingKey != key && tableHeading.tableHeadingKey != keyDefault"
+                    style="text-align:center;display: inline;vertical-align: middle;padding:0px;">
+                    <input type="search" style="border:1.5px #d3d3d3 solid;width:100px;" #box
+                        (keyup)="onKey(box.value, tableHeading.idx)">
+                </div>
+            </th>
+        </tr>
+        <!--  </thead> -->
+        <tr class="row" *ngFor="let gi of g | slice: (curPage * nbrItems) - pageSize :curPage * nbrItems"
+            style="padding: 2px;">
+            <td *ngFor="let p of gi.props" class="{{ p.style }}"
+                style="border:1px solid #D3D3D3;background-color: #fff;padding:.4em .5em;width:auto;white-space: nowrap;">
+                <span *ngIf="p.key != key">
+                    {{p.value}}
+                </span>
+            </td>
+        </tr>
+    </table>
 
-                            <button class="disabled-button" style="background-color: transparent;font-size: large;color:gray;" disabled *ngIf="curPage == 1">
-                                &#171;
-                            </button>
-                            <button class="no-button" style="font-weight:bold;font-size:large;" *ngIf="curPage > 1" (click)="startOver()"
-                                [ngStyle]="{
+    <div style="align-content:center;display: inline-block;margin-left:8px; margin-right: auto;color:inherit;">
+        <div>
+            <span style="color:inherit">Page <span class="disabled-button" style="color:inherit">{{curPage}}</span><span
+                    style="color:inherit">of</span><button class="disabled-button"
+                    style="color:inherit">{{totalNumberPages}}</button>
+            </span>
+
+            <button class="disabled-button" style="background-color: transparent;font-size: large;color:gray;" disabled
+                *ngIf="curPage == 1">
+                &#171;
+            </button>
+            <button class="no-button" style="font-weight:bold;font-size:large;" *ngIf="curPage > 1"
+                (click)="startOver()" [ngStyle]="{
                                     'color': style.primary
                                 }">
-                                &#171;
-                            </button>
+                &#171;
+            </button>
 
 
-                            <button disabled *ngIf="curPage == 1" style="color:#C0C0C0; background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;margin-bottom:3px;">Previous</button>
-                            <button *ngIf="curPage > 1" style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;" (click)="prev()">Previous</button>
-                            <!--...-->
-                            <button class="no-button" *ngIf="lastDisplayed > numberToDisplay && curPage != 1" (click)="previousTen()">...</button>
+            <button disabled *ngIf="curPage == 1"
+                style="color:#C0C0C0; background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;margin-bottom:3px;">Previous</button>
+            <button *ngIf="curPage > 1"
+                style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;"
+                (click)="prev()">Previous</button>
+      
+            <button class="no-button" *ngIf="lastDisplayed > numberToDisplay && curPage != 1"
+                (click)="previousTen()">...</button>
 
-                            <!--<button class="no-button" *ngIf="lastDisplayed > numberToDisplay" (click)="previousTen()">{{ curPage }}...</button>-->
-                            <!--page number-->
-                            <!--<button class="no-button" *ngFor="let nbr of pageNumbers" (click)="curPage = nbr">{{ nbr }}</button>-->
-                            <span style="color:inherit;">
-                            <button class="button" [ngStyle]="(nbr == curPage) ? {'background-color': style.primary, 'color': 'white', 'box-shadow': 'none', 'border-color': style.primary, 'border-style': 'dotted'} : {'color': 'inherit'}"
-                                *ngFor="let nbr of pageNumbers" (click)="curPage = nbr">
-                                    {{ nbr }}
-                            </button>
-                            </span>
-                   <!--          <button class="no-button" [ngClass]="{'isSelected': nbr === curPage, 'notSelected': nbr !== curPage}" 
-                                *ngFor="let nbr of pageNumbers" (click)="curPage = nbr">
-                                    {{ nbr }}
-                            </button> -->
-                            <!--...-->
-                            <button class="no-button" *ngIf="numberToDisplay < totalNumberPages && lastDisplayed < totalNumberPages" (click)="nextTen()">...</button>
+            <span >
+                <button class="p-btn" style="color:inherit;border:1.5px solid #C6C9E8;"
+                    [ngStyle]="(nbr == curPage) ? {'background-color': style.primary, 'color': 'white', 'box-shadow': 'none', 'border-color': style.primary, 'border-style': 'dotted'} : {'color': 'inherit'}"
+                    *ngFor="let nbr of pageNumbers" (click)="curPage = nbr">
+                    {{ nbr }}
+                </button>
+            </span>
 
-                            <button style="color:gray;background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;color:#C0C0C0;" disabled *ngIf="curPage >= totalNumberPages" (click)="curPage = curPage + 1">
-                                Next
-                            </button>
-                            <button style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;" *ngIf="curPage < totalNumberPages" (click)="moveUp()">
-                                <!--ok? not really.  this does not update the page number array -->
-                                Next
-                            </button>
-                            <button class="disabled-button" style="background-color: transparent;font-size: large;color:gray;" disabled *ngIf="curPage == lastPage || lastDisplayed == totalNumberPages">
-                                &#187;
-                            </button>
-                            <button class="no-button" style="font-weight:bold;font-size: large;" *ngIf="curPage < lastPage  && lastDisplayed < totalNumberPages" (click)="endUp()"
-                            [ngStyle]="{
+            <button class="no-button" *ngIf="numberToDisplay < totalNumberPages && lastDisplayed < totalNumberPages"
+                (click)="nextTen()">...</button>
+
+            <button
+                style="color:gray;background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;color:#C0C0C0;"
+                disabled *ngIf="curPage >= totalNumberPages" (click)="curPage = curPage + 1">
+                Next
+            </button>
+            <button
+                style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;"
+                *ngIf="curPage < totalNumberPages" (click)="moveUp()">
+                <!--ok? not really.  this does not update the page number array -->
+                Next
+            </button>
+            <button class="disabled-button" style="background-color: transparent;font-size: large;color:gray;" disabled
+                *ngIf="curPage == lastPage || lastDisplayed == totalNumberPages">
+                &#187;
+            </button>
+            <button class="no-button" style="font-weight:bold;font-size: large;"
+                *ngIf="curPage < lastPage  && lastDisplayed < totalNumberPages" (click)="endUp()" [ngStyle]="{
                                 'color': style.primary
                             }">
-                                &#187;
-                              
-                            </button>
-                            <br />
+                &#187;
 
-                        </div>
-                    </div>
+            </button>
+            <br />
 
-         <!--        </div> -->
-       <!--      </div> -->
-
+        </div>
+    </div>
