@@ -1,92 +1,17 @@
 <style>
     .panel-heading {
         background-color: #E5E7E8;
-        /*         border-color: #006699;
-        border-width: 2px;
-        border-style: solid; */
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
         height: auto;
         width: inherit;
     }
 
-    .well-sm {
-        padding: 0px;
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
-        border-bottom-left-radius: 6px;
-        border-bottom-right-radius: 6px;
-        border-style: solid;
-        /*border-width: 1px;*/
-        border-color: #1976d2;
-        border-left-width: 1px;
-        border-right-width: 1px;
-        border-bottom-width: 1px;
-        border-top-width: 1px;
-        margin-top: 0px;
-    }
-
     .grid-containers {
-        /*background-color: #0d47a1;*/
         border-color: #006699;
         border-radius: 6px;
         border-style: solid;
         border-width: 2px;
-    }
-
-    /* BUTTONS */
-    .btn-primary {
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
-        border-bottom-right-radius: 0px;
-        border-bottom-right-radius: 0px;
-        border-width: 0px;
-        margin-right: 15px;
-        margin-left: 15px;
-        border-bottom: 0px;
-    }
-
-
-
-    .btn-primary,
-    .btn-primary:visited {
-        background-color: #006699;
-        font-weight: bold;
-    }
-
-    .btn-primary:hover {
-        /*background-color: #e8e8e8;*/
-        /*border: solid 0px #eceff1;*/
-        color: #e8e8e8;
-    }
-
-    .btn-primary:focus {
-        border-bottom: 0px;
-        /*background-color: #ffffff;*/
-        border-style: solid;
-        border-bottom-color: yellow;
-        color: #e8e8e8;
-    }
-
-
-    .btn-group {
-        width: 100%;
-        background-color: #006699;
-        border-style: solid;
-        border-color: #006699;
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
-        border-left-width: 2px;
-        border-right-width: 2px;
-        border-bottom-width: 0px;
-        border-top-width: 8px;
-        margin-top: 0px;
-        margin-right: 0px;
-        margin-left: 0px;
-    }
-
-    .btn-group>btn-primary {
-        background-color: red;
     }
 
     /*PAGINATION*/
@@ -104,32 +29,35 @@
         color: #212121;
         background-color: transparent;
         box-shadow: none;
-        border-style: hidden;
-        border-width: 0px;
+        border: none;
         outline: none;
         padding: 8px;
     }
 
     .no-button:hover {
         background-color: #f5f5f5;
+        border: none;
         color: #000000;
         font-weight: bolder;
     }
 
     .no-button:active {
-        background-color: #c5cae9 !important;
+        background-color: transparent !important;
+        border: none;
         color: #000000;
-        font-weight: bolder;
+        font-weight: bold;
+        outline: none;
     }
 
     .no-button:focus {
         font-size: larger;
         font-weight: bolder;
+        outline: none;
     }
 
     button:active,
     :focus {
-        border-color: whitesmoke;
+        border: 2px solid #C6C9E8;
         outline: none;
     }
 
@@ -179,7 +107,7 @@
 
     th:last-of-type {
         border-top-right-radius: 4px;
-        background-color: orchid;
+       /*  background-color: orchid; */
     }
 
     tr:last-of-type td:last-of-type {
@@ -210,17 +138,6 @@
         background-color: orchid;
     }
 
-
-    .arrow {
-        padding: 2px;
-        width: 18px;
-        height: 20px;
-    }
-
-    .arrow:hover {
-        background-color: #ffffff;
-    }
-
     .foo-class {
         float: left;
         padding: 3px;
@@ -228,160 +145,7 @@
         min-width: 310px;
     }
 
-    .nesting span.pencil {
-        float: right;
-        background-color: red;
-    }
-
-    .nesting span.triangle-top {
-        float: right;
-        color: #ccc;
-        background-color: green;
-        display: inline-block;
-        font-size: 1.2em;
-    }
-
-    .nesting span.triangle-top:hover {
-        float: right;
-        display: inline-block;
-        background-color: #ccc;
-        color: red;
-        font-size: 1.2em;
-    }
-
-    .nesting span.triangle-bottom {
-        float: right;
-        color: #ccc;
-        background-color: green;
-        display: inline-block;
-        font-size: 1.2em;
-        -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
-        /* Safari */
-        transition: width 2s, height 2s, transform 2s;
-    }
-
-    .nesting span.triangle-bottom:hover {
-        float: right;
-        display: inline-block;
-        background-color: #ccc;
-        color: red;
-        font-size: 1.2em;
-        -webkit-transform: rotate(180deg);
-        /* Safari */
-        transform: rotate(180deg);
-    }
-
-
-    .nestchild a {
-        clear: both;
-        display: block;
-    }
-
-    .nesting {
-        background-color: #e8e8e8;
-        /*table headings*/
-        border-top-color: #e8e8e8;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-
-
-
-
-    .nesting a {
-        width: 285px;
-    }
-
-    .nesting a .pencil {
-
-        display: inline-block;
-    }
-
-    .nesting a .triangle-top {
-        display: none;
-
-    }
-
-
-    .nestchild {
-        margin-left: 15px;
-    }
-
     /***********************************************************************/
-    .show {
-        margin-top: 0px;
-        color: purple;
-        opacity: 1;
-        /*transition: opacity 1s;*/
-    }
-
-    .show:hover {
-        margin-top: 0px;
-        color: blue;
-        opacity: 1;
-        /*transition: opacity 1s;*/
-    }
-
-    .hide {
-        margin-top: 0px;
-        color: white;
-        opacity: 0;
-        /*transition: opacity 1s;*/
-    }
-
-    .hide:hover {
-        margin-top: 0px;
-        color: blue;
-        opacity: 0;
-        /*transition: opacity 1s;*/
-    }
-
-    .test {
-        color: #363636;
-        white-space: nowrap;
-    }
-
-    .test:hover {
-        color: #878787;
-        /*min-width: 125px;*/
-    }
-
-    .test:active {
-        color: #006699;
-    }
-
-    .glyphicon {
-
-        color: #c5cae9;
-    }
-
-    .glyphicon:hover {
-        color: #3f51b5;
-    }
-
-
-    .showme {
-        visibility: hidden;
-    }
-
-    .showme:hover {
-        visibility: hidden;
-        color: #878787;
-
-    }
-
-    .showme:active {
-        /*visibility: hidden;*/
-        color: #E5E7E8;
-        color: red;
-    }
-
-    .showhim:hover .showme {
-        visibility: visible;
-        white-space: nowrap;
-        color: #878787;
-    }
 
     .filters {
         max-width: 50px;
@@ -394,60 +158,20 @@
         max-width: 50px;
     }
 
-    /*sorting*/
-    /*.notSorted*/
-
-    label {
-        color: #363636;
-    }
-
-    label:hover {
-        color: #808080;
-    }
-
-    label:active {
-        color: red;
-    }
-
-    /*     span:hover {
-        color: red;
-    } */
-    .span:hover:arrow {
-        color: green;
-    }
-
-    .span-hover:hover .glyphicon {
-        color: #e8e8e8;
-    }
-
     .Sam {
         cursor: pointer;
         pointer-events: auto;
     }
 
     .Sam:hover {
-        background-color: "red" !important;
+        background-color: #dcdcdc !important;
 
     }
 
-    /* .Sam:active {
-        color: red;
-        visibility: collapse; 
-    } */
-    .Biff {
-        background-color: #ccc;
-    }
-
-    .Happ {
-        background-color: #ccc;
-    }
-
-    .btn-xs {
+    /*     .btn-xs {
         color: #fff;
         background-color: rgb(204, 204, 204);
-        /* gray*/
         box-shadow: none;
-
         font-size: 1.2em;
         text-align: center;
         width: 45px;
@@ -456,9 +180,9 @@
         padding-left: 5px;
         margin-bottom: 8px;
         vertical-align: middle;
-    }
+    } */
 
-    .btn-xs:hover,
+    /*     .btn-xs:hover,
     .btn-xs:active,
     .btn-xs:visited,
     .btn-xs:focus {
@@ -471,139 +195,15 @@
         outline: none;
         display: inline-block;
         visibility: visible;
-    }
-
+    } 
+ */
     .span:hover {
         color: #e8e8e8;
-    }
-
-
-    /* DROPDOWNS */
-    .dropdown {
-        vertical-align: middle;
-        position: relative;
-        display: inline-block;
-        background-color: transparent !important;
-        margin-left: 0px;
-        margin-right: 50px;
-        padding-left: 1px;
-
-    }
-
-    .dropdown-menu {
-        /*position: relative;
-    display: inline-block;*/
-        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-        border-style: none;
-        background-color: pink !important;
-        margin-right: 8px;
-        /*width: 12px !important;*/
-    }
-
-    .selectdiv {
-        position: relative;
-        /*Don't really need this just for demo styling*/
-        float: left;
-        /*min-width: 200px;*/
-        margin: 50px 33%;
-        background-color: green;
     }
 
     /*To remove button from IE11, thank you Matt */
     select::-ms-expand {
         display: none;
-    }
-
-    .selectdiv:after {
-        content: '<>';
-        font: 17px "Consolas", monospace;
-        color: #ffffff;
-        -webkit-transform: rotate(90deg);
-        -moz-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        transform: rotate(90deg);
-        right: 11px;
-        /*Adjust for position however you want*/
-        top: 18px;
-        padding: 0 0 2px;
-        border-bottom: 1px solid #999;
-        /*left line */
-        position: absolute;
-        pointer-events: none;
-        background-color: #f9f9f9;
-    }
-
-    .selectdiv select {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        /*appearance: none;*/
-        /* Add some styling */
-        display: block;
-        width: 100%;
-        max-width: 320px;
-        height: 50px;
-        float: right;
-        margin: 5px 0px;
-        padding: 0px 24px;
-        font-size: 16px;
-        line-height: 1.75;
-        color: #333;
-        /*background-color: #ffffff;*/
-        background-color: red;
-        background-image: none;
-        border: 1px solid #cccccc;
-        -ms-word-break: normal;
-        word-break: normal;
-    }
-
-    /* HeroesComponent's private CSS styles */
-    .heroes {
-        margin: 0 0 2em 0;
-        list-style-type: none;
-        padding: 0;
-        width: 15em;
-    }
-
-    .heroes li {
-        cursor: pointer;
-        position: relative;
-        left: 0;
-        background-color: #EEE;
-        margin: .5em;
-        padding: .3em 0;
-        height: 1.6em;
-        border-radius: 4px;
-    }
-
-    .heroes li:hover {
-        color: #607D8B;
-        background-color: #DDD;
-        left: .1em;
-    }
-
-    .heroes li.selected {
-        background-color: #CFD8DC;
-        color: white;
-    }
-
-    .heroes li.selected:hover {
-        background-color: #BBD8DC;
-        color: white;
-    }
-
-    .heroes .badge {
-        display: inline-block;
-        font-size: small;
-        color: white;
-        padding: 0.8em 0.7em 0 0.7em;
-        background-color: #405061;
-        line-height: 1em;
-        position: relative;
-        left: -1px;
-        top: -4px;
-        height: 1.8em;
-        margin-right: .8em;
-        border-radius: 4px 0 0 4px;
     }
 
     /*  **********from bootstrap************* */
@@ -751,31 +351,34 @@
         font-size: 'inherit';
         padding: .5em 2em;
     }
+
     .p-btn {
         background-color: transparent;
         border: 1.5px solid #C6C9E8;
         border-radius: 1.5px;
         font-size: 'inherit';
     }
-    select {
-       width: 7rem;
-        -webkit-appearance: none;
-  -moz-appearance: none;
-  background: transparent;
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="60%" height="20%" viewBox="0 0 100 100"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:rgb(144, 164, 174);"></path></svg>');
-    background-repeat: no-repeat;
-  background-position-x: 100%;
-  background-position-y: 5px;
-  border: none;
 
-  margin-right: 2rem;
-  margin-left: 2rem;
-  padding: .25rem;
-  padding-right: .25rem;  
+    select {
+        width: 7rem;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: transparent;
+        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="60%" height="20%" viewBox="0 0 100 100"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:rgb(144, 164, 174);"></path></svg>');
+        background-repeat: no-repeat;
+        background-position-x: 100%;
+        background-position-y: 5px;
+        border: none;
+
+        margin-right: 2rem;
+        margin-left: 2rem;
+        padding: .25rem;
+        padding-right: .25rem;
     }
-    select:hover{
+
+    select:hover {
         background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="60%" height="20%" viewBox="0 0 100 100"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:gray;stroke:gray;stroke-width:6"></path></svg>');
-    background-repeat: no-repeat;
+        background-repeat: no-repeat;
     }
 </style>
 
@@ -783,7 +386,7 @@
     style="padding:0px;border:4px solid; border-color:transparent;border-radius:8px;margin-top: 0%;">
 
     <div class="grid-container" style="background-color:transparent;padding: 0px;margin:0px;width:100%;">
-        <div class="item1">Header</div>
+        <div class="item1">&nbsp;</div>
         <div class="item2" style="text-align: left;vertical-align:bottom;">
             <span>
                 <button class="g-btn" type="button" style="min-width:130px;" (click)="filtersPnl()">Add Filters</button>
@@ -791,8 +394,9 @@
                     Filters</button>
                 <button class="g-btn" type="button" style="min-width:130px;" (click)="showSort()">Sort</button>
                 <button class="g-btn" type="button" style="min-width:130px;" (click)="reset()">Reset</button>
-               
-                <select name="perPg" id={{ddlId}} (change)="itemsPerPage(10)">
+
+                <select class="g-btn" style="min-width:10rem;margin-left:0px;" name="perPg" id={{ddlId}}
+                    (change)="itemsPerPage(10)">
                     <option value="0">Items per Page </option>
                     <option>10 items per page</option>
                     <option>20 items per page</option>
@@ -806,23 +410,19 @@
         </div>
         <div class="item3" style="text-align: right;"></div>
         <div class="item4" style="text-align: right;padding-right:12px;">
-   
+
         </div>
         <div class="item5" style="padding:0px;background-color:transparent;"></div>
     </div>
-    <div style="width:inherit; margin-left:0px;padding-left: 0px;float:right;" 
-    [ngStyle]="{
+    <div style="width:inherit; margin-left:0px;padding-left: 0px;float:right;" [ngStyle]="{
                 'background-color' : color,
                 'color': 'white'
             }">
     </div>
-
-
     <table>
         <tr class="row" style="background-color: transparent;">
             <th *ngFor="let tableHeading of tableHeadings" style="background-color: #E5E7E8;">
                 <div class="container"
-                    *ngIf="tableHeading.tableHeadingKey != key && tableHeading.tableHeadingKey != keyDefault"
                     style="text-align:center;display: inline;vertical-align: middle;background-color:transparent;margin: 0px;">
                     <span
                         style="white-space: nowrap; text-align:left; margin-left:auto;margin-right:auto;vertical-align:middle;">
@@ -857,7 +457,7 @@
             <th *ngFor="let tableHeading of tableHeadings" style="padding:0;">
                 <div *ngIf="tableHeading.tableHeadingKey != key && tableHeading.tableHeadingKey != keyDefault"
                     style="text-align:center;display: inline;vertical-align: middle;padding:0px;">
-                    <input type="search" style="border:1.5px #d3d3d3 solid;width:100px;" #box
+                    <input name={{filIds}} type="search" style="border:1.5px #d3d3d3 solid;width:100px;" #box
                         (keyup)="onKey(box.value, tableHeading.idx)">
                 </div>
             </th>
@@ -873,14 +473,12 @@
             </td>
         </tr>
     </table>
-
     <div style="align-content:center;display: inline-block;margin-left:8px; margin-right: auto;color:inherit;">
         <div>
             <span style="color:inherit">Page <span class="disabled-button" style="color:inherit">{{curPage}}</span><span
                     style="color:inherit">of</span><button class="disabled-button"
                     style="color:inherit">{{totalNumberPages}}</button>
             </span>
-
             <button class="disabled-button" style="background-color: transparent;font-size: large;color:gray;" disabled
                 *ngIf="curPage == 1">
                 &#171;
@@ -891,18 +489,16 @@
                                 }">
                 &#171;
             </button>
-
-
             <button disabled *ngIf="curPage == 1"
                 style="color:#C0C0C0; background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;margin-bottom:3px;">Previous</button>
             <button *ngIf="curPage > 1"
                 style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;"
                 (click)="prev()">Previous</button>
-      
+
             <button class="no-button" *ngIf="lastDisplayed > numberToDisplay && curPage != 1"
                 (click)="previousTen()">...</button>
 
-            <span >
+            <span>
                 <button class="p-btn" style="color:inherit;border:1.5px solid #C6C9E8;"
                     [ngStyle]="(nbr == curPage) ? {'background-color': style.primary, 'color': 'white', 'box-shadow': 'none', 'border-color': style.primary, 'border-style': 'dotted'} : {'color': 'inherit'}"
                     *ngFor="let nbr of pageNumbers" (click)="curPage = nbr">
@@ -933,9 +529,7 @@
                                 'color': style.primary
                             }">
                 &#187;
-
             </button>
             <br />
-
         </div>
     </div>
