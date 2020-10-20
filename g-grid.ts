@@ -4,12 +4,9 @@ import { MessageService } from '../utilities/message.service';
 import { DataFormatPipe } from '../utilities/data-format-pipe';
 import { ColumnStyle } from '../utilities/columnStyle';
 import { StrDictionary } from '../utilities/dictionary';
-// import { DATE } from 'ngx-bootstrap/chronos/units/constants';
-import { OrderPipe } from 'node_modules/ngx-order-pipe';
+
 import { NgClass } from '@angular/common';
 import { TableHeading } from  '../utilities/table-heading.type';
-//import { OrderModule } from '../node_modules/ngx';
-import { Pipe, PipeTransform } from '@angular/core';
 import { AnyType } from '../utilities/AnyType';
 import { ActivatedRoute } from '@angular/router';
 import { GridItem } from '../utilities/grid-item';
@@ -100,30 +97,26 @@ export class Wip2Component implements OnInit {
         unsorted: "hoverSort";
 
       // Column Styling
-        birthday = new Date();
-        carolyn = "date";
         tdNbr = "tdNbrStyle";
         tdNV = "tdNV";
         tdDate = "tdDateStyle";
         colStyles = new ColumnStyle();
 
-        public filterQuery = "";
         public rowsOnPage = 10;
         public sortBy = "idx";
         public sortOrder = " ";
-  //------------------------
+
     selectedHero: KeyValuePair;
     heroes: KeyValuePair[];
     contacts: GridItem[];
-    //contacts: Object[];
+
     testArr: any;
-    // gridItems: Object[];
-    //gridItems:any[] = new Array();
+
     gridItems: Object[];
     g: AnyType[] = new Array();
     gConst: AnyType[];
     ddlId: string;
-
+    filIds = ''; 
     ngOnInit() {
    
       if(this.start){
@@ -138,14 +131,12 @@ export class Wip2Component implements OnInit {
           this.aId = makeid();
           this.dId = makeid();
           this.ddlId = makeid();
+          this.filIds = makeid();
           this.start = false;
       }
 
      // let id = this.activatedRoute.snapshot.params['id'] as string;
-    
-     this.getHeroes();
      this.getCustomers();
-
 
      // Grid Items
         this.dataService.getCustomers()
@@ -169,18 +160,10 @@ export class Wip2Component implements OnInit {
                 this.headings = Object.keys(this.gridItems[0]);  // ok but add code to check for gridItems length in case nothing has been returned
       
                 this.columnCount = this.headings.length + 1;
-                var headingsMapN = new Object;
-                 _.map(this.gridItems, function (e, i) {
-                    return _.extend(e, { idx: i + 1 });
-                }); 
 
-                // data => displayed items
                 var keysMapN = new Object;
                 var tblHdr = [{ tableHeadingKey: "A", tableHeadingVal: "B" }];
 
-
-                // rows and columns (objects and their properties) 
-                // map to AnyType
                 var k =  Object.keys(this.gridItems[0]);
                 let vg:AnyType[] = new Array();
                 let re = /\-/gi;
@@ -193,7 +176,6 @@ export class Wip2Component implements OnInit {
                  
                    for (j = 0; j < Object.values(this.gridItems[i]).length; j++) {
                         let p:prop = new prop();
-                       // p.key = 'col' + j.toString();
                         p.key = k[j];
                         p.value = v[j];
                         p.type = typeof(v[j]);
@@ -231,8 +213,6 @@ export class Wip2Component implements OnInit {
                 // old
                 // create column names, okay
                 for (i = 0; i < Object.keys(this.gridItems[0]).length; i++) {
-                    // alert(Object.keys(this.gridItems[0])[i]);
-
                     let col = "Col" + i.toString();
 
                     if (i === Object.keys(this.gridItems[0]).length - 1) {
@@ -257,20 +237,11 @@ export class Wip2Component implements OnInit {
              this.tableHeadings = tblHdr.filter(obj => obj.tableHeadingKey !== "A");
 
              this.arrPageNbrs();
-                       // replace************************************************
-                       // rmv
-                       this.gridItems = replaceKeysDeep(this.gridItems, keysMapN);
-                       for(let i = 0; i < this.gridItems.length; i++){
-                        let a = this.gridItems[i].toString();
-                        let b = a.split(",");
 
-                       }
-                      
-                       // _.forOwn(this.gridItems, function(value, key) { alert(key + ' * ' + value); } );
 
                        // sort***************************************************
                        // rmv
-                       this.gridItems = _.orderBy(this.gridItems, (item: any) => item['idx'], 'asc');
+                       //this.gridItems = _.orderBy(this.gridItems, (item: any) => item['idx'], 'asc');
                        // *******************************************************
        
                        //save this for reset*************************************
@@ -295,8 +266,6 @@ export class Wip2Component implements OnInit {
                                 for (var j = 0; j < this.gridItems.length; j++) {
                                     this.gridItems[j][Object.keys(this.gridItems[0])[i]] = new Date(this.gridItems[j][Object.keys(this.gridItems[0])[i]]);
                                 }
-                               // var dateB = new Date(b.date);
-                               // alert(_.map(this.gridItems, Object.keys(this.gridItems[0])[i]));
                             }
                             else {
                                 this.addToDictionary(Object.keys(this.gridItems[0])[i], "tdStrStyle");
@@ -310,9 +279,7 @@ export class Wip2Component implements OnInit {
                             this.addToDictionary(Object.keys(this.gridItems[0])[i], "other");
                         }
                     }
-                }
-                this.columnStyles();
-        
+                }       
             });
  
     }
@@ -339,15 +306,19 @@ export class Wip2Component implements OnInit {
           }  
        };
 
-       filtersT(f: any) {  // filter button (button group)
-        // alert('filter');
+       filtersT(f: any) { 
         let n = this.g[f].name;
         const johnArr = this.g.filter(person => person.name === 'john');
-
     }
     clearFilters() {
+        var f = document.getElementsByName(this.filIds);
+        for (var i=0, item; item = f[i]; i++) {
+            let e = <HTMLInputElement>f[i];
+            e.value = "";
+        }
         this.g = this.gConst;
         this.sorted = false;
+        this.filters = "noFilters";
     }
     sortVis = "none";
     showSort(){
@@ -473,43 +444,11 @@ export class Wip2Component implements OnInit {
        // if (prop.charAt(0) === '-') { sorted.reverse(); }
        // return sorted;
     }
-    sortByColumnDesc(x: any) {
-        _.map(this.gridItems, function (e, i) {
-            return _.extend(e, { idx: i + 1 });
-        });
-
-        var c = _.filter(this.tableHeadings, ['tableHeadingVal', x]);
-
-        if (this.key === c[0].tableHeadingKey) {
-            this.named = "Biff";
-            alert('asc');
-            this.key = c[0].tableHeadingKey;
-            this.reverse = !this.reverse;
-            if (this.reverse) {
-                this.direction = false
-            }
-            else {
-                this.direction = true;
-            }
-        }
-        else {
-            //alert('new sort');
-            this.direction = false;
-            this.reverse = true;
-            this.named = "Happ";
-            this.key = c[0].tableHeadingKey;
-
-        }
-        //_.reverse(this.gridItems);
-        this.key = c[0].tableHeadingKey;
-    }
 ascDsc = 9;
 sorted = false;
 clrA = '#B0BEC5';
 clrD = '#B0BEC5';
     sortByColumn(x: any, d: number, event: any) {
-        var c = _.filter(this.tableHeadings, ['idx', x]);
-
         let ele = <HTMLSpanElement>event.target;
 
         let ml = <HTMLSpanElement>document.getElementById(x);
@@ -526,7 +465,6 @@ clrD = '#B0BEC5';
         else if (d == 1) {
             this.g.sort((a, b) => (a.props[x].value < b.props[x].value) ? 1 : ((b.props[x].value < a.props[x].value) ? -1 : 0));
         }
-
     }
     reset() {
         this.g = this.gConst;
@@ -536,8 +474,7 @@ clrD = '#B0BEC5';
         // ITEMS PER PAGE ****************************************
         itemsPerPage(nbr: any) {  
             var x = <HTMLSelectElement>document.getElementById(this.ddlId);
-
-            let y = (x.options.selectedIndex + 1) * 10;
+            let y = (x.options.selectedIndex) * 10;
 
             if (y == 5) {
                 this.nbrItems = this.g.length;
@@ -560,77 +497,53 @@ clrD = '#B0BEC5';
                     return "other";
             }
         }
-            //FILTERING
-        filterBy(key:string) {
+
+/*         filterBy(key:string) {
         alert('here');
-        }
+        } */
         vs = "";
+        fil = false;
         onKey(value: string, s: any) {
-            // always reset ??
-            
             this.gridItems = this.gridItemsConst;
             this.g = this.gConst;
             var fArr = this.g;
 
             if (this.g[0].props[s].type.indexOf("string") > -1) {
                 let q = value.toString();
-                fArr = this.g.filter(p => p.props[s].value.toUpperCase().indexOf(value.toUpperCase()) > -1);
+                 this.g = this.g.filter(p => p.props[s].value.toString().toUpperCase().indexOf(value.toUpperCase()) >= 0);
             }
             else {
-                fArr = this.g.filter(p => p.props[s].value == value);
+                this.g = this.g.filter(p => p.props[s].value == value);
             }
-            this.g = fArr;
-    
-//alert(johnArr.length);
-
-
+        
             this.dataType = this.detectType(this.g[0][s]);
 
-            
-            
-          //  alert(this.dateFilters(this.gridItems[0][s], s));
-    
-           // alert(this.dataType + 'ee');
-            if (value.indexOf('/') > -1 && this.dateFilters(value, s)) {
-                alert(this.dateFilters(value, s));
-                // DATES
+        //    if (value.indexOf('/') > -1 && this.dateFilters(value, s)) {
+        /*         alert(this.dateFilters(value, s));
+             
                 let date = new Date(value);
                 this.gridItems = _.filter(this.gridItems, function (item) {
                     return new Date(item[s]) < date;
-                });
-            }
+                }); */
+        //    }
             // NUMBER
-            else if (this.dataType.startsWith('n')) {
-                alert(this.dataType + 'ss');
-                this.gridItems = _.filter(this.gridItems, function (item) {
+        //    else if (this.dataType.startsWith('n')) {
+        /*          this.gridItems = _.filter(this.gridItems, function (item) {
                     return item[s] == value;
-                });
-            }
-            else if (this.dataType == 'str') {
-                // STRING
-                this.gridItems = _.filter(this.gridItems, function (item) {
+                }); */ 
+        //    }
+        //    else if (this.dataType == 'str') {
+
+       /*          this.gridItems = _.filter(this.gridItems, function (item) {
                     return item[s].toLowerCase().indexOf(value.toLowerCase()) == 0;
-                });
-            }
+                }); */
+        //    }
             
         }
   
-    
-
- // HERO
-    onSelect(hero: KeyValuePair): void {
-      this.selectedHero = hero;
-      this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
-    }
-    getHeroes(): void {
-      this.dataService.getHeroes()
-          .subscribe(heroes => this.heroes = heroes);
-         // alert( Object.keys(this.heroes[0]));
-    }
     getCustomers(): void {
       this.dataService.getCustomers()
           .subscribe(contacts => this.contacts = contacts);
-        // alert(Object.keys(this.contacts[0]));
     }
     //  keeper
     addToDictionary(k: string, v: string) {
@@ -639,23 +552,6 @@ clrD = '#B0BEC5';
       ds.value = v;
       this.dataTypes.push(ds);
   }
-   // populate column styles rmv?
-   columnStyles() {
-        
-    this.colStyles.Col0 = this.dataTypes[1].value;
-    this.colStyles.Col1 = this.dataTypes[2].value;
-    this.colStyles.Col2 = this.dataTypes[3].value;
-    this.colStyles.Col3 = this.dataTypes[4].value;
-    this.colStyles.Col4 = this.dataTypes[5].value;
-    this.colStyles.Col5 = this.dataTypes[6].value;
-    this.colStyles.Col6 = this.dataTypes[7].value;
-    this.colStyles.Col7 = this.dataTypes[8].value;
-    this.colStyles.Col8 = this.dataTypes[9].value;
-    this.colStyles.Col9 = this.dataTypes[10].value;
-    this.colStyles.Col10 = this.dataTypes[11].value;
-    this.colStyles.Col11 = this.dataTypes[12].value;
-    this.colStyles.Col12 = this.dataTypes[13].value;
-}
 
 dateFilters(value: string, s: any) {
 
@@ -663,18 +559,15 @@ let newDate = new Date(value);
 
 if (Object.prototype.toString.call(newDate) === "[object Date]") {
     // it is a date
-    if (isNaN(newDate.getTime())) {  // d.valueOf() could also work
-        //alert('this is not a date');
+    if (isNaN(newDate.getTime())) {  
         return false;
     }
     else {
-        //alert('this is a date');
         return true;
     }
 }
 else {
     alert('this is not a date');
-    //return 'this is NOT a valid date';
     return false;
 }
 }
@@ -689,15 +582,7 @@ resetAll() {
     }
   
 }
-function replaceKeysDeep(obj, keysMap) { // keysMap = { oldKey1: newKey1, oldKey2: newKey2, etc...
-   let biff =  _.transform(obj, function (result, value, key) { // transform to a new object
-    var currentKey = keysMap[key] || key; // if the key is in keysMap use the replacement, if not use the original key
-    result[currentKey] = _.isObject(value) ? replaceKeysDeep(value, keysMap) : value; // if the key is an object run it through the inner function - replaceKeys
- }); 
-let dataArr: Object[];
-dataArr = _.values(biff);
-return _.values(biff);
-}
+
 function makeid() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
