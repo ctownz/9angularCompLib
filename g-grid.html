@@ -106,8 +106,8 @@
     }
 
     th:last-of-type {
-        border-top-right-radius: 4px;
-       /*  background-color: orchid; */
+        border-top-right-radius: .5px;
+        /*  background-color: orchid; */
     }
 
     tr:last-of-type td:last-of-type {
@@ -120,7 +120,7 @@
         border-left: 1px #E5E7E8 solid;
         border-top: 1px #E5E7E8 solid;
         border-bottom: 1.5px #E5E7E8 solid;
-        border-top-left-radius: 4px;
+        border-top-left-radius: .5px;
         border-bottom-left-radius: 0px;
         margin-right: 0%;
         background-color: #E5E7E8;
@@ -168,40 +168,10 @@
 
     }
 
-    /*     .btn-xs {
-        color: #fff;
-        background-color: rgb(204, 204, 204);
-        box-shadow: none;
-        font-size: 1.2em;
-        text-align: center;
-        width: 45px;
-        height: 15px;
-        padding-right: 0px;
-        padding-left: 5px;
-        margin-bottom: 8px;
-        vertical-align: middle;
-    } */
-
-    /*     .btn-xs:hover,
-    .btn-xs:active,
-    .btn-xs:visited,
-    .btn-xs:focus {
-        color: #fff;
-        background-color: rgb(204, 204, 204);
-        border-color: #ccc !important;
-        box-shadow: none;
-        width: 45px;
-        height: 15px;
-        outline: none;
-        display: inline-block;
-        visibility: visible;
-    } 
- */
     .span:hover {
         color: #e8e8e8;
     }
 
-    /*To remove button from IE11, thank you Matt */
     select::-ms-expand {
         display: none;
     }
@@ -285,7 +255,6 @@
         width: 50%;
         padding: 10px;
         height: 10px;
-        /* Should be removed. Only for demonstration */
     }
 
     /* Clear floats after the columns */
@@ -297,10 +266,6 @@
 
     .heading {
         font-size: 20px;
-    }
-
-    .heading:hover {
-        color: red;
     }
 
     .item1 {
@@ -344,12 +309,26 @@
         margin-bottom: 1px;
     }
 
-    .g-btn {
+    .s-btn {
         background-color: transparent;
-        border: 1.5px solid #C6C9E8;
+        /* border: 1.5px solid #C6C9E8; */
+        border: none;
         border-radius: 1.5px;
         font-size: 'inherit';
-        padding: .5em 2em;
+        padding: .45em 1em;
+    }
+
+    .g-btn {
+        background-color: transparent;
+        /* border: 1.5px solid #C6C9E8; */
+        border: none;
+        border-radius: 1.5px;
+        font-size: 'inherit';
+        padding: .45em 1em;
+    }
+
+    .g-btn:hover {
+        font-weight: bold;
     }
 
     .p-btn {
@@ -364,7 +343,7 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         background: transparent;
-        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="60%" height="20%" viewBox="0 0 100 100"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:rgb(144, 164, 174);"></path></svg>');
+        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="45%" height="15%" viewBox="0 0 100 100"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:rgb(144, 164, 174);"></path></svg>');
         background-repeat: no-repeat;
         background-position-x: 100%;
         background-position-y: 5px;
@@ -377,26 +356,34 @@
     }
 
     select:hover {
-        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="60%" height="20%" viewBox="0 0 100 100"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:gray;stroke:gray;stroke-width:6"></path></svg>');
+        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="45%" height="15%" viewBox="0 0 100 100"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:rgb(96, 125, 139);stroke:rgb(96, 125, 139);stroke-width:3"></path></svg>');
         background-repeat: no-repeat;
     }
 </style>
 
+
 <div class="panel panel-primary"
-    style="padding:0px;border:4px solid; border-color:transparent;border-radius:8px;margin-top: 0%;">
+    style="padding:0px;border:1px solid transparent; border-radius:3px;margin-top: 0%;background-color:transparent;color:inherit;">
 
     <div class="grid-container" style="background-color:transparent;padding: 0px;margin:0px;width:100%;">
-        <div class="item1">&nbsp;</div>
+        <div class="item1">
+            <p style="font-weight: bold;">{{title}}</p>
+        </div>
         <div class="item2" style="text-align: left;vertical-align:bottom;">
             <span>
-                <button class="g-btn" type="button" style="min-width:130px;" (click)="filtersPnl()">Add Filters</button>
-                <button class="g-btn" type="button" style="min-width:130px;" (click)="clearFilters()">Clear
+                <button class="g-btn" type="button" style="min-width:4rem;color:inherit;" (click)="filtersPnl()">Add
                     Filters</button>
-                <button class="g-btn" type="button" style="min-width:130px;" (click)="showSort()">Sort</button>
-                <button class="g-btn" type="button" style="min-width:130px;" (click)="reset()">Reset</button>
+                <button class="g-btn" type="button" style="min-width:4rem;color:inherit;" (click)="clearFilters()">Clear
+                    Filters</button>
+                <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
+                    (click)="showSort()">Sort</button>
+                <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
+                    (click)="reset()">Reset</button>
+                <button (click)="download()" class="g-btn" type="button" style="min-width:4rem;color:inherit;">
+                    Export</button>
 
-                <select class="g-btn" style="min-width:10rem;margin-left:0px;" name="perPg" id={{ddlId}}
-                    (change)="itemsPerPage(10)">
+                <select class="s-btn" style="min-width:150px;margin-left:10px;border:none;color:inherit;" name="perPg"
+                    id={{ddlId}} (change)="itemsPerPage(10)">
                     <option value="0">Items per Page </option>
                     <option>10 items per page</option>
                     <option>20 items per page</option>
@@ -406,6 +393,7 @@
                     <option>All</option>
 
                 </select>
+
             </span>
         </div>
         <div class="item3" style="text-align: right;"></div>
@@ -421,7 +409,7 @@
     </div>
     <table>
         <tr class="row" style="background-color: transparent;">
-            <th *ngFor="let tableHeading of tableHeadings" style="background-color: #E5E7E8;">
+            <th *ngFor="let tableHeading of tableHeadings" style="background-color:transparent;border:none;">
                 <div class="container"
                     style="text-align:center;display: inline;vertical-align: middle;background-color:transparent;margin: 0px;">
                     <span
@@ -454,11 +442,24 @@
             </th>
         </tr>
         <tr class="row" [ngClass]="filters" style="padding:0;">
-            <th *ngFor="let tableHeading of tableHeadings" style="padding:0;">
-                <div *ngIf="tableHeading.tableHeadingKey != key && tableHeading.tableHeadingKey != keyDefault"
-                    style="text-align:center;display: inline;vertical-align: middle;padding:0px;">
-                    <input name={{filIds}} type="search" style="border:1.5px #d3d3d3 solid;width:100px;" #box
-                        (keyup)="onKey(box.value, tableHeading.idx)">
+            <th *ngFor="let tableHeading of tableHeadings" style="padding:0;background-color:#ffffff;" [ngStyle]="{
+                'border': '1.5px #b0bec5 solid'
+            }">
+                <div
+                    style="text-align:center;display: inline-block;vertical-align: middle;padding:0px;background-color:#fff;">
+                    <span *ngIf="tableHeading.type != 'date'" style="background-color:#fff;display:inline-block;">
+                        <input name={{filIds}} type="search"
+                            style="border:1.5px #d3d3d3 solid;margin:0;background-color: transparent;padding:.5em;" #box
+                            (keyup)="onKey(box.value, tableHeading.idx)">
+
+                    </span>
+                    <span *ngIf="tableHeading.type == 'date'" style="background-color:#fff;display:inline-block;">
+                        <input name={{filIds}} type="date"
+                            style="border:none;margin:0;background-color: transparent;padding:.5em;width:100%;font-family: inherit;"
+                            #box (keyup)="onKey(box.value, tableHeading.idx)">
+
+                    </span>
+
                 </div>
             </th>
         </tr>
@@ -466,7 +467,7 @@
         <tr class="row" *ngFor="let gi of g | slice: (curPage * nbrItems) - pageSize :curPage * nbrItems"
             style="padding: 2px;">
             <td *ngFor="let p of gi.props" class="{{ p.style }}"
-                style="border:1px solid #D3D3D3;background-color: #fff;padding:.4em .5em;width:auto;white-space: nowrap;">
+                style="border:1px solid #D3D3D3;background-color: #fff;padding:.4em .5em;width:auto;white-space: nowrap;background-color:transparent;">
                 <span *ngIf="p.key != key">
                     {{p.value}}
                 </span>
