@@ -4,6 +4,7 @@ import { prop } from '../utilities/prop';
 import { StrDictionary } from '../utilities/StrDictionary';
 import { Style } from '../utilities/Style';
 import { TableHeading } from '../grid/table-heading.type';
+import Utils from '../utilities/helpers';
 
 @Component({
   selector: 'g-grid',
@@ -75,16 +76,17 @@ export class GridComponent implements OnInit {
   tdDate = "tdDateStyle";
   hasData = false;
   headings: string[];
+  sMsg: string = "";
 
   // The ngOnInit() is a lifecycle hook
   ngOnInit(): void {
     if (this.start) {
       if (this.data == undefined) {
-        alert('biff');
+        this.sMsg = 'No data';
       }
       else {
         this.format();
-      }
+     
       if (this.style == undefined) {
         this.style = new Style();
       }
@@ -99,7 +101,7 @@ export class GridComponent implements OnInit {
       this.filIds = makeid();
       this.start = false;
     }
-
+  }
   }
 
   public format() {
@@ -369,7 +371,7 @@ export class GridComponent implements OnInit {
 
   }
 
-  // sort*************************************************
+  // sort
 
   sortByColumn(x: any, d: number, event: any) {
     let ele = <HTMLSpanElement>event.target;
@@ -544,7 +546,12 @@ export class GridComponent implements OnInit {
     var blob = new Blob([csvData], { type: 'text/csv' });
     var url = window.URL.createObjectURL(blob);
     a.href = url;
-    let str = this.title + '.csv';
+    let str = 'data' + Utils.makeid + '.csv';
+   
+    if(this.title != undefined){
+      str = this.title + '.csv';
+    }
+    
     a.download = str;/* your file name*/
     a.click();
     return 'success';
