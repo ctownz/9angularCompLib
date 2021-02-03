@@ -176,7 +176,6 @@
         display: none;
     }
 
-    /*  **********from bootstrap************* */
     @media (max-width: 575.98px) {
         .table-responsive-sm {
             display: block;
@@ -355,191 +354,204 @@
         padding: .25rem;
         padding-right: .25rem;
     }
+
     select option {
-    margin: 40px;
-    background:#fff;
-    color: #546e7a;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+        margin: 40px;
+        background: #fff;
+        color: #546e7a;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
     }
+
     select:hover {
         background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="30%" height="10%" viewBox="0 0 110 110"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:rgb(84, 110, 122);stroke:rgb(84, 110, 122);stroke-width:3"></path></svg>');
         background-repeat: no-repeat;
     }
 </style>
-
-
-<div class="panel panel-primary"
-    style="padding:0px;border:1px solid transparent; border-radius:3px;margin-top: 0%;background-color:transparent;color:inherit;">
-
-    <div class="grid-container" style="background-color:transparent;padding: 0px;margin:0px;width:100%;">
-        <div class="item1">
-            <p style="font-weight: bold;">{{title}}</p>
-        </div>
-        <div class="item2" style="text-align: left;vertical-align:bottom;">
-            <span style="font-size:inherit;">
-                <button class="g-btn" type="button" style="min-width:4rem;color:inherit;" (click)="filtersPnl()">Add
-                    Filters</button>
-                <button class="g-btn" type="button" style="min-width:4rem;color:inherit;" (click)="clearFilters()">Clear
-                    Filters</button>
-                <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
-                    (click)="showSort()">Sort</button>
-                <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
-                    (click)="reset()">Reset</button>
-                <button (click)="download()" class="g-btn" type="button" style="min-width:4rem;color:inherit;">
-                    Export</button>
-
-                <select class="s-btn" style="width:auto;margin-left:10px;border:none;color:inherit;" name="perPg"
-                    id={{ddlId}} (change)="itemsPerPage(10)">
-                    <option value="0">Items per Page &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                    <option>10 items per page</option>
-                    <option>20 items per page</option>
-                    <option>30 items per page</option>
-                    <option>40 items per page</option>
-                    <option>50 items per page</option>
-                    <option>All</option>
-                </select>
-
-            </span>
-        </div>
-        <div class="item3" style="text-align: right;"></div>
-        <div class="item4" style="text-align: right;padding-right:12px;">
-
-        </div>
-        <div class="item5" style="padding:0px;background-color:transparent;"></div>
+<form autocomplete="off">
+    <div *ngIf="noData == true" class="item1">
+        <p style="font-weight:bold;padding:16px;">{{sMsg}}</p>
     </div>
-    <div style="width:inherit; margin-left:0px;padding-left: 0px;float:right;" [ngStyle]="{
+    <div *ngIf="noData == false">
+        <div class="panel panel-primary"
+            style="padding:0px;border:1px solid transparent; border-radius:3px;margin-top: 0%;background-color:transparent;color:inherit;">
+
+            <div class="grid-container" style="background-color:transparent;padding: 0px;margin:0px;width:100%;">
+                <div class="item1">
+                    <p style="font-weight: bold;">{{title}}</p>
+                </div>
+                <div class="item2" style="text-align: left;vertical-align:bottom;">
+                    <span style="font-size:inherit;">
+                        <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
+                            (click)="filtersPnl()">Add
+                            Filters</button>
+                        <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
+                            (click)="clearFilters()">Clear
+                            Filters</button>
+                        <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
+                            (click)="showSort()">Sort</button>
+                        <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
+                            (click)="reset()">Reset</button>
+                        <button (click)="download()" class="g-btn" type="button" style="min-width:4rem;color:inherit;">
+                            Export</button>
+
+                        <select class="s-btn" style="width:auto;margin-left:10px;border:none;color:inherit;"
+                            name="perPg" id={{ddlId}} (change)="itemsPerPage(10)">
+                            <option value="0">Items per Page &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </option>
+                            <option>10 items per page</option>
+                            <option>20 items per page</option>
+                            <option>30 items per page</option>
+                            <option>40 items per page</option>
+                            <option>50 items per page</option>
+                            <option>All</option>
+                        </select>
+
+                    </span>
+                </div>
+                <div class="item3" style="text-align: right;"></div>
+                <div class="item4" style="text-align: right;padding-right:12px;">
+
+                </div>
+                <div class="item5" style="padding:0px;background-color:transparent;"></div>
+            </div>
+            <div style="width:inherit; margin-left:0px;padding-left: 0px;float:right;" [ngStyle]="{
                 'background-color' : color,
                 'color': 'white'
             }">
-    </div>
-    <table>
-        <tr class="row" style="background-color: transparent;">
-            <th *ngFor="let tableHeading of tableHeadings" style="background-color:transparent;border:none;">
-                <div class="container"
-                    style="text-align:center;display: inline;vertical-align: middle;background-color:transparent;margin: 0px;">
-                    <span
-                        style="white-space: nowrap; text-align:left; margin-left:auto;margin-right:auto;vertical-align:middle;">
-                        <span style="text-align:left;vertical-align: middle;">
-                            {{ tableHeading.tableHeadingVal }}
-                        </span>
-                        <span id={{tableHeading.idx}} class="container" style="margin:0px 0px 0px 0px;margin:0;">
-                            <span style="padding:0px;margin:0px;" [ngStyle]="{'display': sortVis}">
-                                <span class="Sam" (click)="sortByColumn(tableHeading.idx, 0, $event)"
-                                    style="padding:0;margin:0px 0px 0px 8px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: 22px;font-weight: bold;vertical-align: middle;"
-                                    [ngStyle]="{
+            </div>
+            <table>
+                <tr class="row" style="background-color: transparent;">
+                    <th *ngFor="let tableHeading of tableHeadings" style="background-color:transparent;border:none;">
+                        <div class="container"
+                            style="text-align:center;display: inline;vertical-align: middle;background-color:transparent;margin: 0px;">
+                            <span
+                                style="white-space: nowrap; text-align:left; margin-left:auto;margin-right:auto;vertical-align:middle;">
+                                <span style="text-align:left;vertical-align: middle;">
+                                    {{ tableHeading.tableHeadingVal }}
+                                </span>
+                                <span id={{tableHeading.idx}} class="container"
+                                    style="margin:0px 0px 0px 0px;margin:0;">
+                                    <span style="padding:0px;margin:0px;" [ngStyle]="{'display': sortVis}">
+                                        <span class="Sam" (click)="sortByColumn(tableHeading.idx, 0, $event)"
+                                            style="padding:0;margin:0px 0px 0px 8px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: 22px;font-weight: bold;vertical-align: middle;"
+                                            [ngStyle]="{
                                                                                             'color' : clrA                                                                               
                                                                                         }">
-                                    &#x25BC;
+                                            &#x25BC;
 
-                                </span>
-                                <span class="Sam" (click)="sortByColumn(tableHeading.idx, 1, $event)"
-                                    id={{tableHeading.idx}}
-                                    style="padding:0px 0px 10px 0px;margin:0px 0px 10px 0px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size:22px;font-weight: bold;vertical-align: middle;"
-                                    [ngStyle]="{
+                                        </span>
+                                        <span class="Sam" (click)="sortByColumn(tableHeading.idx, 1, $event)"
+                                            id={{tableHeading.idx}}
+                                            style="padding:0px 0px 10px 0px;margin:0px 0px 10px 0px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size:22px;font-weight: bold;vertical-align: middle;"
+                                            [ngStyle]="{
                                                                                             'color' : clrA
                                                                                         }">
-                                    &#x25B2;
+                                            &#x25B2;
+                                        </span>
+                                    </span>
                                 </span>
                             </span>
-                        </span>
-                    </span>
-                </div>
-            </th>
-        </tr>
-        <tr class="row" [ngClass]="filters" style="padding:0;">
-            <th *ngFor="let tableHeading of tableHeadings" style="padding:0;background-color:#ffffff;" [ngStyle]="{
+                        </div>
+                    </th>
+                </tr>
+                <tr class="row" [ngClass]="filters" style="padding:0;">
+                    <td *ngFor="let tableHeading of tableHeadings"
+                        style="padding:0;background-color:gray;width:10px;color:#ffffff;" [ngStyle]="{
                 'border': '1.5px #b0bec5 solid'
             }">
-                <div
-                    style="text-align:center;display: inline-block;vertical-align: middle;padding:0px;background-color:#fff;">
-                    <span *ngIf="tableHeading.type != 'date'"
-                        style="background-color:#fff;display:inline-block;color:inherit;">
-                        <input name={{filIds}} type="search"
-                            style="border:1.5px #d3d3d3 solid;margin:0;background-color: transparent;padding:.5em;color:inherit;z-index:-1;"
-                            #box (keyup)="onKey(box.value, tableHeading.idx)">
 
+
+                        <input *ngIf="tableHeading.type == 'number'" size={{tableHeading.size}} autocomplete="off"
+                            style="border:none;margin:0;background-color: transparent;padding:.5em;color:#ffffff;"
+                            (keyup)="onKey(box.value, tableHeading.idx)" #box />
+
+                        <input *ngIf="tableHeading.type == 'string'" size={{tableHeading.size}}
+                            autocomplete="chrome-off" name="fog"
+                            style="border:none;margin:0;background-color: transparent;padding:.5em;color:#ffffff;"
+                            (keyup)="onKey(box.value, tableHeading.idx)" #box />
+
+                        <input *ngIf="tableHeading.type == 'date'" size={{tableHeading.size}} autocomplete="off"
+                            style="border:none;margin:0;background-color:transparent;padding:.5em;color:#ffffff;"
+                            (keyup)="onKey(box.value, tableHeading.idx)" #box />
+
+                    </td>
+                </tr>
+                <!--  </thead> -->
+                <tr class="row" *ngFor="let gi of g | slice: (curPage * nbrItems) - pageSize :curPage * nbrItems"
+                    style="padding: 2px;">
+                    <td *ngFor="let p of gi.props" class="{{ p.style }}"
+                        style="border:1px solid #D3D3D3;background-color: #fff;padding:.4em .5em;white-space:nowrap;background-color:transparent;width:10px;">
+
+                        <input *ngIf="p.key != key" [size]="p.charLen" class="{{ p.style }}"
+                            style="border:none;background-color:transparent;font-size: inherit;color:inherit;"
+                            value={{p.value}} />
+
+                    </td>
+                </tr>
+            </table>
+            <div *ngIf="noData == false"
+                style="align-content:center;display: inline-block;margin-left:8px; margin-right: auto;color:inherit;">
+                <div>
+                    <span style="color:inherit;font-size:inherit;">Page <span class="disabled-button"
+                            style="color:inherit">{{curPage}}</span><span
+                            style="color:inherit;font-size:inherit;">of</span><button class="disabled-button"
+                            style="color:inherit;font-size:inherit;">{{totalNumberPages}}</button>
                     </span>
-                    <span *ngIf="tableHeading.type == 'date'" style="background-color:#fff;display:inline-block;">
-                        <input name={{filIds}} type="date"
-                            style="border:none;margin:0;background-color: transparent;padding:.5em;width:100%;font-family: inherit;z-index:-1;"
-                            #box (keyup)="onKey(box.value, tableHeading.idx)">
-
-                    </span>
-
-                </div>
-            </th>
-        </tr>
-        <!--  </thead> -->
-        <tr class="row" *ngFor="let gi of g | slice: (curPage * nbrItems) - pageSize :curPage * nbrItems"
-            style="padding: 2px;">
-            <td *ngFor="let p of gi.props" class="{{ p.style }}"
-                style="border:1px solid #D3D3D3;background-color: #fff;padding:.4em .5em;width:auto;white-space: nowrap;background-color:transparent;">
-                <span *ngIf="p.key != key" style="color:inherit;">
-                    <input  class="{{ p.style }}" style="border:none;background-color: transparent;font-size: inherit;color:inherit;width:auto;"
-                        value={{p.value}} readonly />
-                </span>
-                {{ p.style }}
-            </td>
-        </tr>
-    </table>
-    <div style="align-content:center;display: inline-block;margin-left:8px; margin-right: auto;color:inherit;">
-        <div>
-            <span style="color:inherit;font-size:inherit;">Page <span class="disabled-button"
-                    style="color:inherit">{{curPage}}</span><span
-                    style="color:inherit;font-size:inherit;">of</span><button class="disabled-button"
-                    style="color:inherit;font-size:inherit;">{{totalNumberPages}}</button>
-            </span>
-            <button class="disabled-button" style="background-color: transparent;font-size:inherit;color:gray;" disabled
-                *ngIf="curPage == 1">
-                &#171;
-            </button>
-            <button class="no-button" style="font-weight:bold;font-size:inherit;" *ngIf="curPage > 1"
-                (click)="startOver()" [ngStyle]="{
+                    <button class="disabled-button" style="background-color: transparent;font-size:inherit;color:gray;"
+                        disabled *ngIf="curPage == 1">
+                        &#171;
+                    </button>
+                    <button class="no-button" style="font-weight:bold;font-size:inherit;" *ngIf="curPage > 1"
+                        (click)="startOver()" [ngStyle]="{
                                     'color': style.primary
                                 }">
-                &#171;
-            </button>
-            <button disabled *ngIf="curPage == 1"
-                style="color:#C0C0C0; background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;margin-bottom:3px;font-size: inherit;">Previous</button>
-            <button *ngIf="curPage > 1"
-                style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;font-size: inherit;"
-                (click)="prev()">Previous</button>
+                        &#171;
+                    </button>
+                    <button disabled *ngIf="curPage == 1"
+                        style="color:#C0C0C0; background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;margin-bottom:3px;font-size: inherit;">Previous</button>
+                    <button *ngIf="curPage > 1"
+                        style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;font-size: inherit;"
+                        (click)="prev()">Previous</button>
 
-            <button class="no-button" *ngIf="lastDisplayed > numberToDisplay && curPage != 1"
-                (click)="previousTen()">...</button>
+                    <button class="no-button" *ngIf="lastDisplayed > numberToDisplay && curPage != 1"
+                        (click)="previousTen()">...</button>
 
-            <span>
-                <button class="p-btn" style="color:inherit;border:1.5px solid #C6C9E8;"
-                    [ngStyle]="(nbr == curPage) ? {'background-color': style.primary, 'color': 'white', 'box-shadow': 'none', 'border-color': style.primary, 'border-style': 'dotted'} : {'color': 'inherit'}"
-                    *ngFor="let nbr of pageNumbers" (click)="curPage = nbr">
-                    {{ nbr }}
-                </button>
-            </span>
+                    <span>
+                        <button class="p-btn" style="color:inherit;border:1.5px solid #C6C9E8;"
+                            [ngStyle]="(nbr == curPage) ? {'background-color': style.primary, 'color': 'white', 'box-shadow': 'none', 'border-color': style.primary, 'border-style': 'dotted'} : {'color': 'inherit'}"
+                            *ngFor="let nbr of pageNumbers" (click)="curPage = nbr">
+                            {{ nbr }}
+                        </button>
+                    </span>
 
-            <button class="no-button" *ngIf="numberToDisplay < totalNumberPages && lastDisplayed < totalNumberPages"
-                (click)="nextTen()">...</button>
+                    <button class="no-button"
+                        *ngIf="numberToDisplay < totalNumberPages && lastDisplayed < totalNumberPages"
+                        (click)="nextTen()">...</button>
 
-            <button
-                style="color:gray;background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;color:#C0C0C0;font-size: inherit;"
-                disabled *ngIf="curPage >= totalNumberPages" (click)="curPage = curPage + 1">
-                Next
-            </button>
-            <button
-                style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;font-size: inherit;"
-                *ngIf="curPage < totalNumberPages" (click)="moveUp()">
-                <!--ok? not really.  this does not update the page number array -->
-                Next
-            </button>
-            <button class="disabled-button" style="background-color: transparent;font-size:inherit;color:gray;" disabled
-                *ngIf="curPage == lastPage || lastDisplayed == totalNumberPages">
-                &#187;
-            </button>
-            <button class="no-button" style="font-weight:bold;font-size:inherit;"
-                *ngIf="curPage < lastPage  && lastDisplayed < totalNumberPages" (click)="endUp()" [ngStyle]="{
+                    <button
+                        style="color:gray;background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;color:#C0C0C0;font-size: inherit;"
+                        disabled *ngIf="curPage >= totalNumberPages" (click)="curPage = curPage + 1">
+                        Next
+                    </button>
+                    <button
+                        style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;font-size: inherit;"
+                        *ngIf="curPage < totalNumberPages" (click)="moveUp()">
+                        <!--ok? not really.  this does not update the page number array -->
+                        Next
+                    </button>
+                    <button class="disabled-button" style="background-color: transparent;font-size:inherit;color:gray;"
+                        disabled *ngIf="curPage == lastPage || lastDisplayed == totalNumberPages">
+                        &#187;
+                    </button>
+                    <button class="no-button" style="font-weight:bold;font-size:inherit;"
+                        *ngIf="curPage < lastPage  && lastDisplayed < totalNumberPages" (click)="endUp()" [ngStyle]="{
                                 'color': style.primary
                             }">
-                &#187;
-            </button>
-            <br />
+                        &#187;
+                    </button>
+                    <br />
+                </div>
+            </div>
         </div>
     </div>
+</form>
