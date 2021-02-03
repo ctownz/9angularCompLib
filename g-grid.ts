@@ -52,6 +52,7 @@ export class GridComponent implements OnInit {
   p: number = 1;
   nbrItems = 10;
   pageSize = 10;
+  iSize = "7";
   pageNumbers: number[] = [1];
   curPage: number = 1;
   lastPage: number = 1;
@@ -76,17 +77,17 @@ export class GridComponent implements OnInit {
   tdDate = "tdDateStyle";
   hasData = false;
   headings: string[];
-  sMsg: string = "";
+  sMsg: string = "No data found";
+  noData: boolean = false;
 
-  // The ngOnInit() is a lifecycle hook
   ngOnInit(): void {
     if (this.start) {
       if (this.data == undefined) {
-        this.sMsg = 'No data';
+        this.noData = true;
       }
       else {
         this.format();
-     
+      }
       if (this.style == undefined) {
         this.style = new Style();
       }
@@ -101,9 +102,16 @@ export class GridComponent implements OnInit {
       this.filIds = makeid();
       this.start = false;
     }
-  }
+
   }
 
+  strLen = 1;
+  nbrLen = 1;
+  dtLen = 1;
+  strSize = "1";
+  nbrSize = "1";
+  dtSize = "1";
+  w: string[] = new Array();
   public format() {
     this.gridItems = this.data;
 
@@ -121,6 +129,7 @@ export class GridComponent implements OnInit {
     this.filterButtonCaption = 'Add Filters';
 
     // table headings (this just gets the property names.)
+
     this.headings = Object.keys(this.gridItems[0]);  // ok but add code to check for gridItems length in case nothing has been returned
 
     this.columnCount = this.headings.length + 1;
@@ -132,22 +141,51 @@ export class GridComponent implements OnInit {
     let vg: AnyType[] = new Array();
     let re = /\-/gi;
 
+    let sZ: string[] = new Array();
+    let len = 0;
+
+    // this.g.sort((a, b) => (a.props[x].value > b.props[x].value) ? 1 : ((b.props[x].value > a.props[x].value) ? -1 : 0));
+    let colLen = 0;
     for (i = 0; i < this.gridItems.length; i++) {
       let itm: AnyType = new AnyType();
       itm.iid = i; itm.name = k[i];
       var v = Object.values(this.gridItems[i])
       let aP: prop[] = new Array();
-
       for (let j = 0; j < Object.values(this.gridItems[i]).length; j++) {
+        //this.tableHeadings[i].len = '2rem';
+        //sZ.push('2rem');
         let p: prop = new prop();
         p.key = k[j];
         p.value = v[j];
+        if (p.value.toString().length <= 1) {
+          sZ.push('2rem');
+        }
+        else if (p.value.toString().length > 10 && p.value.toString().length < 90) {
+          /*  colLen = p.value.toString().length * .5;
+           sZ.push(colLen.toString() + 'rem'); */
+          sZ.push('5rem');
+        }
+        else if (p.value.toString().length < 10) {
+          //  colLen = p.value.toString().length * ;
+          sZ.push('4rem');
+        }
+        else {
+          colLen = p.value.toString().length * .25;
+          sZ.push(colLen.toString() + 'rem');
+        }
+        /*         if (p.value.toString().length > 1) {
+                  colLen = p.value.toString().length * .75;
+                  sZ.push(colLen.toString() + 'rem');
+                }
+                else {
+                  sZ.push('2rem');
+                } */
         p.type = typeof (v[j]);
 
         if (Object.prototype.toString.call(v[j]) === '[object Date]') {
           p.type = "date";
           p.style = this.tdDate;
-          p.value = p.value.toLocaleString();
+          p.value = p.value.toLocaleString(); // debug
         }
         else if (Number(p.value) || Number(p.value.replace(re, ""))) {
           if (p.key == "idx") {
@@ -155,11 +193,43 @@ export class GridComponent implements OnInit {
           }
           else {
             p.style = this.tdNbr;
+
           }
+
         }
         else {
           p.type = typeof (v[j]);
           p.style = "tdStrStyle";
+        }
+        let str = "";
+
+        if (p.type.indexOf('number') > -1) {
+          str = p.value.toString();
+          len = str.length;
+          if (len > this.nbrLen) {
+            this.nbrLen = len;
+            this.nbrLen.toString();
+          }
+          p.charLen = len.toString();
+          this.w.push(this.nbrLen.toString());
+        }
+        else if (p.type.indexOf('string') > -1) {
+          len = Number(p.value.length);
+          if (len > this.strLen) {
+            this.strLen = len;
+            this.strLen.toString();
+          }
+          p.charLen = len.toString();
+          this.w.push(p.charLen);
+        }
+        else {
+          len = Number(p.value.length);
+          if (len > this.dtLen) {
+            this.dtLen = len;
+            this.dtLen.toString();
+          }
+          p.charLen = len.toString();
+          this.w.push(p.charLen);
         }
 
         aP.push(p);
@@ -167,6 +237,7 @@ export class GridComponent implements OnInit {
       itm.props = aP;
       vg.push(itm);
     }
+
     this.g = vg;
     this.gConst = vg;
 
@@ -193,6 +264,10 @@ export class GridComponent implements OnInit {
       }
     }
     this.tableHeadings = tblHdr.filter(obj => obj.tableHeadingKey !== "A");
+    for (let m = 0; m < this.tableHeadings.length; m++) {
+      this.tableHeadings[m].len = sZ[m];
+      this.tableHeadings[m].size = this.w[m];
+    }
 
     this.arrPageNbrs();
 
@@ -391,10 +466,9 @@ export class GridComponent implements OnInit {
       this.g.sort((a, b) => (a.props[x].value > b.props[x].value) ? 1 : ((b.props[x].value > a.props[x].value) ? -1 : 0));
     }
     else if (d == 1) {
-      alert(d);
       this.g.sort((a, b) => (a.props[x].value < b.props[x].value) ? 1 : ((b.props[x].value < a.props[x].value) ? -1 : 0));
     }
-    // }
+
     this.sorted = true;
   }
   reset() {
@@ -426,13 +500,10 @@ export class GridComponent implements OnInit {
 
       }
       var d = new Date(value);
-      alert(d.getDay());
       let dt = d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear();
-
       var d = new Date(dt);
 
       if (Object.prototype.toString.call(d) === "[object Date]") {
-        // alert(Object.prototype.toString.call(d) === "[object Date]");
         if (!isNaN(d.getTime())) {
           this.g = this.g.filter(p => new Date(p.props[s].value).getTime() == d.getTime());
         }
@@ -444,7 +515,7 @@ export class GridComponent implements OnInit {
     }
     this.startOver();
   }
-  public startOver() { // <<
+  public startOver() {
     this.curPage = 1;
     this.arrPageNbrs();
     this.lastDisplayed = this.pageNumbers.slice(-1)[0];
@@ -547,11 +618,11 @@ export class GridComponent implements OnInit {
     var url = window.URL.createObjectURL(blob);
     a.href = url;
     let str = 'data' + Utils.makeid + '.csv';
-   
-    if(this.title != undefined){
+
+    if (this.title != undefined) {
       str = this.title + '.csv';
     }
-    
+
     a.download = str;/* your file name*/
     a.click();
     return 'success';
