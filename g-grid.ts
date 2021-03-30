@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AnyType } from './anyType';
 import { prop } from '../utilities/prop';
 import { StrDictionary } from '../utilities/StrDictionary';
@@ -18,7 +18,11 @@ export class GridComponent implements OnInit {
   @Input() columns: string[];
   @Input() title: string;
   @Input() color: string;
+  @Input() hdrBgColor: string;
+  @Input() hdrTxtColor: string;
   @Input() data: Object[];
+  @Input() export: boolean = true;
+  @Output() pageChg: EventEmitter<any> = new EventEmitter();
 
   style: Style;
   start: boolean = true;
@@ -41,10 +45,12 @@ export class GridComponent implements OnInit {
   isSelected = "isSelected";
   notSelected = "notSelected";
   public isSelectedNA = false;
-
+  hover = 1;
+  hoverC = '';
   // filtering
   dataType: string;
   filterButtonCaption: string;
+  fNm = '';
 
   colTypes: StrDictionary[];
 
@@ -79,9 +85,30 @@ export class GridComponent implements OnInit {
   headings: string[];
   sMsg: string = "No data found";
   noData: boolean = false;
+  tblWidth: string = "750px";
+  eq: string;
+  gr: string;
+  lt: string;
+  ge: string;
+  le: string;
+  // icons, sort
+  ai: string;
+  di:string;
 
-  ngOnInit(): void {
+  tblId: string;
+
+ngOnInit(): void {
     if (this.start) {
+      this.tblId = makeid();
+      this.fNm = makeid();
+      this.eq = makeid();
+      this.gr = makeid();
+      this.lt = makeid();
+      this.ge = makeid();
+      this.le = makeid();
+      this.ai = makeid();
+      this.di = makeid();
+      
       if (this.data == undefined) {
         this.noData = true;
       }
@@ -96,6 +123,16 @@ export class GridComponent implements OnInit {
         this.style.primary = this.color;
       }
       else { this.color = this.style.primary }
+
+      if (this.hdrBgColor == undefined) {
+        this.hdrBgColor = '#cdcdcd';
+      }
+      if (this.hdrTxtColor == undefined && this.hdrBgColor == 'transparent') {
+        this.hdrTxtColor = '#647687';
+      }
+
+
+      this.hoverC = setLtrDkr(this.hdrBgColor, 30);
       this.aId = makeid();
       this.dId = makeid();
       this.ddlId = makeid();
@@ -146,42 +183,42 @@ export class GridComponent implements OnInit {
 
     // this.g.sort((a, b) => (a.props[x].value > b.props[x].value) ? 1 : ((b.props[x].value > a.props[x].value) ? -1 : 0));
     let colLen = 0;
+    let result = this.g.map(a => a.props[0].value);
+    
     for (i = 0; i < this.gridItems.length; i++) {
       let itm: AnyType = new AnyType();
       itm.iid = i; itm.name = k[i];
       var v = Object.values(this.gridItems[i])
       let aP: prop[] = new Array();
+      let tW = 0;
       for (let j = 0; j < Object.values(this.gridItems[i]).length; j++) {
-        //this.tableHeadings[i].len = '2rem';
-        //sZ.push('2rem');
         let p: prop = new prop();
         p.key = k[j];
         p.value = v[j];
+        p.charLen = "8";
         if (p.value.toString().length <= 1) {
           sZ.push('2rem');
+          tW += 4;
         }
         else if (p.value.toString().length > 10 && p.value.toString().length < 90) {
-          /*  colLen = p.value.toString().length * .5;
-           sZ.push(colLen.toString() + 'rem'); */
-          sZ.push('5rem');
+          sZ.push('6rem');
+          tW += 8;
+
         }
         else if (p.value.toString().length < 10) {
-          //  colLen = p.value.toString().length * ;
           sZ.push('4rem');
+          tW += 8;
+
         }
         else {
           colLen = p.value.toString().length * .25;
           sZ.push(colLen.toString() + 'rem');
-        }
-        /*         if (p.value.toString().length > 1) {
-                  colLen = p.value.toString().length * .75;
-                  sZ.push(colLen.toString() + 'rem');
-                }
-                else {
-                  sZ.push('2rem');
-                } */
-        p.type = typeof (v[j]);
+          tW += p.value.toString().length * 2.5;
 
+        }
+        this.tblWidth = tW.toString() + 'rem';
+        p.type = typeof (v[j]);
+       
         if (Object.prototype.toString.call(v[j]) === '[object Date]') {
           p.type = "date";
           p.style = this.tdDate;
@@ -195,14 +232,11 @@ export class GridComponent implements OnInit {
             p.style = this.tdNbr;
 
           }
-
         }
-        else {
-          p.type = typeof (v[j]);
+        else if(typeof p.value == "string" ){
           p.style = "tdStrStyle";
         }
         let str = "";
-
         if (p.type.indexOf('number') > -1) {
           str = p.value.toString();
           len = str.length;
@@ -215,12 +249,19 @@ export class GridComponent implements OnInit {
         }
         else if (p.type.indexOf('string') > -1) {
           len = Number(p.value.length);
-          if (len > this.strLen) {
-            this.strLen = len;
-            this.strLen.toString();
+          if (p.value.length > 30) {
+            len = Number(p.value.length) + 4;
           }
+          else { 
+            if(len > 3 ){
+              len += 3;
+            }   
+        }
           p.charLen = len.toString();
-          this.w.push(p.charLen);
+         this.w.push(p.charLen);
+        }
+        else if(p.type.indexOf('date') > -1){
+          p.charLen = p.value.length.toString();
         }
         else {
           len = Number(p.value.length);
@@ -229,7 +270,7 @@ export class GridComponent implements OnInit {
             this.dtLen.toString();
           }
           p.charLen = len.toString();
-          this.w.push(p.charLen);
+          this.w.push(p.charLen); 
         }
 
         aP.push(p);
@@ -263,10 +304,13 @@ export class GridComponent implements OnInit {
         keysMapN[Object.keys(this.gridItems[0])[i]] = col;
       }
     }
+
+    let wT = 0;
     this.tableHeadings = tblHdr.filter(obj => obj.tableHeadingKey !== "A");
     for (let m = 0; m < this.tableHeadings.length; m++) {
       this.tableHeadings[m].len = sZ[m];
       this.tableHeadings[m].size = this.w[m];
+
     }
 
     this.arrPageNbrs();
@@ -405,16 +449,14 @@ export class GridComponent implements OnInit {
   }
   // ITEMS PER PAGE 
   itemsPerPage(nbr: any) {
-    var x = <HTMLSelectElement>document.getElementById(this.ddlId);
-    let y = (x.options.selectedIndex) * 10;
-
-    if (y == 5) {
+    // 2-6-21 CMT select changed to ddl to allow for styling
+    if (nbr > this.g.length || nbr == 0) {
       this.nbrItems = this.g.length;
       this.pageSize = this.g.length;
     }
     else {
-      this.nbrItems = y;
-      this.pageSize = y;
+      this.nbrItems = nbr;
+      this.pageSize = nbr;
     }
     this.curPage = 1;
     this.arrPageNbrs();
@@ -435,6 +477,7 @@ export class GridComponent implements OnInit {
     this.reverse = !this.reverse;
   }
 
+
   unsorted: "hoverSort";
   showSort() {
     if (this.sortVis.indexOf("none") > -1) {
@@ -446,32 +489,62 @@ export class GridComponent implements OnInit {
 
   }
 
+  testIcon = "1009";  // Todo rmv
+  
+  aP = '<path d="M 12.033203 12.333984 L 12.033203 42.580078 L 22.054688 42.580078 L 22.054688 12.333984 L 12.033203 12.333984 z M 1.5195312 43.582031 L 16.941406 63.492188 L 33.070312 43.582031 L 1.5195312 43.582031 z "style="fill:whitesmoke;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.5" />';
+  aPs = '<path d="M 12.033203 12.333984 L 12.033203 42.580078 L 22.054688 42.580078 L 22.054688 12.333984 L 12.033203 12.333984 z M 1.5195312 43.582031 L 16.941406 63.492188 L 33.070312 43.582031 L 1.5195312 43.582031 z "style="fill:#83919F;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.5" />';
+  dP = '<path d="M 16.927734 0.37304688 L 0.79882812 20.283203 L 32.349609 20.283203 L 16.927734 0.37304688 z M 11.814453 21.285156 L 11.814453 51.529297 L 21.835938 51.529297 L 21.835938 21.285156 L 11.814453 21.285156 z "style="fill:whitesmoke;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.33333337" />';
+  dPs = '<path d="M 16.927734 0.37304688 L 0.79882812 20.283203 L 32.349609 20.283203 L 16.927734 0.37304688 z M 11.814453 21.285156 L 11.814453 51.529297 L 21.835938 51.529297 L 21.835938 21.285156 L 11.814453 21.285156 z "style="fill:#83919F;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.33333337" />';
   // sort
-
-  sortByColumn(x: any, d: number, event: any) {
-    let ele = <HTMLSpanElement>event.target;
-
-    let ml = <HTMLSpanElement>document.getElementById(x);
-    var rl = document.getElementsByClassName('Sam');
-    for (let i = 0; i < rl.length; i++) {
-      let rm = <HTMLSpanElement>rl[i];
-      rm.style.color = "#B0BEC5";
-    }
-
-    ele.style.color = this.color;
-
-    this.sArr.push(x);
+  lS: number;
+  sortByColumn(x: any, d: number, e: any) {
+    this.resetArrows();
     if (d == 0) {
-
+      let e = <HTMLSpanElement>document.getElementById(this.ai + x);
       this.g.sort((a, b) => (a.props[x].value > b.props[x].value) ? 1 : ((b.props[x].value > a.props[x].value) ? -1 : 0));
+
+    e.innerHTML =
+    "<svg width='" + 15 + "' height='" + 25 + "' style='background-color:transparent;overflow: hidden;vertical-align:top;padding:0px;margin:0px;'>" +
+    "<g transform='translate(" + 3 + ",0) scale(" + .3 + ")'>" +
+      this.aP +
+    "</g>" +
+    "</svg>";
     }
     else if (d == 1) {
+      let e = <HTMLSpanElement>document.getElementById(this.di + x);
       this.g.sort((a, b) => (a.props[x].value < b.props[x].value) ? 1 : ((b.props[x].value < a.props[x].value) ? -1 : 0));
+      e.innerHTML =
+      "<svg width='" + 15 + "' height='" + 25 + "' style='background-color:transparent;overflow: hidden;vertical-align:top;padding:0px;margin:0px;'>" +
+      "<g transform='translate(" + 3 + ",0) scale(" + .3 + ")'>" +
+        this.dP +
+      "</g>" +
+      "</svg>";
     }
 
-    this.sorted = true;
   }
+  resetArrows(){
+    var d = document.getElementsByName("des");
+    var a = document.getElementsByName("asc");
+  
+    for(let i = 0; i < d.length; i++){
+      d[i].innerHTML = "<svg width='" + 15 + "' height='" + 25 + "' style='background-color:transparent;overflow: hidden;vertical-align:top;padding:0px;margin:0px;'>" +
+      "<g transform='translate(" + 3 + ",0) scale(" + .3 + ")'>" +
+        this.dPs +
+      "</g>" +
+      "</svg>";;
+    }
+    for(let i = 0; i < a.length; i++){
+      a[i].innerHTML = "<svg width='" + 15 + "' height='" + 25 + "' style='background-color:transparent;overflow: hidden;vertical-align:top;padding:0px;margin:0px;'>" +
+      "<g transform='translate(" + 3 + ",0) scale(" + .3 + ")'>" +
+        this.aPs +
+      "</g>" +
+      "</svg>";;
+    }
+  }
+  
   reset() {
+    this.resetArrows();
+    this.sArr = [];
     this.g = this.gConst;
     this.sortVis = "none";
     this.g.sort((a, b) => (a.iid > b.iid) ? 1 : ((b.iid > a.iid) ? -1 : 0));
@@ -480,37 +553,109 @@ export class GridComponent implements OnInit {
     this.startOver();
   }
 
-  // filtering
+  // filter
   vs = "";
   fil = false;
   dTest = new Date('6/10/2020');
-  onKey(value: string, s: any) {
+  nbrFil: number;
+  // filter dates
+  filDts(s: any) {
+    let eN = null; let gN = null; let lN = null; let gE = null; let lE = null;
+    var a = document.getElementsByName(this.g[0].props[s].key);
 
-    var fArr = this.g;
-    if (this.g[0].props[s].type.indexOf("string") > -1) {
-      let c = value.toLowerCase()
-      this.g = this.g.filter(p => p.props[s].value.toLowerCase().indexOf(c) > -1);
+    for (let i = 0; i < a.length; i++) {
+      let c = <HTMLInputElement>a[i];
+      if (c.id == 'eq' + this.g[0].props[s].key && c.value) {
+        eN = Date.parse(c.value); 
+
+        this.g = this.g.filter(p => Date.parse(p.props[s].value) == eN);
+        break;
+      }
+      else if (c.id == 'gt' + this.g[0].props[s].key && c.value) {
+        gN = Number(c.value);
+      }
+      else if (c.id == 'lt' + this.g[0].props[s].key && c.value) {
+        lN = Number(c.value);
+      }
+      else if (c.id == 'ge' + this.g[0].props[s].key && c.value) {
+        gE = Number(c.value);
+      }
+      else if (c.id == 'le' + this.g[0].props[s].key && c.value) {
+        lE = Number(c.value);
+      }
     }
-    else if (this.g[0].props[s].type.indexOf("number") > -1) {
-      this.g = this.g.filter(p => p.props[s].value == value);
+    if (eN == null) {
+      if (gE != null) {
+        this.g = this.g.filter(p => Number(p.props[s].value) >= gE);
+      }
+      if (lE != null) {
+        this.g = this.g.filter(p => Number(p.props[s].value) <= lE);
+      }
+      if (gN != null) {
+        this.g = this.g.filter(p => Number(p.props[s].value) > gN);
+      }
+      if (lN != null) {
+        this.g = this.g.filter(p => Number(p.props[s].value) < lN);
+      }
+    }
+
+  }
+  // filter numbers
+  filNbrs(s: any) {
+
+    let eN = null; let gN = null; let lN = null; let gE = null; let lE = null;  
+    var a = document.getElementsByName(this.g[0].props[s].key);
+
+    for (let i = 0; i < a.length; i++) {
+      let c = <HTMLInputElement>a[i];
+      if (c.id == 'eq' + this.g[0].props[s].key && c.value) {
+        eN = Number(c.value);
+        this.g = this.g.filter(p => Number(p.props[s].value) == eN);
+        break;
+      }
+      else if (c.id == 'gt' + this.g[0].props[s].key && c.value) {
+        gN = Number(c.value);
+      }
+      else if (c.id == 'lt' + this.g[0].props[s].key && c.value) {
+        lN = Number(c.value);
+      }
+      else if (c.id == 'ge' + this.g[0].props[s].key && c.value) {
+        gE = Number(c.value);
+      }
+      else if (c.id == 'le' + this.g[0].props[s].key && c.value) {
+        lE = Number(c.value);
+      }
+    }
+    if (eN == null) {
+      if (gE != null) {
+        this.g = this.g.filter(p => Number(p.props[s].value) >= gE);
+      }
+      if (lE != null) {
+        this.g = this.g.filter(p => Number(p.props[s].value) <= lE);
+      }
+      if (gN != null) {
+        this.g = this.g.filter(p => Number(p.props[s].value) > gN);
+      }
+      if (lN != null) {
+        this.g = this.g.filter(p => Number(p.props[s].value) < lN);
+      }
+    }
+  }
+
+  v = '';
+  // main filter, strings
+  onKey(value: string, s: any, e: any) {
+   
+    if (e.target.value.length == 0) {
+      this.g = this.gConst;
     }
     else {
-      this.dTest = new Date(this.g[0].props[s].value);
-      if (value.length >= 8) {
-
+      if (this.g[0].props[s].type.indexOf("string") > -1) {
+        let c = value.toLowerCase()
+        this.g = this.g.filter(p => p.props[s].value.toLowerCase().indexOf(c) > -1);
       }
-      var d = new Date(value);
-      let dt = d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear();
-      var d = new Date(dt);
-
-      if (Object.prototype.toString.call(d) === "[object Date]") {
-        if (!isNaN(d.getTime())) {
-          this.g = this.g.filter(p => new Date(p.props[s].value).getTime() == d.getTime());
-        }
-        else {
-          // this.g = this.g.filter(p => new Date(p.props[s].value).getTime() == d.getTime());
-        }
-
+      else if (this.g[0].props[s].type.indexOf("number") > -1) {
+        this.g = this.g.filter(p => p.props[s].value == value);
       }
     }
     this.startOver();
@@ -520,15 +665,7 @@ export class GridComponent implements OnInit {
     this.arrPageNbrs();
     this.lastDisplayed = this.pageNumbers.slice(-1)[0];
   };
-  filDate(d: Date) {
-    let fromDate = new Date('11/11/1940');
-    let toDate = new Date('06/10/2020');
-    let v = this.g.filter((item: any) => {
-      item.date.getTime() >= fromDate.getTime() &&
-        item.date.getTime() <= toDate.getTime();
-    });
-    let w = this.g.filter(p => new Date(p.props[10].value).getTime() == toDate.getTime());
-  }
+
   filtersPnl() {
     if (this.filters == 'noFilters') {
       this.filters = 'filters';
@@ -541,9 +678,19 @@ export class GridComponent implements OnInit {
 
   clearFilters() {
     var f = document.getElementsByName(this.filIds);
+    var temp = document.getElementsByName(this.fNm);
+    var calc = document.getElementsByClassName("calc");
+    for (let j = 0; j < temp.length; j++) {
+      let c = <HTMLInputElement>temp[j];
+      c.value = '';
+    }
     for (var i = 0, item; item = f[i]; i++) {
       let e = <HTMLInputElement>f[i];
       e.value = "";
+    }
+    for (let k = 0; k < calc.length; k++) {
+      let c = <HTMLInputElement>calc[k];
+      c.value = '';
     }
     this.g = this.gConst;
     this.sorted = false;
@@ -573,7 +720,6 @@ export class GridComponent implements OnInit {
   }
 
   dateFilters(value: string, s: any) {
-
     let newDate = new Date(value);
 
     if (Object.prototype.toString.call(newDate) === "[object Date]") {
@@ -582,52 +728,84 @@ export class GridComponent implements OnInit {
     else {
       return true;
     }
-
   }
-  ConvertToCSV(objArray) {
-    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-    var str = '';
-    var row = "";
-
-    for (var index in objArray[0]) {
-      //Now convert each value to string and comma-separated
-      row += index + ',';
-    }
-    row = row.slice(0, -1);
-    //append Label row with line break
-    str += row + '\r\n';
-
-    for (var i = 0; i < array.length; i++) {
-      var line = '';
-      for (var index in array[i]) {
-        if (line != '') line += ','
-
-        line += array[i][index];
-      }
-      str += line + '\r\n';
-    }
-    return str;
-  }
-
-  download() {
-    var csvData = this.ConvertToCSV(this.g);
-    var a = document.createElement("a");
-    a.setAttribute('style', 'display:none;');
-    document.body.appendChild(a);
-    var blob = new Blob([csvData], { type: 'text/csv' });
+  downloadCSV() {
+    var csvData = this.cSV();
+    var blob = new Blob(csvData, { type: 'text/csv' });
     var url = window.URL.createObjectURL(blob);
-    a.href = url;
-    let str = 'data' + Utils.makeid + '.csv';
-
-    if (this.title != undefined) {
-      str = this.title + '.csv';
+  
+    if(navigator.msSaveOrOpenBlob) {
+      navigator.msSaveBlob(blob, this.title);
+    } else {
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = this.title + ".csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+    window.URL.revokeObjectURL(url);
+  }
+  // ToDo:  review once you have chrome working
+  print() {
+    let p = '<table style="border:2px solid gray;font-family:Arial;"><tr>';
+    for (let i = 0; i < this.tableHeadings.length; i++) {
+      p += '<td style="padding:6px;">' + this.tableHeadings[i].tableHeadingVal + '</td>';
     }
 
-    a.download = str;/* your file name*/
-    a.click();
-    return 'success';
+    for (let i = 0; i < this.g.length; i++) {
+      p += '<tr>';
+      for (let j = 0; j < this.g[i].props.length; j++) {
+        p += '<td style="padding:6px;border:1.5px solid whitesmoke;">' + this.g[i].props[j].value + '</td>';
+      }
+    }
+    p += '</tr><table>';
+
+    let b = Utils.getBrowser();
+    let w = window.open('', this.title, 'rel="noopener, left=10,top=10,width=600,height=900,toolbar=0,scrollbars=0,status=0,addressbar=0"');
+    w.document.open();
+    w.document.write(p);
+    w.document.close();
+    if (b.indexOf("Chrome") > -1) {
+      setTimeout(function () {
+        w.print();
+        w.close();
+      }, 10);
+    }
+    else {
+      w.print();
+      w.close();
+    }
   }
 
+  cSV() {
+    let y = '';
+    let x = [];
+ 
+    for (let h = 0; h < this.tableHeadings.length; h++) {
+      y = y + this.tableHeadings[h].tableHeadingVal + ',';
+    }
+    y = y.substring(0, y.length - 1) + '\r\n';
+    x.push(y);
+    for (let q = 0; q < this.g.length; q++) {
+      y = '';
+      for (let p = 0; p < this.g[q].props.length; p++) {
+        y = y + this.g[q].props[p].value + ',';
+      }
+      y = y.substring(0, y.length - 1) + '\r\n';;
+      x.push(y);
+    }
+    return x;
+  }
+  // do we need an export to json?
+
+  /* CRUD */
+/*   create() {
+  }
+  update() {
+  }
+  delete() {
+  } */
 
 }
 function makeid() {
@@ -637,4 +815,39 @@ function makeid() {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
 }
+function setLtrDkr(col: string, amt: number) {
+  var usePound = false;
+  if (col[0] != "#") { col = '#9896A4'; amt = 30; }
+  if (col[0] == "#") {
+    col = col.slice(1);
+    usePound = true;
+  }
+  else {
+    if (amt < 0) {
+      return '#c6c6c6';
+    }
+    else {
+      return '#d3d3d3';
+    }
+  }
 
+  var num = parseInt(col, 16);
+  var r = (num >> 16) + amt;
+
+  if (r > 255) r = 255;
+  else if (r < 0) r = 0;
+
+  var b = ((num >> 8) & 0x00FF) + amt;
+
+  if (b > 255) b = 255;
+  else if (b < 0) b = 0;
+
+  var g = (num & 0x0000FF) + amt;
+
+  if (g > 255) g = 255;
+  else if (g < 0) g = 0;
+  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
+}
+interface pg{
+  
+}
