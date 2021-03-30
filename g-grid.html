@@ -5,13 +5,7 @@
         border-top-right-radius: 6px;
         height: auto;
         width: inherit;
-    }
-
-    .grid-containers {
-        border-color: #006699;
-        border-radius: 6px;
-        border-style: solid;
-        border-width: 2px;
+        font-family: inherit;
     }
 
     /*PAGINATION*/
@@ -35,7 +29,6 @@
     }
 
     .no-button:hover {
-        background-color: #f5f5f5;
         border: none;
         color: #000000;
         font-weight: bolder;
@@ -50,33 +43,19 @@
     }
 
     .no-button:focus {
-        font-size: larger;
         font-weight: bolder;
         outline: none;
     }
 
     button:active,
     :focus {
-        border: 2px solid #C6C9E8;
+        border: 1.5px solid #9e9ca9;
         outline: none;
     }
 
-    .isSelected {
-        background-color: #006699;
-        color: #ffffff;
-        font-size: larger;
-        font-weight: bolder;
-    }
-
-    .notSelected {
-        font-weight: normal;
-    }
-
-
     /* TABLE */
-
     .tdNbrStyle {
-        padding: .1em .1em .1em .1em;
+        padding: .05em .1em .05em .1em;
         text-align: right;
     }
 
@@ -85,20 +64,21 @@
     }
 
     .tdDateStyle {
-        padding: .1em .1em .1em .1em;
+        padding: .05em .1em .05em .1em;
         text-align: right;
     }
 
     .tdStrStyle {
-        padding: .1em .1em .1em .1em;
+        padding: .05em .1em .05em .1em;
         text-align: left;
-
     }
-
 
     th {
         background-color: #E5E7E8;
-        padding: .3em .6em;
+        border: 1px solid #D3D3D3;
+        padding: .1em .6em .3em .6em;
+        font-weight: normal;
+
     }
 
     th:first-of-type {
@@ -107,23 +87,32 @@
 
     th:last-of-type {
         border-top-right-radius: .5px;
-        /*  background-color: orchid; */
     }
 
     tr:last-of-type td:last-of-type {
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
-
     }
 
     th:first-child {
-        border-left: 1px #E5E7E8 solid;
+        /*        border-left: 1px #E5E7E8 solid;
         border-top: 1px #E5E7E8 solid;
-        border-bottom: 1.5px #E5E7E8 solid;
-        border-top-left-radius: .5px;
+        border-bottom: 1.5px #E5E7E8 solid; */
+
+        border-top-left-radius: 3px;
         border-bottom-left-radius: 0px;
-        margin-right: 0%;
-        background-color: #E5E7E8;
+        /*         margin-right: 0%;
+        background-color: #E5E7E8; */
+    }
+
+    th:last-child {
+        /*   border-left: 1px #E5E7E8 solid;
+        border-top: 1px #E5E7E8 solid;
+        border-bottom: 1.5px #E5E7E8 solid; */
+        border-top-right-radius: 3px;
+        border-bottom-left-radius: 0px;
+        /*     margin-right: 0%; */
+        /* background-color: #E5E7E8; */
     }
 
     th {
@@ -131,18 +120,6 @@
         border-top: 1px #E5E7E8 solid;
         border-bottom: 1px #E5E7E8 solid;
         background-color: #E5E7E8;
-
-    }
-
-    thead {
-        background-color: orchid;
-    }
-
-    .foo-class {
-        float: left;
-        padding: 3px;
-        width: 310px;
-        min-width: 310px;
     }
 
     /***********************************************************************/
@@ -150,6 +127,9 @@
     .filters {
         max-width: 50px;
         visibility: visible;
+        padding: 0;
+        width: 10px;
+        color: #696969;
     }
 
     .noFilters {
@@ -161,19 +141,20 @@
     .Sam {
         cursor: pointer;
         pointer-events: auto;
+        padding: 0px 0px 10px 0px;
+        margin: 0px 0px 10px 0px;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: bold;
+        vertical-align: middle;
     }
 
     .Sam:hover {
         background-color: #dcdcdc !important;
-
     }
 
     .span:hover {
         color: #e8e8e8;
-    }
-
-    select::-ms-expand {
-        display: none;
     }
 
     @media (max-width: 575.98px) {
@@ -267,47 +248,6 @@
         font-size: 20px;
     }
 
-    .item1 {
-        grid-area: header;
-    }
-
-    .item2 {
-        grid-area: menu;
-    }
-
-    .item3 {
-        grid-area: main;
-    }
-
-    .item4 {
-        grid-area: right;
-    }
-
-    .item5 {
-        grid-area: footer;
-    }
-
-    .grid-container {
-        display: grid;
-        grid-template-areas:
-            'header header header header header header'
-            'menu main main main main right'
-            'footer footer footer footer footer footer';
-        grid-gap: 1px;
-        background-color: transparent;
-        padding: 10px;
-        margin-bottom: 1px;
-        width: 100%;
-    }
-
-    .grid-container>div {
-        background-color: transparent;
-        text-align: center;
-        padding: 2px 0;
-        font-size: inherit;
-        margin-bottom: 1px;
-    }
-
     .s-btn {
         background-color: transparent;
         /* border: 1.5px solid #C6C9E8; */
@@ -319,7 +259,7 @@
 
     .g-btn {
         background-color: transparent;
-        /* border: 1.5px solid #C6C9E8; */
+        font-family: inherit;
         border: none;
         border-radius: 1.5px;
         font-size: inherit;
@@ -331,194 +271,531 @@
     }
 
     .p-btn {
+        padding-left: .45rem;
+        padding-right: .45rem;
+        padding-top: .085rem;
+        padding-bottom: .25rem;
         background-color: transparent;
-        border: 1.5px solid #C6C9E8;
+        border: none;
         border-radius: 1.5px;
         font-size: inherit;
     }
 
-    select {
-        width: 7rem;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background: transparent;
-        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="30%" height="10%" viewBox="0 0 110 110"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:rgb(144, 164, 174);"></path></svg>');
-        background-size: auto auto;
-        background-repeat: no-repeat;
-        background-position-x: 100%;
-        background-position-y: 6px;
+    .p-btn:hover {
+        background-color: #B5B6B7;
+        color: #696969;
+    }
+
+    .wrapper {
+        font-family: inherit;
+        display: grid;
+        grid-gap: 2px;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        background-color: transparent;
+        margin-bottom: 4px;
+        color: inherit;
+    }
+
+    .wrapper2 {
+        display: grid;
+        border: 1px solid #000;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .box {
+        background-color: transparent;
+        color: inherit;
+        border-radius: 5px;
+        padding: 2px;
+        font-size: inherit;
+        font-family: inherit;
+
+
+    }
+
+    .dropbtn {
         border: none;
-
-        margin-right: 2rem;
-        margin-left: 2rem;
-        padding: .25rem;
-        padding-right: .25rem;
+        margin: 0;
+        background-color: transparent;
+        padding: .5em;
+        color: #696969;
+        display: inline;
     }
 
-    select option {
-        margin: 40px;
-        background: #fff;
-        color: #546e7a;
-        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
     }
 
-    select:hover {
-        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="30%" height="10%" viewBox="0 0 110 110"><path d="M 1.1113281 4.7421875 L 28.886719 54.308594 L 56.611328 4.8222656 L 58.769531 4.7460938 L 39.326172 4.7421875 L 17.798828 4.7421875 L 1.1113281 4.7421875 z " style="fill:rgb(84, 110, 122);stroke:rgb(84, 110, 122);stroke-width:3"></path></svg>');
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        border: 1px solid #D3D3D3;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {
+        background-color: #9896A4;
+        color: #fff;
+    }
+
+    .dropdown-content button {
+        padding: 8px 5px 8px 16px;
+        border: 1px solid #f3f3f3;
+        text-align: left;
+        width: 100%;
+        font-family: inherit;
+    }
+
+    .dropdown-content button:hover {
+        background-color: #9896A4;
+        color: #fff;
+    }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        color: #9496A4;
+
+    }
+
+    /*  input */
+    input.flt {
+        border: 1px solid #D3D3D3;
+        margin: 2px;
+        background-color: #fff;
+        padding: .5em;
+        color: #696969;
+        display: inline;
+    }
+
+    input.val {
+        border: none;
+        background-color: transparent;
+        font-size: inherit;
+        color: inherit;
+        font-family: inherit;
+    }
+
+    input.calc {
+        width: 60%;
+        border: 1px solid #D3D3D3;
+    }
+
+    div.pg {
+        align-content: center;
+        display: inline-block;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        margin-left: 8px;
+        margin-right: auto;
+        color: inherit;
+    }
+
+    span.nbr {
+        color: inherit;
+    }
+
+    button.f {
+        margin: 0px;
+        padding: 0px;
+        height: 18px;
+        width: 16px;
+        background-color: transparent;
+        background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='50' viewBox='0 64 124 124' width='24' xmlns='http://www.w3.org/2000/svg'><path d='m 0,0 30,45 0,30 10,15 0,-45 30,-45 Z' style='fill:rgb(152 150 164);fill-opacity:1;fill-rule:nonzero;stroke:rgb(152 150 164);stroke-width:5.2753458' /></svg>");
         background-repeat: no-repeat;
+        border: none;
+        font-size: inherit;
+        cursor: pointer;
+    }
+
+    button.f:hover {
+        background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='50' viewBox='0 64 124 124' width='24' xmlns='http://www.w3.org/2000/svg'><path d='m 0,0 30,45 0,30 10,15 0,-45 30,-45 Z' style='fill:rgb(181,182,183);fill-opacity:1;fill-rule:nonzero;stroke:rgb(181,182,183);stroke-width:5.2753458' /></svg>");
+    }
+
+    button.f:active {
+        background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='50' viewBox='0 64 124 124' width='24' xmlns='http://www.w3.org/2000/svg'><path d='m 0,0 30,45 0,30 10,15 0,-45 30,-45 Z' style='fill:rgb(218,218,219);fill-opacity:1;fill-rule:nonzero;stroke:rgb(218,218,219);stroke-width:5.2753458' /></svg>");
+    }
+
+    .g {
+        background-color: #9e9ca9;
+        padding: 2px;
+        text-align: center;
+        width: 70%;
+        margin: 0 auto;
+        display: block;
+        color: #fff;
+        border: none;
+        border-radius: 2px;
+    }
+
+    .g:active {
+        box-shadow: 0px 0px 10px #c0becc;
+        border: 2px solid #9e9ca9;
+        color: inherit;
+    }
+
+    .t {
+        padding: 2px 1px;
+        border: 1px solid #D3D3D3;
+        border-radius: 1.5px;
+        background-color: transparent;
+        margin-right: 8px;
+    }
+
+    label {
+        font-weight: bold;
+        color: #212121;
+        text-align: right;
+        clear: both;
+        float: left;
+        margin-right: 15px;
+        padding-left: 2px;
+        width: 7%;
     }
 </style>
-<form autocomplete="off">
+
+  <body>
+<br /><br /><br /><br />
+<div>
+<span [attr.id]="testIcon"
+  style="background-color:transparent;margin:0;padding:0rem;overflow:visible;vertical-align:text-top; text-align:top;display:inline-block;"
+  [ngStyle]="{
+    'font-size' : '14pt',
+    'color' : 'red'
+    }">
+  </span> 
+  
+<img src="../../assets/gage.gif" alt="">
+<p>fix the charlength on filter to grab the longest string</p>
+<p>change the color of the selected arrow for sort</p>
+<p>fix the charlength on filter to grab the longest string</p>
+<div style="padding:20px;background-color: #83919F;color:white;">
+here
+</div>
+
+
+<form autocomplete="off" style="font-family:inherit;" [ngStyle]="{
+    'width' : tblWidth
+}">
+
+    <div class="wrapper" style="font-weight: bold;padding-left:12px;color:inherit;">
+        <div class="box b">
+            <span>{{title}}</span><br/>
+        </div>
+
+    </div>
+    <div id="mad"></div>
+
     <div *ngIf="noData == true" class="item1">
         <p style="font-weight:bold;padding:16px;">{{sMsg}}</p>
     </div>
+
     <div *ngIf="noData == false">
         <div class="panel panel-primary"
             style="padding:0px;border:1px solid transparent; border-radius:3px;margin-top: 0%;background-color:transparent;color:inherit;">
-
-            <div class="grid-container" style="background-color:transparent;padding: 0px;margin:0px;width:100%;">
-                <div class="item1">
-                    <p style="font-weight: bold;">{{title}}</p>
-                </div>
-                <div class="item2" style="text-align: left;vertical-align:bottom;">
-                    <span style="font-size:inherit;">
-                        <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
-                            (click)="filtersPnl()">Add
-                            Filters</button>
-                        <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
-                            (click)="clearFilters()">Clear
-                            Filters</button>
-                        <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
-                            (click)="showSort()">Sort</button>
-                        <button class="g-btn" type="button" style="min-width:4rem;color:inherit;"
-                            (click)="reset()">Reset</button>
-                        <button (click)="download()" class="g-btn" type="button" style="min-width:4rem;color:inherit;">
-                            Export</button>
-
-                        <select class="s-btn" style="width:auto;margin-left:10px;border:none;color:inherit;"
-                            name="perPg" id={{ddlId}} (change)="itemsPerPage(10)">
-                            <option value="0">Items per Page &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </option>
-                            <option>10 items per page</option>
-                            <option>20 items per page</option>
-                            <option>30 items per page</option>
-                            <option>40 items per page</option>
-                            <option>50 items per page</option>
-                            <option>All</option>
-                        </select>
-
-                    </span>
-                </div>
-                <div class="item3" style="text-align: right;"></div>
-                <div class="item4" style="text-align: right;padding-right:12px;">
-
-                </div>
-                <div class="item5" style="padding:0px;background-color:transparent;"></div>
-            </div>
             <div style="width:inherit; margin-left:0px;padding-left: 0px;float:right;" [ngStyle]="{
                 'background-color' : color,
-                'color': 'white'
+                'color': 'inherit'
             }">
             </div>
-            <table>
-                <tr class="row" style="background-color: transparent;">
-                    <th *ngFor="let tableHeading of tableHeadings" style="background-color:transparent;border:none;">
+
+            <table style="font-family: inherit;">
+                <tr>
+                    <td>
+                        <button aria-label="Filter" class="t" (click)="filtersPnl()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="22" viewBox="0 -5 72 72">
+                                <path
+                                    d="M 4.0507812 1.9980469 L 23.425781 25.945312 L 23.498047 25.945312 L 23.5 29.509766 L 24.166016 29.509766 L 24.166016 62.076172 L 24.169922 62.078125 C 24.197627 62.048048 37.577552 55.309401 40.851562 51.873047 L 40.853516 29.509766 L 41.521484 29.509766 L 41.523438 25.947266 L 41.595703 25.947266 L 60.966797 1.9980469 L 4.0507812 1.9980469 z M 37.234375 62.054688 L 37.234375 62.076172 L 37.234375 62.054688 z "
+                                    style="fill:none;stroke:#83919F;stroke-width:5.0;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" />
+                            </svg>
+                        </button>
+
+                        <button aria-label="Clear Filters" class="t" (click)="clearFilters()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="22" viewBox="-3 -5 70 70">
+                                <path
+                                    d="M 61.451172 1.9121094 L 2.5488281 1.9140625 L 22.599609 25.849609 L 22.673828 25.849609 L 22.675781 29.410156 L 23.365234 29.410156 L 23.365234 61.958984 C 23.393921 61.928748 37.242481 55.194196 40.630859 51.759766 L 40.634766 51.759766 L 40.634766 50.642578 C 37.063128 48.633525 34.648438 44.795759 34.648438 40.390625 C 34.648438 35.985488 37.063127 32.145772 40.634766 30.136719 L 40.634766 29.410156 L 41.328125 29.410156 L 41.328125 25.849609 L 41.402344 25.849609 L 61.451172 1.9121094 z M 46.492188 28.648438 C 40.038308 28.648438 34.804688 33.906996 34.804688 40.392578 C 34.804688 46.876909 40.038308 52.134766 46.492188 52.134766 C 52.947314 52.134766 58.179688 46.876909 58.179688 40.392578 C 58.179688 33.906996 52.947314 28.648438 46.492188 28.648438 z M 54.322266 32.328125 L 46.421875 40.357422 L 54.126953 47.90625 L 52.972656 47.056641 L 52.859375 47.056641 L 46.308594 40.472656 L 39.755859 47.056641 L 39.642578 47.056641 L 38.234375 48.064453 L 46.193359 40.357422 L 40.634766 34.773438 L 40.634766 34.701172 L 39.642578 33.701172 L 39.642578 33.660156 L 38.857422 32.720703 L 46.308594 40.244141 L 54.322266 32.328125 z M 40.634766 45.785156 L 39.484375 46.939453 L 39.486328 47.054688 L 39.599609 47.054688 L 40.634766 46.013672 L 40.634766 45.785156 z "
+                                    style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#83919F;stroke-width:5.0;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" />
+                            </svg>
+                        </button>
+
+                        <button aria-label="Sort" class="t" (click)="showSort()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="22" viewBox="-3 -5 70 70">
+                                <path
+                                    d="M 16.496094,-0.93554688 0.3671875,18.976562 H 31.916016 Z M 42.878906,12.064453 V 42.308594 H 52.904297 V 12.064453 Z M 11.382812,19.976562 V 50.222656 H 21.404297 V 19.976562 Z M 32.367188,43.310547 47.789062,63.222656 63.917969,43.310547 Z"
+                                    style="fill:#83919F;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.33333337" />
+                            </svg>
+                        </button>
+
+                        <button aria-label="Reset" class="t" (click)="reset()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="22" viewBox="-3 -5 70 70">
+                                <path
+                                    d="m 32.988281,0.95117188 c -8.019,0 -16.03825,3.05905722 -22.15625,9.17773412 -12.2359995,12.235994 -12.2359995,32.075184 0,44.3125 12.237333,12.235994 32.07455,12.235994 44.310547,0 l 0.236328,-0.236328 -5.185547,-5.1875 -0.234375,0.238281 c -9.37333,9.371981 -24.568073,9.371981 -33.941406,0 -4.686,-4.68667 -7.0292968,-10.828706 -7.0292968,-16.970703 0,-0.383875 0.00904,-0.766871 0.027344,-1.15039 0.2745703,-5.752793 2.608828,-11.426559 7.001953,-15.820313 9.373333,-9.3720188 24.569406,-9.3733416 33.941406,0 l 0.464844,0.478516 5.185547,-5.1875 -0.466797,-0.476563 C 49.024579,4.0102291 41.007281,0.95117188 32.988281,0.95117188 Z M 60.697266,6.5527344 45.457031,22.179688 62.916016,24.013672 Z"
+                                    style="fill:#83919F;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.33333337" />
+                            </svg>
+                        </button>
+
+                         <button *ngIf="export == true" aria-label="Download" (click)="downloadCSV()" class="t" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="22" viewBox="-3 -5 70 70">
+                                <path
+                                    d="m 27.966797,0.47851562 v 30.24414038 0.002 H 37.988281 V 0.47851562 Z M 17.455078,31.726562 32.875,51.636719 49.003906,31.726562 Z M 1.3632812,41.369141 1.3496094,64.0625 h 0.082031 l -0.039062,0.601562 62.8945309,-0.01953 -0.05078,-0.582031 h 0.113281 l 0.01367,-22.693359 h -8 l -0.01367,15.296875 H 9.3496094 l 0.013672,-15.296875 z"
+                                    style="fill:#83919F;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.33333337" />
+                            </svg>
+                        </button> 
+
+                        <button aria-label="Print" class="t" (click)="print()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="22" viewBox="0 0 16.5 16.5">
+                                <path
+                                    d="m 5.8191996,0.18612057 c -0.4110869,0 -0.7445202,0.33468273 -0.7445202,0.74793553 V 5.187749 H 4.3518643 v 0.5672944 h -2.227503 c -0.5478859,0 -0.9923568,0.4469737 -0.9923568,0.9980931 l -0.64962528,2.866917 0.13275171,3.7107545 c 0,0.550772 0.44447077,0.997586 0.99235687,0.997586 h 2.111913 l -0.6471014,1.673467 c 0,0.413253 0.3334331,0.747936 0.7445199,0.747936 h 9.4950277 c 0.411087,0 0.744015,-0.334683 0.744015,-0.747936 l -0.647606,-1.673467 h 1.979161 c 0.548231,0 0.992357,-0.446467 0.992357,-0.997586 l 0.13578,-3.6442828 -0.652149,-2.9333887 c 0,-0.5507728 -0.44447,-0.9975857 -0.992357,-0.9975857 l -1.99077,-5.074e-4 V 5.187749 H 12.440127 V 0.9340561 c 0,-0.4132528 -0.332928,-0.74793553 -0.744015,-0.74793553 z M 6.09076,0.73869978 h 5.333792 c 0.205715,0 0.372512,0.16751457 0.372512,0.37396782 v 6.3965231 c 0,0.2067996 -0.167142,0.3744751 -0.372512,0.3744751 H 6.09076 c -0.2053711,0 -0.3725123,-0.1676755 -0.3725123,-0.3744751 V 1.1126676 c 0,-0.20645325 0.1671412,-0.37396782 0.3725123,-0.37396782 z m 8.645518,6.77049092 c 0.342514,0 0.620349,0.1813081 0.620349,0.4054277 0,0.2241196 -0.277835,0.4059352 -0.620349,0.4059352 -0.342515,0 -0.620349,-0.1818156 -0.620349,-0.4059352 0,-0.2241196 0.277834,-0.4054277 0.620349,-0.4054277 z M 1.9088291,9.0355068 H 14.895277 c 0.05341,0 0.09691,0.043387 0.09691,0.097424 0,0.053692 -0.0435,0.097424 -0.09691,0.097424 H 1.9088291 c -0.05341,0 -0.096914,-0.043732 -0.096914,-0.097424 0,-0.054038 0.043504,-0.097424 0.096914,-0.097424 z m 2.2603122,1.0082412 h 9.0452867 v 1.68869 h -0.688996 l -0.474474,-0.975766 0.109028,0.297347 C 11.980803,10.775516 11.55898,10.57806 11.243343,10.57806 H 6.1417408 c -0.4107423,0 -1.260889,0.334683 -1.260889,0.747936 l -0.1569799,0.40695 -0.5547306,-5.08e-4 z m 2.1361414,1.215269 h 4.6458053 c 0.325285,0 0.846986,0.253829 0.846986,0.566279 l 1.430992,3.801076 c 0,0.312425 -0.522044,0.302928 -0.846986,0.302928 H 4.8752996 c -0.3249411,0 -0.8464812,0.0095 -0.8464812,-0.302928 l 1.4294784,-3.801076 c 0,-0.31245 0.5220448,-0.566279 0.8469859,-0.566279 z m 5.9389983,0.02385 0.264494,0.72155 -0.262475,-0.678419 c 0,-0.01454 -6.52e-4,-0.02893 -0.002,-0.04313 z"
+                                    style="fill:#83919F;stroke:none;stroke-width:5.0;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" />
+                            </svg>
+                        </button> 
+
+                    </td>
+
+                    <td>
+                        <div class="dropdown" style="padding-top:.1rem;">
+                            <button class="dropbtn"
+                                style="margin-top:0px;padding-top:0px;color:inherit;white-space: nowrap;font-family:inherit;"
+                                (change)="itemsPerPage(10)">items per page {{nbrItems}}&nbsp;&nbsp;
+                                <span style='font-size:1rem;' [ngStyle]="{
+                             'color': '#83919F',
+                             'font-size': 'small'
+                         }">&#9660;</span>
+                            </button>
+                            <div class="dropdown-content">
+                                <button (click)="itemsPerPage(20)">20 items per page</button>
+                                <button (click)="itemsPerPage(30)">30 items per page</button>
+                                <button (click)="itemsPerPage(40)">40 items per page</button>
+                                <button (click)="itemsPerPage(50)">50 items per page</button>
+                                <button (click)="itemsPerPage(0)">All</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table  [id]="tblId" style="font-family: inherit;">
+                <tr class="row" style="border:1px solid whitesmoke;font-family: inherit;">
+                    <th *ngFor="let tableHeading of tableHeadings" style="vertical-align:middle;" [ngStyle]="{
+                        'color' : hdrTxtColor,
+                        'background-color': hdrBgColor                                                                               
+                      }">
                         <div class="container"
-                            style="text-align:center;display: inline;vertical-align: middle;background-color:transparent;margin: 0px;">
+                            style="text-align:center;display: inline;vertical-align: middle;background-color:transparent;margin: 0px;padding:0px;">
                             <span
                                 style="white-space: nowrap; text-align:left; margin-left:auto;margin-right:auto;vertical-align:middle;">
-                                <span style="text-align:left;vertical-align: middle;">
+                                <span style="text-align:left;vertical-align: middle;" [ngStyle]="{
+                                    'color' : hdrTxtColor                                                                           
+                                  }">
                                     {{ tableHeading.tableHeadingVal }}
                                 </span>
                                 <span id={{tableHeading.idx}} class="container"
-                                    style="margin:0px 0px 0px 0px;margin:0;">
-                                    <span style="padding:0px;margin:0px;" [ngStyle]="{'display': sortVis}">
-                                        <span class="Sam" (click)="sortByColumn(tableHeading.idx, 0, $event)"
-                                            style="padding:0;margin:0px 0px 0px 8px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: 22px;font-weight: bold;vertical-align: middle;"
-                                            [ngStyle]="{
-                                                                                            'color' : clrA                                                                               
-                                                                                        }">
-                                            &#x25BC;
-
-                                        </span>
-                                        <span class="Sam" (click)="sortByColumn(tableHeading.idx, 1, $event)"
-                                            id={{tableHeading.idx}}
-                                            style="padding:0px 0px 10px 0px;margin:0px 0px 10px 0px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size:22px;font-weight: bold;vertical-align: middle;"
-                                            [ngStyle]="{
-                                                                                            'color' : clrA
-                                                                                        }">
-                                            &#x25B2;
-                                        </span>
+                                    style="margin:0;padding-left:5px;padding-right:0px;">
+                                    <button aria-label="Sort Ascending"
+                                    style="padding:0;background-color:transparent;border:none;"
+                                    [ngStyle]="{'display': sortVis}"
+                                    (click)="sortByColumn(tableHeading.idx, 0, $event)">
+                                    <span id="{{ai + tableHeading.idx}}" name="asc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="18"
+                                        viewBox="2 22 30 30">   
+                                         <path
+                                            d="M 12.033203 12.333984 L 12.033203 42.580078 L 22.054688 42.580078 L 22.054688 12.333984 L 12.033203 12.333984 z M 1.5195312 43.582031 L 16.941406 63.492188 L 33.070312 43.582031 L 1.5195312 43.582031 z "
+                                            style="fill:#83919F;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.5" />
+                                    </svg>
+                                </span>
+                                </button>
+                                    <button aria-label="Sort Descending"
+                                        style="padding:0;background-color:transparent;border:none;margin:0px 8px 0px 8px;"
+                                        [ngStyle]="{'display': sortVis}"
+                                        (click)="sortByColumn(tableHeading.idx, 1, $event)">
+                                        <span id="{{di + tableHeading.idx}}" name="des">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="18"
+                                            viewBox="0 15 30 30">
+                                            <path
+                                                d="M 16.927734 0.37304688 L 0.79882812 20.283203 L 32.349609 20.283203 L 16.927734 0.37304688 z M 11.814453 21.285156 L 11.814453 51.529297 L 21.835938 51.529297 L 21.835938 21.285156 L 11.814453 21.285156 z "
+                                                style="fill:#83919F;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.33333337" />
+                                        </svg>
                                     </span>
+                                    </button>
+
                                 </span>
                             </span>
                         </div>
                     </th>
                 </tr>
-                <tr class="row" [ngClass]="filters" style="padding:0;">
-                    <td *ngFor="let tableHeading of tableHeadings"
-                        style="padding:0;background-color:gray;width:10px;color:#ffffff;" [ngStyle]="{
-                'border': '1.5px #b0bec5 solid'
-            }">
+                <tr class="row" [ngClass]="filters">
+                    <td *ngFor="let tableHeading of tableHeadings" [ngStyle]="{
+                        'border': '1.5px #b0bec5 solid',
+                        'background-color' : '#f3f3f3',
+                        'padding' : '3px'
+                    }" style="text-align: center;vertical-align: middle;">
 
 
-                        <input *ngIf="tableHeading.type == 'number'" size={{tableHeading.size}} autocomplete="off"
-                            style="border:none;margin:0;background-color: transparent;padding:.5em;color:#ffffff;"
-                            (keyup)="onKey(box.value, tableHeading.idx)" #box />
+                        <div *ngIf="tableHeading.type == 'number'" class="dropdown">
+                            <button aria-label="drop down" class="dropbtn" *ngIf="tableHeading.type == 'number'"
+                                autocomplete="chrome-off" name={{fNm}} style="color:#212121;">
+                                <span style="font-size:1rem;" [ngStyle]="{
+                                'color': '#83919F',
+                                'font-size': 'small',
+                                'vertical-align': 'center',
+                                'margin-left' : '.0125rem',
+                                'margin-right' : '.0125rem'
+                            }"></span>select<span style='font-size:1rem;margin-left:.75rem;' [ngStyle]="{
+                                'color': '#83919F',
+                                'font-size': 'small'
+                            }">&#9660;</span>
+                            </button>
+                            <div class="dropdown-content" style="margin:0;padding:0;color:#212121;">
+                                <div
+                                    style="padding-bottom:6px;padding-top:6px;padding-left:2px;background-color:#f3f3f3;">
+                                    <label for="eq{{tableHeading.tableHeadingVal}}">&#x3d;</label>
+                                    <input id="eq{{tableHeading.tableHeadingVal}}" name={{tableHeading.tableHeadingVal}}
+                                        class="calc" />
+                                    <label for="gt{{tableHeading.tableHeadingVal}}">&#x3e;</label>
+                                    <input id="gt{{tableHeading.tableHeadingVal}}" name={{tableHeading.tableHeadingVal}}
+                                        class="calc" />
+                                    <label for="ge{{tableHeading.tableHeadingVal}}">&#x3e;&#x3d;</label>
+                                    <input id="ge{{tableHeading.tableHeadingVal}}" name={{tableHeading.tableHeadingVal}}
+                                        class="calc" />
+                                    <label for="lt{{tableHeading.tableHeadingVal}}">&#x3c;</label>
+                                    <input id="lt{{tableHeading.tableHeadingVal}}" name={{tableHeading.tableHeadingVal}}
+                                        class="calc" />
+                                    <label for="le{{tableHeading.tableHeadingVal}}">&#x3c;&#x3d;</label>
+                                    <input id="le{{tableHeading.tableHeadingVal}}" name={{tableHeading.tableHeadingVal}}
+                                        class="calc" />
 
-                        <input *ngIf="tableHeading.type == 'string'" size={{tableHeading.size}}
-                            autocomplete="chrome-off" name="fog"
-                            style="border:none;margin:0;background-color: transparent;padding:.5em;color:#ffffff;"
-                            (keyup)="onKey(box.value, tableHeading.idx)" #box />
+                                    <div style="margin-top: 8px;">
+                                        <button class="g"
+                                            style="padding:2px;text-align:center;width:70%;margin:0 auto;display:block;color:#fff;border:none;border-radius:2px;background-color:#9e9ca9;"
+                                            (click)="filNbrs(tableHeading.idx)" #box (mouseover)="hover=2"
+                                            (mouseleave)="hover=1"
+                                            [ngStyle]="(hover == 1) ? {'background-color': '#9e9ca9', 'color': hdrTxtColor, 'box-shadow': 'none', 'border' : 'none' } : {'color' : 'inherit','background-color': hdrBgColor, 'border': '1.5px solid #fff'}">
+                                            done
+                                        </button>
+                                    </div>
+                                </div>
 
-                        <input *ngIf="tableHeading.type == 'date'" size={{tableHeading.size}} autocomplete="off"
-                            style="border:none;margin:0;background-color:transparent;padding:.5em;color:#ffffff;"
-                            (keyup)="onKey(box.value, tableHeading.idx)" #box />
+                            </div>
+                        </div>
 
+                        <input class="flt" *ngIf="tableHeading.type == 'string'" size={{tableHeading.size}}
+                            autocomplete="chrome-off" name={{fNm}} (keyup)="onKey(box.value, tableHeading.idx, $event )" #box/>
+
+                        <div *ngIf="tableHeading.type == 'date'" class="dropdown">
+                            <button aria-label="select" class="dropbtn" *ngIf="tableHeading.type == 'date'"
+                                autocomplete="chrome-off" name={{fNm}} style="color:#212121;">
+                                <span style="font-size:1rem;" [ngStyle]="{
+                                        'color': '#83919F',
+                                        'font-size': 'small',
+                                        'vertical-align': 'center',
+                                        'margin-left' : '.75rem'
+                                    }"></span>select<span style='font-size:1rem;margin-left:.75rem;' [ngStyle]="{
+                                        'color': '#83919F',
+                                        'font-size': 'small'
+                                    }">&#9660;</span>
+                            </button>
+                            <div class="dropdown-content" style="margin:0;padding:0;color:#212121;">
+                                <div
+                                    style="padding-bottom:6px;padding-top:6px;padding-left:2px;background-color:#f3f3f3">
+                                    <label for="eq{{tableHeading.tableHeadingVal}}">&#x3d;</label>
+                                    <input class="calc" id="eq{{tableHeading.tableHeadingVal}}"
+                                        name={{tableHeading.tableHeadingVal}} />
+                                    <label for="gt{{tableHeading.tableHeadingVal}}">&#x3e;</label>
+                                    <input id="gt{{tableHeading.tableHeadingVal}}" name={{tableHeading.tableHeadingVal}}
+                                        class="calc" />
+                                    <label for="ge{{tableHeading.tableHeadingVal}}">&#x3e;&#x3d;</label>
+                                    <input id="ge{{tableHeading.tableHeadingVal}}" name={{tableHeading.tableHeadingVal}}
+                                        class="calc" />
+                                    <label for="lt{{tableHeading.tableHeadingVal}}">&#x3c;</label>
+                                    <input id="lt{{tableHeading.tableHeadingVal}}" name={{tableHeading.tableHeadingVal}}
+                                        class="calc" />
+                                    <label for="le{{tableHeading.tableHeadingVal}}">&#x3c;&#x3d;</label>
+                                    <input id="le{{tableHeading.tableHeadingVal}}" name={{tableHeading.tableHeadingVal}}
+                                        class="calc" />
+
+                                    <div style="margin-top: 8px;">
+                                        <button class="g"
+                                            style="padding:2px;text-align:center;width:70%;margin:0 auto;display:block;color:#fff;border:none;border-radius:2px;background-color:#9e9ca9;"
+                                            (click)="filDts(tableHeading.idx)" #box (mouseover)="hover=2"
+                                            (mouseleave)="hover=1"
+                                            [ngStyle]="(hover == 1) ? {'background-color': '#9e9ca9', 'color': hdrTxtColor, 'box-shadow': 'none', 'border' : 'none' } : {'color' : 'inherit','background-color': hdrBgColor, 'border': '1.5px solid #fff'}">
+                                            done
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--                         <input class="flt" *ngIf="tableHeading.type == 'date'" size={{tableHeading.size}}
+                            autocomplete="off" name={{fNm}} (keyup)="onKey(box.value, tableHeading.idx)" #box />
+ -->
                     </td>
                 </tr>
-                <!--  </thead> -->
-                <tr class="row" *ngFor="let gi of g | slice: (curPage * nbrItems) - pageSize :curPage * nbrItems"
-                    style="padding: 2px;">
-                    <td *ngFor="let p of gi.props" class="{{ p.style }}"
-                        style="border:1px solid #D3D3D3;background-color: #fff;padding:.4em .5em;white-space:nowrap;background-color:transparent;width:10px;">
 
-                        <input *ngIf="p.key != key" [size]="p.charLen" class="{{ p.style }}"
-                            style="border:none;background-color:transparent;font-size: inherit;color:inherit;" readonly
-                            value={{p.value}} />
+                <tr class="row" *ngFor="let gi of g | slice: (curPage * nbrItems) - pageSize :curPage * nbrItems">
+                    <td *ngFor="let p of gi.props" class="{{ p.style }}" [ngStyle]="{
+                            'border': '1px solid #D3D3D3',
+                            'padding' : '.4em.5em',
+                            'white-space' : 'nowrap',
+                            'font-family' : 'inherit'
+                        }">
 
+                     <input class="val" *ngIf="p.key != key" [size]="p.charLen" class="{{ p.style }}" readonly
+                            value={{p.value}} /> 
                     </td>
                 </tr>
             </table>
-            <div *ngIf="noData == false"
-                style="align-content:center;display: inline-block;margin-left:8px; margin-right: auto;color:inherit;">
+            <div class="pg" *ngIf="noData == false">
                 <div>
-                    <span style="color:inherit;font-size:inherit;">Page <span class="disabled-button"
-                            style="color:inherit">{{curPage}}</span><span
-                            style="color:inherit;font-size:inherit;">of</span><button class="disabled-button"
-                            style="color:inherit;font-size:inherit;">{{totalNumberPages}}</button>
+                    <span>Page
+                        <span class="nbr">{{curPage}}&nbsp;&nbsp;</span>
+                        <span class="nbr">of</span>
+                        <span class="nbr">
+                            {{totalNumberPages}}</span>
                     </span>
-                    <button class="disabled-button" style="background-color: transparent;font-size:inherit;color:gray;"
+                    <button class="disabled-button" style="background-color:transparent;font-size:large;color:gray;"
                         disabled *ngIf="curPage == 1">
                         &#171;
                     </button>
-                    <button class="no-button" style="font-weight:bold;font-size:inherit;" *ngIf="curPage > 1"
+                    <button class="no-button" style="font-weight:bold;font-size:large;" *ngIf="curPage > 1"
                         (click)="startOver()" [ngStyle]="{
-                                    'color': style.primary
+                                    'color': '#83919F'
                                 }">
                         &#171;
                     </button>
                     <button disabled *ngIf="curPage == 1"
-                        style="color:#C0C0C0; background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;margin-bottom:3px;font-size: inherit;">Previous</button>
+                        style="color:#616161; background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;margin-bottom:3px;font-size: inherit;font-family: inherit;">
+                        Previous
+                    </button>
                     <button *ngIf="curPage > 1"
-                        style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;font-size: inherit;"
+                        style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;font-size: inherit;font-family: inherit;"
                         (click)="prev()">Previous</button>
 
                     <button class="no-button" *ngIf="lastDisplayed > numberToDisplay && curPage != 1"
                         (click)="previousTen()">...</button>
 
                     <span>
-                        <button class="p-btn" style="color:inherit;border:1.5px solid #C6C9E8;"
-                            [ngStyle]="(nbr == curPage) ? {'background-color': style.primary, 'color': 'white', 'box-shadow': 'none', 'border-color': style.primary, 'border-style': 'dotted'} : {'color': 'inherit'}"
+                        <button class="p-btn" style="color:inherit;font-family: inherit;border: 1px solid #D3D3D3;"
+                            [ngStyle]="(nbr == curPage) ? {'background-color': hdrBgColor, 'color': hdrTxtColor, 'box-shadow': 'none', 'border': '1px solid #D3D3D3' } : {'color': 'inherit', 'border': '1px solid #D3D3D3'}"
                             *ngFor="let nbr of pageNumbers" (click)="curPage = nbr">
                             {{ nbr }}
                         </button>
@@ -529,23 +806,24 @@
                         (click)="nextTen()">...</button>
 
                     <button
-                        style="color:gray;background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;color:#C0C0C0;font-size: inherit;"
+                        style="color:#616161;background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;color:#616161;font-size: inherit;font-family: inherit;"
                         disabled *ngIf="curPage >= totalNumberPages" (click)="curPage = curPage + 1">
                         Next
                     </button>
                     <button
                         style="background-color:transparent;box-shadow:none;border-style:hidden;border-width:0px;outline:none;color:inherit;font-size: inherit;"
-                        *ngIf="curPage < totalNumberPages" (click)="moveUp()">
+                        *ngIf="curPage < totalNumberPages && totalNumberPages > 1" (click)="moveUp()">
                         <!--ok? not really.  this does not update the page number array -->
                         Next
                     </button>
-                    <button class="disabled-button" style="background-color: transparent;font-size:inherit;color:gray;"
-                        disabled *ngIf="curPage == lastPage || lastDisplayed == totalNumberPages">
+                    <button class="disabled-button" style="background-color: transparent;font-size:large;color:#616161;"
+                        disabled *ngIf="curPage == totalNumberPages">
                         &#187;
                     </button>
-                    <button class="no-button" style="font-weight:bold;font-size:inherit;"
-                        *ngIf="curPage < lastPage  && lastDisplayed < totalNumberPages" (click)="endUp()" [ngStyle]="{
-                                'color': style.primary
+                    <button class="no-button" style="font-weight:bold;font-size:large;"
+                        *ngIf="curPage < lastPage  || lastDisplayed < totalNumberPages   && totalNumberPages > 1"
+                        (click)="endUp()" [ngStyle]="{
+                                'color': '#83919F'
                             }">
                         &#187;
                     </button>
@@ -554,4 +832,6 @@
             </div>
         </div>
     </div>
+
 </form>
+ 
