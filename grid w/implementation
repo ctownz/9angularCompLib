@@ -1,0 +1,104 @@
+// ???
+  sortDataTable(arrayColNames, asc) { // if not asc, desc
+    for (var i=0;i<arrayColNames.length;i++) {
+        var columnName = arrayColNames[i];
+        this.DATA_TABLE = this.DATA_TABLE.sort(function(a,b){
+            if (asc) {
+                return (a[columnName] > b[columnName]) ? 1 : -1;
+            } else {
+                return (a[columnName] < b[columnName]) ? 1 : -1;
+            }
+        });
+    }
+}
+
+
+paging(p: any) {
+    this.dataC = [];
+    let s = Object.keys(this.cust[0]);
+    
+    // filter?
+    if(p.filters.length > 0){
+      // you will need to encapsulate this.
+      for(let m = 0; m < p.filters.length; m++){
+        let f = s[p.filter.key];
+        let q = p.filters[m].val || p.filters[m].nbr || p.filters[m].dt;
+        // is it a calc or an equal to...?
+        // what about contains?
+          if(p.filters[m].operand == "eq"){
+            if(p.filters[m].val != ''){
+              this.dataC = this.cust.filter(p => this.cust[f].indexOf(q) > -1);
+            }
+          else{
+            this.dataC = this.cust.filter(p => this.cust[f] == -1);
+          }
+
+        }
+        else{
+          this.filterDataC(f, q, p.filters.operand);
+        }
+      }
+
+    }
+    // secondary sort?
+    this.sortDataTable(Object.keys(this.DATA_TABLE)[0], "asc");
+
+    // sort?
+    if(p.sort.key != undefined){
+      let t = s[p.sort.key];
+  
+      if(p.sort.val == "asc"){
+        this.cust.sort((a, b) => (a[t]  > b[t] ) ? 1 : ((b[t] > a[t])  ? -1 : 0));
+     
+      }
+      else{
+        this.cust.sort((a, b) => (a[t] < b[t] ) ? 1 : ((b[t] < a[t] ) ? -1 : 0));
+      }
+    }
+    // is this a rest?
+   if(p.refresh){
+    this.range.from = 0;
+    this.range.to = this.chunk;
+   }
+   else if (p.cursor > 0) {
+        this.range.from += this.chunk;
+        this.range.to += this.chunk;
+      }
+    else if(p.cursor < 0){
+       this.range.from -= this.chunk;
+       this.range.to -= this.chunk;
+    }
+    // check for out of range
+    let rem = this.cust.length - this.range.from; // remainder would be 20
+    let req = this.range.to - this.range.from; // request would be 60
+  
+    if(rem < req){ this.range.to = this.cust.length; }
+    if (this.range.from < 0) { this.range.from = 0; }
+    let temp = [];
+    // deep copy
+    temp = JSON.parse(JSON.stringify(this.cust.slice(this.range.from, this.range.to)));
+
+    this.dataC = temp;
+    //this.ffs = this.range.from.toString() + '   ' + this.range.to.toString();
+  }
+  filterDataC(f: string, q: any, o: string){
+    switch (o) {
+      case ("gt"):
+        this.g = this.g.filter(p => p[f].value > q);
+        break;
+      case ("lt"):
+        this.g = this.g.filter(p => p[f].value < q);
+        break;
+      case ("ge"):
+        this.g = this.g.filter(p => p[f].value >= q);
+        break;
+      case ("le"):
+        this.g = this.g.filter(p => p[f].value <= q);
+        break;
+    }
+  }
+  deepCopy(start: number, end: number) {
+    // deep copy, otherwise they can't go back and forth
+    return JSON.parse(JSON.stringify(this.cust.slice(start, end)));
+  };
+  
