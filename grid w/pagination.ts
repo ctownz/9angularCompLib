@@ -35,14 +35,24 @@ export class EditComponent implements OnInit {
   dataTracker = 0;
   cursor = 0;
   ngOnChanges(changes: SimpleChanges) {
+   
     this.u += this.pageNumbers[this.pageNumbers.length - 1];
     if (changes.data && !this.start) {
-      if (this.page.refresh) {
+   
+      if(this.data.length == 0){
+        this.noData = true;
+        this.sMsg = "There are no results returned from this request.";
+      }
+      else{
+        this.noData = false;
+        this.sMsg = "";
+      if (this.page.refresh || this.page.reset) {
         this.format();
         this.chunk = 0;
         this.dataTracker = 0;
         this.curPage = 1;
         this.page.refresh = false;
+        this.page.reset = false;
       }
       else {
         let b = this.dataTracker;  // rmv
@@ -67,6 +77,7 @@ export class EditComponent implements OnInit {
           this.bof = 1;
         }
       }
+    }
     }
   }
 
@@ -173,6 +184,9 @@ export class EditComponent implements OnInit {
       this.page.cursor = 0;
       this.fK = { "key": 9, "val": "desc" };
       this.page.filters = [];
+      this.page.sort = [];
+      this.page.reset = false;
+      this.page.refresh = false;
       if (this.nbrItems == undefined) { this.nbrItems = 10; };
       this.pageSize = this.nbrItems;
       if (this.data == undefined) {
@@ -583,7 +597,7 @@ export class EditComponent implements OnInit {
   }
   // ToDo: remove
   paginate() {
-    alert(571);
+   // alert(571);
     /* let p: args = {
       "sort": "value" */
     //}
@@ -627,12 +641,16 @@ export class EditComponent implements OnInit {
   sortByColumn(x: any, d: number, e: any) {
     this.sel = x;
     this.dir = d;
-    this.k = { "key": x, "operand": '', "val": "desc" };
+   
+    let kV = { "key": x, "operand": '', "val": "desc" };
     if (this.paged) {
-      this.k.val = (d > 0) ? "desc" : "asc";
+     
+      kV.val = (d > 0) ? "desc" : "asc";
       this.page.cursor = 0;
       this.page.refresh = true;
-      this.page.sort = this.k;
+      this.page.sort = [];
+      this.page.sort.push(kV);
+     // alert(this.page.sort[0].val);
       this.pageChg.emit(this.page);
     }
     else {
@@ -668,6 +686,17 @@ export class EditComponent implements OnInit {
     } */
 
   reset() {
+    if(this.paged){
+      this.page.filters = [];
+      this.page.sort = [];
+      this.page.reset = true;
+      this.pageChg.emit(this.page);
+      this.sorted = false;
+      this.sortVis = "none";
+      this.sel = 999;
+      this.clearFilters();      
+    } 
+    else{
     this.sel = 999;
     this.dir = 999;
     this.sArr = [];
@@ -677,6 +706,7 @@ export class EditComponent implements OnInit {
     this.sorted = false;
     this.clearFilters();
     this.startOver();
+  }
   }
 
   // filter
@@ -743,14 +773,16 @@ export class EditComponent implements OnInit {
 
   filNbrs(s: any) {
     let eN = null; let gN = null; let lN = null; let gE = null; let lE = null;
-
+  
     var a = document.getElementsByName(this.g[0].props[s].key);
+  
     this.update(s);
     // what if there's a back space?
     for (let i = 0; i < a.length; i++) {
       let c = <HTMLInputElement>a[i];
+  
       let o = c.id.substring(0, 2);
-      if (this.paged) {
+      if (this.paged && c.value != '' && !isNaN(Number(c.value))) {
         this.rollUpFilters(s, o, Number(c.value));
       }
       else {
@@ -775,39 +807,31 @@ export class EditComponent implements OnInit {
     //}
     if (eN == null) {
       if (gE != null) {
-        if (this.paged) {
-          this.rollUpFilters(s, "gE", gE);
-        }
-        else {
+        
+      
           this.g = this.g.filter(p => Number(p.props[s].value) >= gE);
-        }
+      
 
       }
       if (lE != null) {
-        if (this.paged) {
-          this.rollUpFilters(s, "lE", lE);
-        }
-        else {
+     
+   
           this.g = this.g.filter(p => Number(p.props[s].value) <= lE);
-        }
+      
       }
       if (gN != null) {
-        if (this.paged) {
-          this.rollUpFilters(s, "gN", gN);
-        }
-        else {
+        
           this.g = this.g.filter(p => Number(p.props[s].value) > gN);
-        }
+        
       }
       if (lN != null) {
-        if (this.paged) {
-          this.rollUpFilters(s, "lN", lN);
-        }
-        else {
+        
+       
           this.g = this.g.filter(p => Number(p.props[s].value) < lN);
-        }
+       
       }
     }
+    
   }
   // filter paged data
   rollUpFilters(s: any, operand: string, val: number) {
@@ -815,9 +839,10 @@ export class EditComponent implements OnInit {
     this.fK.key = s;
     this.fK.nbr = val;
     this.fK.operand = operand;
+    let kV = { "key": parseInt(s), "operand": operand, "nbr": val };
+    this.page.filters.push(kV);
    
-    this.page.filters.push(this.fK);
-  
+    // alert(" hey  " + this.page.filters[0].operand);
     // ToDo: rmv
     switch (operand) {
       case ("gt"):
@@ -848,34 +873,35 @@ export class EditComponent implements OnInit {
     this.tokyo = '';
     // strings
     var s = document.getElementsByName(this.fNm);
-alert(s.length);
 
-    // STRINGS
-    // loop thru strings
+  //  this.page.filters.length = 0;
+    this.tokyo = '';
     for (let i = 0; i < s.length; i++) {
-
       let sf = <HTMLInputElement>s[i];
 
-      this.update(sf.id);
       if (sf != undefined && sf.value != '') {
         try {
-          this.fK.key = parseInt(sf.id);
-          this.fK.val = sf.value;
-         // k.push(this.fK);
-         this.page.filters.push(this.fK);
+          let kV = { "key": parseInt(sf.id), "val": sf.value };
+          this.page.filters.push(kV);
         }
         catch
         {
         
         }
       }
+     
     }
-   // alert(this.page.filters.length);
+
   
-   
+// debug
+this.tokyo += this.tokyo.length;
 for(let m = 0; m < this.page.filters.length; m++){
-  this.tokyo += this.page.filters[m].key + "  " + this.page.filters[m].val + "  *  ";
+  this.tokyo += this.page.filters[m].key + "  " + this.page.filters[m].val + "  *  " + this.page.filters[m].nbr;
 }
+
+      this.page.cursor = 0;
+      this.page.refresh = true;
+      this.pageChg.emit(this.page);
   }
 
   dateFilters(value: string, s: any) {
@@ -891,13 +917,13 @@ for(let m = 0; m < this.page.filters.length; m++){
   v = '';
   // main filter, strings
   onKey(value: string, s: any, e: any) {
-
+if(!this.paged){
     if (e.target.value.length == 0) {
       this.g = this.gConst;
     }
     else {
       if (this.g[0].props[s].type.indexOf("string") > -1) {
-        let c = value.toLowerCase()
+        let c = value.toLowerCase();
         this.g = this.g.filter(p => p.props[s].value.toLowerCase().indexOf(c) > -1);
       }
       else if (this.g[0].props[s].type.indexOf("number") > -1) {
@@ -905,6 +931,7 @@ for(let m = 0; m < this.page.filters.length; m++){
       }
     }
     this.startOver();
+  }
   }
   public startOver() {
     this.curPage = 1;
@@ -1096,11 +1123,13 @@ interface args {
   start?: number,
   end?: number,
   total?: number,
-  sort?: keyValue,
+  sort?: keyValue[],
 
   asc?: number,
   filters?: keyValue[],
-  refresh?: boolean
+  refresh?: boolean,
+  reset?: boolean
+
 }
 interface keyValue {
   key: number,
