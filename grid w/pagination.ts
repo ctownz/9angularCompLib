@@ -6,6 +6,7 @@ import { Style } from '../utilities/Style';
 import { TableHeading } from '../grid/table-heading.type';
 import Utils from '../utilities/helpers';
 import { SimpleChanges } from '@angular/core';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-edit',
@@ -31,53 +32,94 @@ export class EditComponent implements OnInit {
   chunk = 0;
   t = 0;
   u = 0;
-  bof = 0;
+  bof = true;
   dataTracker = 0;
   cursor = 0;
   ngOnChanges(changes: SimpleChanges) {
-   
+
     this.u += this.pageNumbers[this.pageNumbers.length - 1];
+
     if (changes.data && !this.start) {
-   
-      if(this.data.length == 0){
+      if (this.data.length == 0) {
         this.noData = true;
         this.sMsg = "There are no results returned from this request.";
       }
-      else{
+      //
+      else {
         this.noData = false;
         this.sMsg = "";
-      if (this.page.refresh || this.page.reset) {
-        this.format();
-        this.chunk = 0;
-        this.dataTracker = 0;
-        this.curPage = 1;
-        this.page.refresh = false;
-        this.page.reset = false;
-      }
-      else {
-        let b = this.dataTracker;  // rmv
-        this.format();
-        let c = Math.ceil(this.g.length / this.nbrItems);
-        this.curPage = 1;
+        // begin
+        if (this.page.total == 99999) {
+          this.format();
+          this.curPage = 1;
+          return 0;
+        }
+        else if (this.page.refresh || this.page.reset  || this.page.bof) {
+          this.format();
+          this.chunk = 0;
+          this.dataTracker = 0;
+          this.curPage = 1;
+          this.page.refresh = false;
+          this.page.reset = false;
+        }
+        else if (this.page.eof) { // keep
+          let c = (this.totalItems / this.nbrItems) - this.nbrItems;
+          this.chunk = c;
+          this.format();
+          this.curPage = 1;
 
-        if (this.page.cursor > 0) {
-          this.dataTracker += this.data.length;
-          this.chunk = (this.u - 1);
-          this.t = c++;
         }
         else {
-          this.dataTracker -= this.data.length;
-          this.chunk = this.chunk - c;
-        }
-        if (this.dataTracker >= this.totalItems) {
-          this.eof = true;
-        }
-        else if (this.dataTracker <= 0) {
-          this.eof = false;
-          this.bof = 1;
+          let b = this.dataTracker;  // rmv
+          this.format();
+          let c = Math.ceil(this.g.length / this.nbrItems);
+          this.curPage = 1;
+          if (this.page.cursor > 0) {
+            this.dataTracker += this.data.length;
+            if (this.dataTracker != this.totalItems) {
+              this.chunk = (this.u - 1);
+            }
+            this.chunk = (this.u - 1);
+            this.t = c++;
+          }
+          else {
+            this.dataTracker -= this.data.length;
+            // this works but if you hit Previous twice...
+            if (this.page.inc) {
+
+              if (this.page.page == this.lastDisplayed) {
+
+                this.chunk -= this.chunk;
+                this.curPage = this.lastDisplayed;
+              }
+              else {
+                this.chunk -= 1;
+              }
+              /*     
+               alert(this.page.page);
+               alert(this.arrPageNbrs.length); */
+              this.page.inc = false;
+            }
+            else {
+              this.chunk = this.chunk - c;
+            }
+          }
+          if (this.dataTracker >= this.totalItems || this.page.eof) {
+            this.eof = true;
+            this.bof = false;
+            // this.chunk += this.nbrItems;  // this is not good...
+
+          }
+          else if (this.dataTracker <= 0) {
+            this.eof = false;
+            this.bof = true;
+          }
+          if ((this.chunk + this.totalNumberPages) >= this.pgNbrs) {
+            this.eof = true;
+            this.bof = false;
+          }
         }
       }
-    }
     }
   }
 
@@ -160,6 +202,7 @@ export class EditComponent implements OnInit {
   di: string;
   dlen = 0;
   tblId: string;
+  trk = true;
   addNewItem(val: string) { }
   ngOnInit(): void {
     if (this.start) {
@@ -175,6 +218,7 @@ export class EditComponent implements OnInit {
       this.ai = makeid();
       this.di = makeid();
       this.cId = 'mth' + makeid();
+      
 
       // initiialize 
       this.page = {
@@ -187,7 +231,9 @@ export class EditComponent implements OnInit {
       this.page.sort = [];
       this.page.reset = false;
       this.page.refresh = false;
-      if (this.nbrItems == undefined) { this.nbrItems = 10; };
+      if (this.nbrItems == undefined) { 
+        this.trk = false;
+        this.nbrItems = 10; };
       this.pageSize = this.nbrItems;
       if (this.data == undefined) {
         this.noData = true;
@@ -275,26 +321,23 @@ export class EditComponent implements OnInit {
       let aP: prop[] = new Array();
       let tW = 0;
       for (let j = 0; j < Object.values(this.gridItems[i]).length; j++) {
-
         let p: prop = new prop();
         if (p.value == undefined) { p.value = " "; }
         p.key = k[j];
         p.value = v[j];
         p.charLen = "8";
-
-        if (p.value.toString().length <= 1) {
+        if(p.value == null){ p.value = " "}
+        else if (p.value.toString().length <= 1) {
           sZ.push('2rem');
           tW += 4;
         }
         else if (p.value.toString().length > 10 && p.value.toString().length < 90) {
           sZ.push('6rem');
           tW += 8;
-
         }
         else if (p.value.toString().length < 10) {
           sZ.push('4rem');
           tW += 8;
-
         }
         else {
           colLen = p.value.toString().length * .25;
@@ -437,10 +480,11 @@ export class EditComponent implements OnInit {
     }
   }
   eof = false;
-
+  pgNbrs = 0;
   // PAGINATION *******************************************
   public arrPageNbrs() {
     this.totalNumberPages = Math.ceil(this.g.length / this.nbrItems);
+    this.pgNbrs = Math.ceil(this.totalItems / this.nbrItems);
 
     this.pageNumbers = [];
     this.pageNumbers = [1];
@@ -460,33 +504,23 @@ export class EditComponent implements OnInit {
 
     let e = this.totalNumberPages;
     this.cursor = this.pageNumbers[this.pageNumbers.length - 1]
-  }
-
-  public prev() {  // Previous
-    this.curPage = this.curPage - 1;
-
-    if (this.pageNumbers.indexOf(this.curPage) == -1) {
-      this.pageNumbers = [this.curPage];
-
-      let til = this.curPage + this.numberToDisplay;
-      if (til > this.totalNumberPages) {
-        til = this.totalNumberPages;
-      }
-
-      for (let i = this.curPage + 1; i <= til; i++) {
-        this.pageNumbers.push(i);
-      }
-    }
-    this.lastDisplayed = this.pageNumbers.slice(-1)[0];
-    // Previous
-    //  this.page.page = this.curPage - 1;
-    //  this.page.cursor = -1;
-    //  this.pageChg.emit(this.page);
+  
   }
 
   public endUp() {
+    this.bof = false;
+    this.eof = true;
+    this.page.bof = false;
+    this.page.eof = true;
+
+    // but what if they don't know the number of items???  or the number of items changes...
+    this.page.page = this.totalItems - this.g.length;
+    this.chunk = this.page.page / this.nbrItems;
+
+   // this.chunk -= 
     this.curPage = this.lastPage;
     let n = this.totalNumberPages - (this.numberToDisplay - 1);
+    this.chunk = (this.totalItems / this.nbrItems) - 10;
     if (n < 1) { n = 1; }
     this.pageNumbers = [n];
 
@@ -494,22 +528,31 @@ export class EditComponent implements OnInit {
       this.pageNumbers.push(i);
     }
     this.lastDisplayed = this.totalNumberPages;
-    // >>
-    this.page.page = this.totalNumberPages;
+
+this.page.total = 8888;
     this.page.cursor = 1;
-    // this.pageChg.emit(this.page);
+    this.pageChg.emit(this.page);
   };
   // ToDo: add emit for paging????
   nextPg(nbr: number) {
-    if (nbr == this.lastPage) {
-      // this.nextTen();
-      this.curPage = nbr;
+    let t = (this.g.length / this.nbrItems);
+
+    if(nbr > t && !this.eof){
+
+      this.page.page = this.curPage + 1;
+      //this.page.total = 8888;
+      this.page.cursor = nbr;
+      this.pageChg.emit(this.page);
     }
+  /*   if (nbr == this.lastPage) { */
+      this.curPage = nbr;
+    /* }
     else {
       this.curPage = nbr;
-    }
+    } */
   }
   public moveUp() {  // Next
+ 
     let prevPage = this.curPage;
     this.curPage = this.curPage + 1;
     let midPoint = this.numberToDisplay / 2;
@@ -531,9 +574,13 @@ export class EditComponent implements OnInit {
     }
     this.lastDisplayed = this.pageNumbers.slice(-1)[0];
     // Next
-    this.page.page = this.curPage + 1;
-    this.page.cursor = 1;
-    this.pageChg.emit(this.page);
+    let ck = this.g.length / this.nbrItems;
+  
+    if(this.curPage > this.totalNumberPages){
+      this.page.page = this.curPage;
+      this.page.cursor = this.curPage;
+      this.pageChg.emit(this.page);
+    }
   }
 
   public previousTen() { // ...
@@ -549,6 +596,16 @@ export class EditComponent implements OnInit {
     // ...
     //  this.page.page = this.pageNumbers[0];
     if (this.paging) {
+      this.page.total = 99999;
+      this.page.page -= this.g.length;
+    // this.page.page =
+      this.chunk -= this.nbrItems;
+      this.page.page = this.chunk;
+      if(this.page.page <= 0){ 
+        this.page.page = 0; 
+        this.bof = true; 
+        this.eof = false;
+        this.chunk = 0; }
       this.curPage = 1;
       this.page.cursor = -1;
       this.pageChg.emit(this.page);
@@ -556,6 +613,7 @@ export class EditComponent implements OnInit {
   }
 
   public nextTen() { // ...
+    this.bof = false;
     let n = this.pageNumbers.slice(-1)[0] + 1;
     this.pageNumbers = [this.curPage];
     if (this.curPage + this.numberToDisplay > this.totalNumberPages) {
@@ -569,11 +627,12 @@ export class EditComponent implements OnInit {
       }
     }
     this.lastDisplayed = this.pageNumbers.slice(-1)[0];
-    // ...
-
-    this.page.page = this.pageNumbers[this.pageNumbers.length - 1];
-    this.page.cursor = 1;
-    this.pageChg.emit(this.page);
+      this.page.page = this.pageNumbers[this.pageNumbers.length - 1];
+      this.page.itemsPerPage = this.nbrItems;
+      this.page.total = 8888;
+      this.page.cursor = 1;
+      this.pageChg.emit(this.page);
+  //  }
   }
   // ITEMS PER PAGE 
   itemsPerPage(nbr: number) {
@@ -588,7 +647,7 @@ export class EditComponent implements OnInit {
       this.nbrItems = nbr;
       this.pageSize = nbr;
     }
-    //alert(this.nbrItems);
+
     this.curPage = 1;
     this.arrPageNbrs();
 
@@ -650,7 +709,6 @@ export class EditComponent implements OnInit {
       this.page.refresh = true;
       this.page.sort = [];
       this.page.sort.push(kV);
-     // alert(this.page.sort[0].val);
       this.pageChg.emit(this.page);
     }
     else {
@@ -663,30 +721,9 @@ export class EditComponent implements OnInit {
     }
   }
 
-  /*   resetArrows(){
-      var d = document.getElementsByName("des");
-      var a = document.getElementsByName("asc");
-      var e = document.getElementsByName("des1");
-  
-      for (let i = 0; i < d.length; i++) {
-         d[i].innerHTML = "<svg width='" + 15 + "' height='" + 25 + "' style='background-color:transparent;overflow: hidden;vertical-align:top;padding:0px;margin:0px;'>" +
-          "<g transform='translate(" + 2 + ",0) scale(" + .3 + ")'>" +
-            this.dPs +
-          "</g>" +
-          "</svg>";
-      }
-      // asc
-      for(let i = 0; i < a.length; i++){
-        a[i].innerHTML = "<svg width='" + 15 + "' height='" + 25 + "'transform='rotate(180)' " + "' style='background-color:transparent;overflow: hidden;vertical-align:top;padding:0px;margin:0px;'>" +
-        "<g transform='translate(" + 3 + ",0) scale(" + .3 + ")'>" +
-          this.aPs +
-        "</g>" +
-        "</svg>";;
-      }
-    } */
-
   reset() {
     if(this.paged){
+      this.page.page = 1;
       this.page.filters = [];
       this.page.sort = [];
       this.page.reset = true;
@@ -842,23 +879,6 @@ export class EditComponent implements OnInit {
     let kV = { "key": parseInt(s), "operand": operand, "nbr": val };
     this.page.filters.push(kV);
    
-    // alert(" hey  " + this.page.filters[0].operand);
-    // ToDo: rmv
-    switch (operand) {
-      case ("gt"):
-        
-        break;
-      case ("lt"):
-
-        break;
-      case ("ge"):
-
-        break;
-      case ("le"):
-
-        break;
-    }
-    // push fArr
   }
   update(s: any){
     for(let i = 0; i < this.page.filters.length; i++){
@@ -869,12 +889,14 @@ export class EditComponent implements OnInit {
   }
   fOn = false;
   fK: keyValue;
-  submitFilters() {
-    this.tokyo = '';
+  
+  fil: boolean;
+ submitFilters() {
     // strings
     var s = document.getElementsByName(this.fNm);
+    // use this instead of the index...
+    var n = this.hdr;
 
-  //  this.page.filters.length = 0;
     this.tokyo = '';
     for (let i = 0; i < s.length; i++) {
       let sf = <HTMLInputElement>s[i];
@@ -893,12 +915,14 @@ export class EditComponent implements OnInit {
     }
 
   
-// debug
-this.tokyo += this.tokyo.length;
-for(let m = 0; m < this.page.filters.length; m++){
-  this.tokyo += this.page.filters[m].key + "  " + this.page.filters[m].val + "  *  " + this.page.filters[m].nbr;
-}
+// ToDo: send the name of the field instead of the index?
 
+
+for(let m = 0; m < this.page.filters.length; m++){
+  let b = this.page.filters[m].val || this.page.filters[m].nbr || 89;
+  this.tokyo += n[this.page.filters[m].key] +  ":  " + b + ",    ";
+}
+this.fil = true;
       this.page.cursor = 0;
       this.page.refresh = true;
       this.pageChg.emit(this.page);
@@ -937,9 +961,14 @@ if(!this.paged){
     this.curPage = 1;
     this.arrPageNbrs();
     this.lastDisplayed = this.pageNumbers.slice(-1)[0];
-    this.page.page = 1;
+    this.page.bof = true;
+this.bof = true;
+this.eof = false;
+    this.page.page = 0;
+    this.page.total = 99999;
+    this.chunk = 0;
     this.page.cursor = 0;
-    //  this.pageChg.emit(this.page);
+    this.pageChg.emit(this.page);
   };
 
   filtersPnl() {
@@ -953,6 +982,7 @@ if(!this.paged){
   }
 
   clearFilters() {
+  
     var f = document.getElementsByName(this.filIds);
     var temp = document.getElementsByName(this.fNm);
     var calc = document.getElementsByClassName("calc");
@@ -972,6 +1002,9 @@ if(!this.paged){
     this.sorted = false;
     this.filters = "noFilters";
     this.startOver();
+    if(this.paged){
+      // ToDO:  
+     } 
   }
   detectType(value: any) {
     switch (typeof value) {
@@ -1064,15 +1097,7 @@ if(!this.paged){
     }
     return x;
   }
-  // do we need an export to json?
 
-  /* CRUD */
-  /*   create() {
-    }
-    update() {
-    }
-    delete() {
-    } */
 
 }
 function makeid() {
@@ -1119,9 +1144,13 @@ function setLtrDkr(col: string, amt: number) {
 
 interface args {
   page?: number,
+  itemsPerPage?: number,
+  eof?: boolean,
+  bof?: boolean,
   cursor?: number,
-  start?: number,
-  end?: number,
+  inc?: boolean,
+  start?: number, // rmv?
+  end?: number,   // rmv?
   total?: number,
   sort?: keyValue[],
 
