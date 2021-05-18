@@ -38,8 +38,57 @@ export class EditComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     this.u += this.pageNumbers[this.pageNumbers.length - 1];
-
     if (changes.data && !this.start) {
+      if (this.data.length == 0) {
+        this.noData = true;
+        this.sMsg = "There are no results returned from this request.";
+      }
+      else {
+        this.noData = false;
+        this.sMsg = "";
+        this.format();
+        let i = this.g.length / this.nbrItems;
+        let j = this.totalItems / this.nbrItems;
+        
+        // beginning of file?
+        if(this.page.bof){
+          this.chunk = 0;
+          this.dataTracker = 0;
+          this.curPage = 1;
+          this.page.refresh = false;
+          this.page.reset = false;
+        }
+        else if(this.page.eof){
+          this.chunk = i - j;
+          this.curPage = 1;
+          this.dataTracker = this.totalItems;
+        }
+        else if(this.page.cursor == 0){
+          this.chunk -= i;
+          this.dataTracker -= this.g.length;
+          this.curPage = i;
+          if((this.dataTracker - this.g.length) <= 0){
+            this.bof = true;
+            this.page.bof = true;
+          }
+        }
+        else if(this.page.cursor == 1){
+          this.chunk += i;
+       // alert(this.chunk);
+          this.curPage = 1;
+          this.dataTracker += this.g.length;
+          
+          if(this.dataTracker >= this.totalItems){
+            this.eof = true;
+            this.page.eof = true;
+          }
+        }
+        else{ this.chunk = 99;}
+      }
+    }
+    let bob = false;
+    if (bob) {
+/*     if (changes.data && !this.start) { */
       if (this.data.length == 0) {
         this.noData = true;
         this.sMsg = "There are no results returned from this request.";
@@ -50,11 +99,13 @@ export class EditComponent implements OnInit {
         this.sMsg = "";
         // begin
         if (this.page.total == 99999) {
+          alert(53);
           this.format();
           this.curPage = 1;
           return 0;
         }
         else if (this.page.refresh || this.page.reset  || this.page.bof) {
+          alert(59);
           this.format();
           this.chunk = 0;
           this.dataTracker = 0;
@@ -63,6 +114,7 @@ export class EditComponent implements OnInit {
           this.page.reset = false;
         }
         else if (this.page.eof) { // keep
+          alert(68);
           let c = (this.totalItems / this.nbrItems) - this.nbrItems;
           this.chunk = c;
           this.format();
@@ -70,11 +122,13 @@ export class EditComponent implements OnInit {
 
         }
         else {
+          alert(76);
           let b = this.dataTracker;  // rmv
           this.format();
           let c = Math.ceil(this.g.length / this.nbrItems);
           this.curPage = 1;
           if (this.page.cursor > 0) {
+            alert(82);
             this.dataTracker += this.data.length;
             if (this.dataTracker != this.totalItems) {
               this.chunk = (this.u - 1);
@@ -83,16 +137,18 @@ export class EditComponent implements OnInit {
             this.t = c++;
           }
           else {
+            alert(91);
             this.dataTracker -= this.data.length;
             // this works but if you hit Previous twice...
             if (this.page.inc) {
 
               if (this.page.page == this.lastDisplayed) {
-
+                alert(97);
                 this.chunk -= this.chunk;
                 this.curPage = this.lastDisplayed;
               }
               else {
+                alert(102);
                 this.chunk -= 1;
               }
               /*     
@@ -226,6 +282,8 @@ export class EditComponent implements OnInit {
       };
       this.page.page = 1;
       this.page.cursor = 0;
+      this.page.bof = true;
+      this.page.eof = false;
       this.fK = { "key": 9, "val": "desc" };
       this.page.filters = [];
       this.page.sort = [];
@@ -515,12 +573,12 @@ export class EditComponent implements OnInit {
 
     // but what if they don't know the number of items???  or the number of items changes...
     this.page.page = this.totalItems - this.g.length;
-    this.chunk = this.page.page / this.nbrItems;
+   // this.chunk = this.page.page / this.nbrItems;
 
    // this.chunk -= 
     this.curPage = this.lastPage;
     let n = this.totalNumberPages - (this.numberToDisplay - 1);
-    this.chunk = (this.totalItems / this.nbrItems) - 10;
+   // this.chunk = (this.totalItems / this.nbrItems) - 10;
     if (n < 1) { n = 1; }
     this.pageNumbers = [n];
 
@@ -596,24 +654,28 @@ this.page.total = 8888;
     // ...
     //  this.page.page = this.pageNumbers[0];
     if (this.paging) {
+      this.page.eof = false;
+      this.eof = false;
       this.page.total = 99999;
       this.page.page -= this.g.length;
     // this.page.page =
-      this.chunk -= this.nbrItems;
-      this.page.page = this.chunk;
+    //  this.chunk -= this.nbrItems;
+    //  this.page.page = this.chunk;
       if(this.page.page <= 0){ 
         this.page.page = 0; 
         this.bof = true; 
         this.eof = false;
-        this.chunk = 0; }
-      this.curPage = 1;
-      this.page.cursor = -1;
+     //   this.chunk = 0; 
+    }
+    //  this.curPage = 1;
+      this.page.cursor = 0;
       this.pageChg.emit(this.page);
     }
   }
 
   public nextTen() { // ...
     this.bof = false;
+    this.page.bof = false;
     let n = this.pageNumbers.slice(-1)[0] + 1;
     this.pageNumbers = [this.curPage];
     if (this.curPage + this.numberToDisplay > this.totalNumberPages) {
@@ -706,6 +768,7 @@ this.page.total = 8888;
      
       kV.val = (d > 0) ? "desc" : "asc";
       this.page.cursor = 0;
+      this.page.bof = true; this.page.eof = false;
       this.page.refresh = true;
       this.page.sort = [];
       this.page.sort.push(kV);
@@ -925,6 +988,7 @@ for(let m = 0; m < this.page.filters.length; m++){
 this.fil = true;
       this.page.cursor = 0;
       this.page.refresh = true;
+      this.page.bof = true;  this.page.eof = false;
       this.pageChg.emit(this.page);
   }
 
@@ -962,11 +1026,12 @@ if(!this.paged){
     this.arrPageNbrs();
     this.lastDisplayed = this.pageNumbers.slice(-1)[0];
     this.page.bof = true;
+    this.page.eof = false;
 this.bof = true;
 this.eof = false;
     this.page.page = 0;
     this.page.total = 99999;
-    this.chunk = 0;
+  //  this.chunk = 0;
     this.page.cursor = 0;
     this.pageChg.emit(this.page);
   };
