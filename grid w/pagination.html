@@ -740,7 +740,7 @@
 
                                 <span style="text-align:right;padding-bottom:1em; ;">Page&nbsp;&nbsp;
                                     <span class="nbr">{{curPage + chunk}}</span>
-                                    <span *ngIf="trk" class="nbr">of</span>
+                                    <span *ngIf="trk" class="nbr">&nbsp;&nbsp;of&nbsp;&nbsp;</span>
                                     <span *ngIf="trk" class="nbr">
                                         {{ pgNbrs }}</span>
                                 </span>
@@ -997,7 +997,12 @@
                         </tr>
                     </table>
                     <div class="pg" *ngIf="noData == false">
-                        <div style="padding:10px;color:white;background-color:red;width:25px;text-align:center;">{{chunk}}</div>
+                        <div style="padding:10px;color:white;background-color:red;width:25px;text-align:center;">
+                            {{chunk}}
+                            <p>{{page.cursor}}</p>
+                            <p>{{page.bof}}</p>
+                            <p>{{page.eof}}</p>
+                        </div>
                         <div>
                             <span>Page
                                 <span class="nbr">{{curPage + chunk }}&nbsp;&nbsp;</span>
@@ -1008,7 +1013,7 @@
                             </span>
                         
                             <button class="no-button" style="font-weight:bold;font-size:large;margin-left:12px;"
-                                *ngIf="!bof" (click)="startOver()" [ngStyle]="{
+                                *ngIf="!page.bof" (click)="startOver()" [ngStyle]="{
                                     'color': '#83919F'
                                 }">
                                 &#171;
@@ -1017,7 +1022,7 @@
                            
                            
 
-                            <button class="no-button" *ngIf="!bof" style="color:inherit;"
+                            <button class="no-button" *ngIf="!page.bof" style="color:inherit;"
                                 (click)="previousTen()">Previous...</button>
 
                        
@@ -1031,11 +1036,11 @@
                                 </button>
                             </span>
 
-                            <button class="no-button" *ngIf="!eof" style="color:inherit;"
+                            <button class="no-button" *ngIf="!page.eof" style="color:inherit;"
                                 (click)="nextTen()">...Next</button>
 
                             <button class="no-button" style="font-weight:bold;font-size:large;color:inherit;"
-                                *ngIf="!eof" (click)="endUp()" [ngStyle]="{
+                                *ngIf="!page.eof" (click)="endUp()" [ngStyle]="{
                                 'color': '#83919F'
                             }">
                                 &#187;
